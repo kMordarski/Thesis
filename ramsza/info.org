@@ -1,0 +1,48 @@
+#+TITLE: Praca licencjacka
+#+DATE: [2022-04-06 Wed]
+#+AUTHOR: Michał Ramsza
+#+EMAIL: michal.ramsza@gmail.com
+#+LINK_UP: http://michal.ramsza.org
+#+LINK_HOME: http://michal.ramsza.org
+#+OPTIONS: toc:nil num:nil
+#+LANGUAGE: pl
+#+EXCLUDE_TAGS: noexport
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="http://michal.ramsza.org/res/indexstyle_20170331.css"/>
+
+* Plan prac
+
+** DONE Stworzenie repo i odpowieniej struktur
+** TODO Przeczytanie dokładne artykułu
+
+Tutaj jeszcze trzeba dokładnie zrozumieć co autorzy mieli na myśli. 
+
+** TODO Stowrzenie algorytmu i struktury symulacji na podstawie artykułu
+
+1. Wybranie wartości parametrów (to jest dobierane tak jak w atrykule)
+2. Początek glównej pętli symulacji (ile razy powtarzamy symulację)
+   - Stworzenie grafu losowego BA
+   - Wylosowanie warunków początkowych
+   - Przeprowadzenie symulacji
+   - Stworzenie ścieżki kooperacji \( c_t \), gdzie \( c_t \) to udział kooperacji w populacji
+3. Koniec pętli symulacji (powtórzenie symulacji)
+
+** TODO Przeprowadzenie symulacji
+** TODO Napisanie skryptu liczącego mierniki oraz wizualizacji
+
+Ten skrypt musi wyrzucać z siebie albo elementy LaTeXa albo wykresy w postaci png / pdf. 
+
+** TODO Napisanie pracy
+
+1. Napisanie struktury pracy (tutaj sections)
+2. Podpięcie wyników symulacji
+3. Zalanie tekstem
+
+* Plan pracy
+
+** Wprowadzenie
+** Przedstawienie literatury i w szczególności tego artykułu
+** Opis gry, populacji, dynamiki populacji, symulacji
+** Przedstawienie wyników oraz dyskusja
+
+Tutaj porównanie do tego co jest w oryginalnym artykule.
+** Zakończenie
