@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 22.3) (preloaded format=xelatex 2022.3.20)  26 MAR 2022 12:56
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 22.3) (preloaded format=xelatex 2022.3.20)  22 APR 2022 13:01
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -633,14 +633,18 @@ Missing character: There is no ł in font ptmr8t!
 
 ] [4
 
-] [5]
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 16
-7.
+]
+Overfull \hbox (32.55287pt too wide) in paragraph at lines 159--164
+[]
+ []
 
-(C:\Users\kacpe\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1pcr.fd
+[5]
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 16
+9.
+ (C:\Users\kacpe\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 182--183
+Underfull \hbox (badness 10000) in paragraph at lines 184--185
 []\T1/ptm/m/n/12 Alignment is done through en-vi-ron-ments [][]\T1/pcr/m/n/12 c
 enter[]\T1/ptm/m/n/12 , [][]\T1/pcr/m/n/12 flushleft []\T1/ptm/m/n/12 and
  []
@@ -648,19 +652,19 @@ enter[]\T1/ptm/m/n/12 , [][]\T1/pcr/m/n/12 flushleft []\T1/ptm/m/n/12 and
 [6
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 210--211
+Underfull \hbox (badness 10000) in paragraph at lines 212--213
 \T1/ptm/m/n/12 There are two types of math-e-mat-ics in-side a L[]T[]X doc-u-me
 nt. The first
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 210--211
+Underfull \hbox (badness 10000) in paragraph at lines 212--213
 \T1/ptm/m/n/12 one is the in-line math-e-mat-ics and the dis-played math-e-mat-
 ics. The first
  []
 
 
-Underfull \hbox (badness 3281) in paragraph at lines 210--211
+Underfull \hbox (badness 3281) in paragraph at lines 212--213
 \T1/ptm/m/n/12 one looks like this: $\OML/cmm/m/it/12 F\OT1/cmr/m/n/12 (\OML/cm
 m/m/it/12 x\OT1/cmr/m/n/12 ) = [][] \OML/cmm/m/it/12 f\OT1/cmr/m/n/12 (\OML/cmm
 /m/it/12 !\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 d!$ \T1/ptm/m/n/12 with the code lo
@@ -668,7 +672,7 @@ ok-ing like this:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 210--211
+Underfull \hbox (badness 10000) in paragraph at lines 212--213
 [][]\T1/pcr/m/n/12 \( F(x) = \int_{-\infty}^{x} f(\omega) d\omega \)[]\T1/ptm/m
 /n/12 . The dis-
  []
@@ -688,22 +692,34 @@ File: figure-2.pdf Graphic file (type pdf)
 File: figure-2.pdf Graphic file (type pdf)
 <use figure-2.pdf>
 
-Underfull \hbox (badness 1112) in paragraph at lines 355--356
+Underfull \hbox (badness 1112) in paragraph at lines 357--358
 []\T1/ptm/m/n/12 The con-tent for the bib-li-og-ra-phy is in
  []
 
 
-Underfull \hbox (badness 5203) in paragraph at lines 355--356
+Underfull \hbox (badness 5203) in paragraph at lines 357--358
 \T1/ptm/m/n/12 can change the name but then you
  []
 
 
-Underfull \hbox (badness 2818) in paragraph at lines 355--356
+Underfull \hbox (badness 2818) in paragraph at lines 357--358
 [][]\T1/pcr/m/n/12 \bibliography{new-name} []\T1/ptm/m/n/12 where
  []
 
 
-Underfull \hbox (badness 2617) in paragraph at lines 357--358
+Package natbib Warning: Citation `garland2010' on page 11 undefined on input li
+ne 359.
+
+
+Package natbib Warning: Citation `benaim2003' on page 11 undefined on input lin
+e 359.
+
+
+Package natbib Warning: Citation `osborne1998' on page 11 undefined on input li
+ne 359.
+
+
+Underfull \hbox (badness 2617) in paragraph at lines 359--360
 []\T1/ptm/m/n/12 The pro-cess of ci-ta-tion is sim-ple.
  []
 
@@ -796,22 +812,23 @@ Missing character: There is no ś in font ptmr8t!
 Missing character: There is no ś in font ptmr8t!
 [15
 
-] [16] [17] [18] (Thesis.bbl) [19
-
-
-] (Thesis.lot
+] [16] [17] [18]
+No file Thesis.bbl.
+(Thesis.lot
 Missing character: There is no ł in font ptmr8t!
 )
 \tf@lot=\write5
 \openout5 = `Thesis.lot'.
 
- [20
+ [19
+
+
 
 ] (Thesis.lof)
 \tf@lof=\write6
 \openout6 = `Thesis.lof'.
 
- [21
+ [20
 
 ]
 Missing character: There is no ą in font ptmr8t!
@@ -821,19 +838,22 @@ Missing character: There is no ł in font ptmr8t!
 Missing character: There is no ś in font ptmr8t!
 Missing character: There is no ł in font ptmr8t!
 Missing character: There is no ł in font ptmr8t!
-[22
+
+Package natbib Warning: There were undefined citations.
+
+[21
 
 ] (Thesis.aux)
 Package rerunfilecheck Info: File `Thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 2FB518075F0D9E6841718E0C6397033D;2282.
+(rerunfilecheck)             Checksum: 95A49CE5741E5126B7479D297EA95619;2279.
  ) 
 Here is how much of TeX's memory you used:
- 15301 strings out of 410967
- 239325 string characters out of 2823753
+ 15290 strings out of 410967
+ 239137 string characters out of 2823753
  626086 words of memory out of 3000000
- 35822 multiletter control sequences out of 15000+600000
+ 35813 multiletter control sequences out of 15000+600000
  506066 words of font info for 89 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  60i,13n,64p,439b,540s stack positions out of 10000i,1000n,20000p,200000b,80000s
 
-Output written on Thesis.pdf (22 pages).
+Output written on Thesis.pdf (21 pages).

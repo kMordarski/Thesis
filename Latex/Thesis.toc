@@ -11,6 +11,6 @@
 \contentsline {section}{\numberline {4}Figures and tables}{9}{section.4}%
 \contentsline {section}{\numberline {5}Bibliography}{11}{section.5}%
 \contentsline {section}{\numberline {A}Appendix: Some important stuff}{14}{appendix.A}%
-\contentsline {section}{List of tables}{20}{section*.6}%
-\contentsline {section}{List of figures}{21}{section*.7}%
-\contentsline {section}{Streszczenie}{22}{section*.8}%
+\contentsline {section}{List of tables}{19}{table.3}%
+\contentsline {section}{List of figures}{20}{section*.6}%
+\contentsline {section}{Streszczenie}{21}{section*.7}%
