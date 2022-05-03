@@ -162,11 +162,74 @@ The aim of this paper is to either prove or disprove the research paper with tit
  because the above mentioned authors did not provide the code that was used to conduct the necessary simulations. Therefore goal is not only
  to disprove the above mantioned paper but also to provide readers with clear and easy to follow code. 
 
- \subsection{Description of the Papaer}
 
-The Paper was 
+ \subsection{Description of The Paper}
 
-% --- chapter ---------------------------------------------------------
+The Paper was published in "Physical Review Letters" on 26th August 2005 and according to Google Scholar has been since cited over 1600 times. 
+It clearly shows the magnitude of said paper and its groundbreaking character. This paper is presenting the results of simulations conducted by the authors and its 
+implications for evolutionary game theory. The crucial thing to understand is that the authors of The Paper changed the approach to modelling such games by applying
+Scale Free Networcs of Contacts (later on refferd to as "SF NOC's"). Its innovativeness lies in the never used before degree distribution of said graph. Before used
+graphs had a degree distribution with a single peak. It means that every "player" could interact only with a fixed number of other "players". SF NOC's is said to 
+perform better at modelling the actual, existing societies and networks. It complies with the rules of growth and preferential attachment (rich gets richer). If we 
+analyse some actual networks - for example Twitter network, we observe that those with bigger count of "followers" are more likely to gain new ones than accounts 
+with low count of "followers". One of the goals of The Paper was to compare results of simulations on different kinds of graphs. According to The Paper, players that 
+occupy vertices of SF NOC are much more likely to cooperate than of any other graph. Those results came up both in Snowdrift game (later on reffered to as SG) and 
+Prisoners Dilemma game (later on reffered to as PD). 
+
+
+\subsection{A brief description of Snowdrift game and Prisoners Dilemma game}
+
+Prisoners Dilemma: \\
+The Prisoners Dillema game is a widely known problem in both game theory and decision analysis. It shows that there exists situations in which the outcome
+is not optimal, even though players act in their own best interest. \\
+\begin{center}
+\begin{game}{2}{2}
+  & $C$    & $D$    \\
+$C$ & $R,R$ & $T,S$  \\
+$D$ & $S,T$ & $P,P$
+\end{game}
+\end{center}
+
+Where the parametrisation is as follows:\\
+\begin{center}
+\(T = b > 1 \)\\
+\(R = 1 \)\\
+\(P = 0 \)\\
+\(S = 0 \)\\
+\(1 < b \le 2 \)
+\end{center}
+
+We clearly see that those parameters show an order as follows: \\
+\begin{center}
+  \( T > R > P = S \)
+\end{center}
+
+Snowdrift Game: \\
+The Snowdrift game represents a metaphore for cooperative interactions between players. Contrary to PD, the Snowdrift game stimulates the cooperative behaviour amongst
+players. It doesn't make the deflection strategy totally inapplicable, but payoffs of this game favourizes cooperative behaviours more than the PD.  \\
+\begin{center}
+  \begin{game}{2}{2}
+    & $C$    & $D$    \\
+  $C$ & $R,R$ & $T,S$  \\
+  $D$ & $S,T$ & $P,P$
+  \end{game}
+  \end{center}
+  
+  Where the parametrisation is as follows:\\
+  \begin{center}
+  \(T = \beta > 1 \)\\
+  \(R = \beta - \frac{1}{2} \)\\
+  \(S = 1 - \beta \)\\
+  \(P = 0 \)
+  
+
+  \begin{center}
+    \( T > R > P > S \)
+  \end{center}
+
+
+  \end{center}
+  % --- chapter ---------------------------------------------------------
 \clearpage
 \section{Basic things}
 
