@@ -181,12 +181,13 @@ Prisoners Dilemma game (later on reffered to as PD).
 
 Prisoners Dilemma: \\
 The Prisoners Dillema game is a widely known problem in both game theory and decision analysis. It shows that there exists situations in which the outcome
-is not optimal, even though players act in their own best interest. \\
+is not optimal, even though players act in their own best interest. In the scope of our analysis it is important to note that in the PD game the best strategy is to 
+deflect, regardless of the opponents choice.\\
 \begin{center}
 \begin{game}{2}{2}
   & $C$    & $D$    \\
-$C$ & $R,R$ & $T,S$  \\
-$D$ & $S,T$ & $P,P$
+$C$ & $R,R$ & $S,T$  \\
+$D$ & $T,S$ & $P,P$
 \end{game}
 \end{center}
 
@@ -203,10 +204,12 @@ We clearly see that those parameters show an order as follows: \\
 \begin{center}
   \( T > R > P = S \)
 \end{center}
+\clearpage
 
 Snowdrift Game: \\
 The Snowdrift game represents a metaphore for cooperative interactions between players. Contrary to PD, the Snowdrift game stimulates the cooperative behaviour amongst
-players. It doesn't make the deflection strategy totally inapplicable, but payoffs of this game favourizes cooperative behaviours more than the PD.  \\
+players. It doesn't make the deflection strategy totally inapplicable, but payoffs of this game favourizes cooperative behaviours more than the PD. The optimal strategy
+is to cooperate when the other defects and to defect when the other cooperates.\\
 \begin{center}
   \begin{game}{2}{2}
     & $C$    & $D$    \\
@@ -229,6 +232,48 @@ players. It doesn't make the deflection strategy totally inapplicable, but payof
 
 
   \end{center}
+
+\subsection{Simulations description}
+
+Because of the nature of this paper (an attempt to clone the results of The Paper) our simulations must be conducted in a strickt accordance with the methods outlined
+in The Paper. Therefore it is only natural that we must follow each step with the utmost care and diligence. According to The Paper we must conduct 100 simulations 
+for each parametrisation. Each simulation is performed following those steps:\\
+\begin{enumerate}
+  \item Setting up the parameters which are needed to create SF NOC's (such as number of final vertices (population size), the avarage connectivity etc.).
+  \item Choosing the parameters of game which is to be simulated (either PD or SG).
+  \item Creating the randomly generated SF NOC (we use Barabasi - Albert model to do that). The SF NOC must be created in compliance with preferential attachment and 
+  growth rules.
+  \item Randomly distributing strategies amongst the population (SF NOC in this particular case). Each vertex can either get a cooperation or deflection strategy.
+  \item Each pair of cooperator - deflector engages in a round of given game. In compliance with replicatory dynamics we keep track of cumulative payoffs for both 
+  strategies so that "players" can adjust their strategies throughout the population. This step is repeated 11 000 times, each time is called "generation". The first 
+  10 000 is so called "transient time".
+  \item We collect results (equilibrium frequencies of cooperators and defectors) by avaraging over the last 1 000 generations.
+\end{enumerate}
+
+\subsection{Replicatory dynamics}
+
+In our analysis we consider replicator to be a strategy in a game. The general idea is that replicators compete for dominance throughout the population. Payoffs of
+their strategies represent their "fitness". It is important to note that each player can alter their strategy through inheritance. Attempt of inheritance occurs 
+whenever on of the sites is updated. For the sake of an example lets say that the site that was just updated is a site x. The procedure is as follows:
+
+\begin{enumerate}
+  \item The site x is updated.
+  \item A neighbour y is drawn at random among all k$_{x}$ neighbours
+  \item if cumulative payoffs of y (P$_{y}$) is greater than cumulative payoffs of x (P$_{x}$), the chosen neighbour takes over site x with probability (P$_{i}$) given below.
+\end{enumerate}
+
+
+\begin{center}
+
+\[
+  P_{i} = \frac{(P_{y} - P_{x})}{Dk_{>}}
+  \]
+\end{center}
+Where P$_{i}$ is the probability of the chosen neighour taking over the site x, P$_{y}$ is a cumulated payoffs of strategies y, P$_{x}$ is a cumulated payoffs 
+of strategies x, k$_{>}$ is the largest between k$_{y}$ and k$_{x}$ (k$_{y}$ is a number of neighbours with a strategy y, k$_{x}$ is a number of neighbours with a 
+strategy x), D depends on the game (it is equal to either T-S for PD or T-P for SG).\\
+
+
   % --- chapter ---------------------------------------------------------
 \clearpage
 \section{Basic things}
