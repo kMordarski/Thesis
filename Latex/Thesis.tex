@@ -157,8 +157,9 @@ Warszawa 2022
 \section{Introduction}
 \subsection{General Introduction}
 
-This paper aims to replicate, to an essential degree, the seminal paper on the emergence of cooperation, cf.~\cite{santos2005scale}. 
+This paper aims to replicate, to an essential degree, the seminal paper on the emergence of cooperation, cf.~\cite{santos2005scale}. The secondary goal of this research is to provide the publicly available code allowing replication of the original results.
 
+Tutaj jest drugi akapit. 
 
 -----
 
@@ -167,9 +168,6 @@ either prove or disprove the research paper with title \mbox{\textbf{"Scale-Free
  because the above mentioned authors did not provide the code that was used to conduct the necessary simulations. Therefore goal is not only
  to disprove the above mantioned paper but also to provide readers with clear and easy to follow code. 
  
-\cite{santos2005scale}
-
-
  \subsection{Description of The Paper}
 
 The Paper was published in "Physical Review Letters" on 26th August 2005 and according to Google Scholar has been since cited over 1600 times. 
@@ -186,10 +184,7 @@ Prisoners Dilemma game (later on reffered to as PD).
 
 \subsection{A brief description of Snowdrift game and Prisoners Dilemma game}
 
-Prisoners Dilemma: \\
-The Prisoners Dillema game is a widely known problem in both game theory and decision analysis. It shows that there exists situations in which the outcome
-is not optimal, even though players act in their own best interest. In the scope of our analysis it is important to note that in the PD game the best strategy is to 
-deflect, regardless of the opponents choice.\\
+\paragraph{Prisoners Dilemma Game}. The Prisoners Dillema game is a widely known problem in game theory and decision analysis. It shows that there exist situations in which the outcome is not optimal, even though players act in their own best interest. In the scope of our analysis, it is important to note that in the PD game, the best strategy is to defect, regardless of the opponent's choice. The game is parametrized as follows:
 \begin{center}
 \begin{game}{2}{2}
   & $C$    & $D$    \\
@@ -197,24 +192,22 @@ $C$ & $R,R$ & $S,T$  \\
 $D$ & $T,S$ & $P,P$
 \end{game}
 \end{center}
+where the values are given as follows:
+\[
+\begin{aligned}
+T &= b > 1, \\
+R &= 1, \\
+P &= 0, \\
+S &= 0, \\
+1 &< b \le 2. 
+\end{aligned}
+\]
+We see that the above restrictions order the parameters as follows:
+\[
+T > R > P = S
+\]
 
-Where the parametrisation is as follows:\\
-\begin{center}
-\(T = b > 1 \)\\
-\(R = 1 \)\\
-\(P = 0 \)\\
-\(S = 0 \)\\
-\(1 < b \le 2 \)
-\end{center}
-
-We clearly see that those parameters show an order as follows: \\
-\begin{center}
-  \( T > R > P = S \)
-\end{center}
-\clearpage
-
-Snowdrift Game: \\
-The Snowdrift game represents a metaphore for cooperative interactions between players. Contrary to PD, the Snowdrift game stimulates the cooperative behaviour amongst
+\paragraph{Snowdrift Game.} The Snowdrift game represents a metaphore for cooperative interactions between players. Contrary to PD, the Snowdrift game stimulates the cooperative behaviour amongst
 players. It doesn't make the deflection strategy totally inapplicable, but payoffs of this game favourizes cooperative behaviours more than the PD. The optimal strategy
 is to cooperate when the other defects and to defect when the other cooperates.\\
 \begin{center}

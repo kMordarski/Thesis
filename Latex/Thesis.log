@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2022.1.17)  8 MAY 2022 12:05
+This is pdfTeX, Version 3.141592653-2.6-1.40.23 (TeX Live 2022/dev) (preloaded format=pdflatex 2022.1.17)  8 MAY 2022 12:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -628,59 +628,42 @@ JPG>]
 ] [4
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 165--169
+Underfull \hbox (badness 10000) in paragraph at lines 166--170
 []\T1/ptm/m/n/12 either prove or dis-prove the re-search pa-per with ti-tle
  []
 
 
-Overfull \hbox (32.55287pt too wide) in paragraph at lines 165--169
+Overfull \hbox (32.55287pt too wide) in paragraph at lines 166--170
 []
  []
 
 [5]
-Underfull \hbox (badness 10000) in paragraph at lines 189--193
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 201--202
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 210--211
+Underfull \hbox (badness 10000) in paragraph at lines 210--213
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 216--220
+Underfull \hbox (badness 10000) in paragraph at lines 221--222
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 228--229
+Underfull \hbox (badness 10000) in paragraph at lines 238--242
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 245--249
-
- []
-
-[7
-
-]
-Underfull \hbox (badness 10000) in paragraph at lines 279--282
+[7]
+Underfull \hbox (badness 10000) in paragraph at lines 272--275
 
  []
 
 [8] [9]
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 29
-0.
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 28
+3.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 305--306
+Underfull \hbox (badness 10000) in paragraph at lines 298--299
 []\T1/ptm/m/n/12 Alignment is done through en-vi-ron-ments [][]\T1/pcr/m/n/12 c
 enter[]\T1/ptm/m/n/12 , [][]\T1/pcr/m/n/12 flushleft []\T1/ptm/m/n/12 and
  []
@@ -688,19 +671,19 @@ enter[]\T1/ptm/m/n/12 , [][]\T1/pcr/m/n/12 flushleft []\T1/ptm/m/n/12 and
 [10
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 333--334
+Underfull \hbox (badness 10000) in paragraph at lines 326--327
 \T1/ptm/m/n/12 There are two types of math-e-mat-ics in-side a L[]T[]X doc-u-me
 nt. The first
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 333--334
+Underfull \hbox (badness 10000) in paragraph at lines 326--327
 \T1/ptm/m/n/12 one is the in-line math-e-mat-ics and the dis-played math-e-mat-
 ics. The first
  []
 
 
-Underfull \hbox (badness 3281) in paragraph at lines 333--334
+Underfull \hbox (badness 3281) in paragraph at lines 326--327
 \T1/ptm/m/n/12 one looks like this: $\OML/cmm/m/it/12 F\OT1/cmr/m/n/12 (\OML/cm
 m/m/it/12 x\OT1/cmr/m/n/12 ) = [][] \OML/cmm/m/it/12 f\OT1/cmr/m/n/12 (\OML/cmm
 /m/it/12 !\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 d!$ \T1/ptm/m/n/12 with the code lo
@@ -708,7 +691,7 @@ ok-ing like this:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 333--334
+Underfull \hbox (badness 10000) in paragraph at lines 326--327
 [][]\T1/pcr/m/n/12 \( F(x) = \int_{-\infty}^{x} f(\omega) d\omega \)[]\T1/ptm/m
 /n/12 . The dis-
  []
@@ -719,41 +702,41 @@ Underfull \hbox (badness 10000) in paragraph at lines 333--334
 <./figure-1.pdf, id=194, 505.89pt x 505.89pt>
 File: ./figure-1.pdf Graphic file (type pdf)
 <use ./figure-1.pdf>
-Package pdftex.def Info: ./figure-1.pdf  used on input line 433.
+Package pdftex.def Info: ./figure-1.pdf  used on input line 426.
 (pdftex.def)             Requested size: 192.0548pt x 192.05493pt.
 File: ./figure-1.pdf Graphic file (type pdf)
 <use ./figure-1.pdf>
-Package pdftex.def Info: ./figure-1.pdf  used on input line 444.
+Package pdftex.def Info: ./figure-1.pdf  used on input line 437.
 (pdftex.def)             Requested size: 192.0548pt x 192.05493pt.
 <figure-2.pdf, id=195, 226.8475pt x 226.8475pt>
 File: figure-2.pdf Graphic file (type pdf)
 <use figure-2.pdf>
-Package pdftex.def Info: figure-2.pdf  used on input line 450.
+Package pdftex.def Info: figure-2.pdf  used on input line 443.
 (pdftex.def)             Requested size: 192.0548pt x 192.0563pt.
  [13
 
  <./figure-1.pdf>] [14 <./figure-2.pdf>]
 File: figure-2.pdf Graphic file (type pdf)
 <use figure-2.pdf>
-Package pdftex.def Info: figure-2.pdf  used on input line 469.
+Package pdftex.def Info: figure-2.pdf  used on input line 462.
 (pdftex.def)             Requested size: 170.71393pt x 170.71326pt.
 
-Underfull \hbox (badness 1112) in paragraph at lines 478--479
+Underfull \hbox (badness 1112) in paragraph at lines 471--472
 []\T1/ptm/m/n/12 The con-tent for the bib-li-og-ra-phy is in
  []
 
 
-Underfull \hbox (badness 5203) in paragraph at lines 478--479
+Underfull \hbox (badness 5203) in paragraph at lines 471--472
 \T1/ptm/m/n/12 can change the name but then you
  []
 
 
-Underfull \hbox (badness 2818) in paragraph at lines 478--479
+Underfull \hbox (badness 2818) in paragraph at lines 471--472
 [][]\T1/pcr/m/n/12 \bibliography{new-name} []\T1/ptm/m/n/12 where
  []
 
 
-Underfull \hbox (badness 2726) in paragraph at lines 480--481
+Underfull \hbox (badness 2726) in paragraph at lines 473--474
 []\T1/ptm/m/n/12 The pro-cess of ci-ta-tion is sim-ple.
  []
 
@@ -783,16 +766,16 @@ Underfull \hbox (badness 2726) in paragraph at lines 480--481
 
 ] (./Thesis.aux)
 Package rerunfilecheck Info: File `Thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 17BAF01A66D5ABFE10D075C1B9ED6709;3372.
+(rerunfilecheck)             Checksum: 09BD295E60588FE00F58481593DDF484;3373.
  ) 
 Here is how much of TeX's memory you used:
- 15709 strings out of 478286
- 247821 string characters out of 5846727
+ 15711 strings out of 478286
+ 247844 string characters out of 5846727
  622051 words of memory out of 5000000
  33570 multiletter control sequences out of 15000+600000
  520629 words of font info for 102 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,13n,63p,450b,544s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,13n,63p,474b,544s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/te
 xlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/tex
@@ -810,10 +793,10 @@ fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/ty
 pe1/urw/times/utmb8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/ti
 mes/utmr8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/times/utmri8
 a.pfb>
-Output written on Thesis.pdf (26 pages, 279227 bytes).
+Output written on Thesis.pdf (26 pages, 279417 bytes).
 PDF statistics:
  382 PDF objects out of 1000 (max. 8388607)
  312 compressed objects within 4 object streams
- 70 named destinations out of 1000 (max. 500000)
+ 72 named destinations out of 1000 (max. 500000)
  176 words of extra memory for PDF output out of 10000 (max. 10000000)
 
