@@ -23,7 +23,7 @@ T_SG = beta
 R_SG = beta - 0.5
 S_SG = beta - 1
 P_SG = 0
-r = 1/(2 * beta - 1)
+r = 1/(2 * beta - 1) # Cost to benefit ratio of mutual cooperation
 
 # Parametrisation of SF NOC's (Barabassi-Albert models)
 
@@ -34,40 +34,88 @@ st = N-m0
 
 # Tracking of the game results
 
-result_C = 0
-result_D = 0
+acc_payoffs = zeros(Float64, 1, 100000)
 
 BAM = Graphs.SimpleGraphs.barabasi_albert(10000, m0, m0)
 
 nv(BAM)
 
+edge = collect(edges(BAM))
 
-players = collect(partition(randperm(10000), 5000)) # distribution of strategies across the network
+edge_1 = edge[1]
 
-coop_strat = Dict( (players[1][i] => "c" for i=1:5000) )# Half of the players get the coop strategy
-def_strat = Dict( (players[2][i] => "d" for i=1:5000) ) # The other half get the defect strategy
-all_strats = merge(coop_strat, def_strat)
+edge_1
 
-get(all_strats, 4986, 0)
+typeof(edge_1)
 
-neigh = neighbors(BAM, keys(all_strats)[500])
-all_strats[1]
-keys(all_strats)
+typeof(edges)
 
-findall(x->x==1, first_1)
-
-intersect(first_2, first_1)
-
-function g(x, y, t) # first player is a coop (x), the second player is def (y), t is the type of game (either SG or PD)
-    payoffs_SG = [T_SG, R,SG, S_SG, P_SG]
-    payoffs_PD = [T_PD, R_PD, S_PD, P_PD]    
-    
-    g + y
+for n in edge
+    print(n)
 end
 
-b = 1:10
+function transform(e)
 
-b_s = shuffle(b)
+    p = [src(e), dst(e)]
+
+end
+
+function strat(e)
+    p = [strategies[e[1]],strategies[e[2]]]
+end
+
+@time begin
+edges_new = map(transform, edge)
+end
+
+@time begin
+    edges_with_strat = map(strat, edges_new)
+end
+
+edges_new[1][2]
+
+strategies = rand([1,2], 10000)
+
+payoffs_PD[edges_with_strat[4][1], edges_with_strat[4][2]]
+
+edges_with_strat[4]
+edges_new[4]
+
+function games(x, y, V)
+    for n in 1:length(x)
+        V[y[n][1]] += payoffs_PD[x[n][1], x[n][2]][1]
+        V[y[n][2]] += payoffs_PD[x[n][1], x[n][2]][2]
+    end
+    return V
+end
+
+@time begin
+acc_payoffs_new = games(edges_with_strat, edges_new, acc_payoffs)
+end
+
+
+findmax(acc_payoffs_new)
+
+# Payoffs matrix for the PD game
+
+payoffs_PD = Array{Array{Float64,1},2}(undef, 2,2)
+
+payoffs_PD[1,1] = [R_PD, R_PD]
+payoffs_PD[1,2] = [S_PD, T_PD]
+payoffs_PD[2,1] = [T_PD, S_PD]
+payoffs_PD[2,2] = [P_PD, P_PD]
+
+payoffs_PD[1,2]
+
+# Payoffs matrix for the SG game
+
+payoffs_SG = Array{Array{Float64,1},2}(undef, 2,2)
+payoffs_SG[1,1] = [R_SG, R_SG]
+payoffs_SG[1,2] = [T_SG, S_SG]
+payoffs_SG[2,1] = [S_SG, T_SG]
+payoffs_SG[2,2] = [P_SG, P_SG]
+
+payoffs_SG
 
 # Defining a function to look for a neighbor with different strategy than agent selected
 
@@ -95,17 +143,9 @@ for j in 1:100 # This loop controlles building new NF SOC's
 
     BAM = Graphs.SimpleGraphs.barabasi_albert(N, m0, m0, is_directed = false) # Generating SF NOC
 
-    players = collect(partition(randperm(10000), 5000)) # distribution of strategies across the network
-    coop_strat = Dict( (players[1][i] => "c" for i=1:5000) )# Half of the players get the coop strategy
-    def_strat = Dict( (players[2][i] => "d" for i=1:5000) ) # The other half get the defect strategy
-    all_strats = merge(coop_strat, def_strat)
-
     # This loop is responsible for evaluating results of games
 
     for k in 1:11000
-        player_n = rand(1:10000)
-        
-        player_k = check_strat(player_n, all_strats, BAM)
     
     end
 end
