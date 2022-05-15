@@ -7,17 +7,20 @@
 \contentsline {paragraph}{Snowdrift Game.}{6}{section*.3}%
 \contentsline {subsection}{\numberline {1.4}Simulations description}{7}{subsection.1.4}%
 \contentsline {subsection}{\numberline {1.5}Replicatory dynamics}{8}{subsection.1.5}%
-\contentsline {section}{\numberline {2}Basic things}{9}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Compiling \LaTeX files}{9}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Basic formatting for a text}{9}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Fonts and fonts' sizes}{9}{subsection.2.3}%
-\contentsline {section}{\numberline {3}Mathematics}{10}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Basic mathematics}{10}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Referencing mathematics and other things}{10}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Some more mathematical formulas}{11}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Figures and tables}{12}{section.4}%
-\contentsline {section}{\numberline {5}Bibliography}{14}{section.5}%
-\contentsline {section}{\numberline {A}Appendix: Some important stuff}{17}{appendix.A}%
-\contentsline {section}{List of tables}{22}{table.3}%
-\contentsline {section}{List of figures}{23}{section*.8}%
-\contentsline {section}{Streszczenie}{24}{section*.9}%
+\contentsline {section}{\numberline {2}Algorithm}{9}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Introduction to the algorithm}{9}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Functions}{9}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Basic things}{10}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Compiling \LaTeX files}{10}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Basic formatting for a text}{10}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Fonts and fonts' sizes}{10}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Mathematics}{11}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Basic mathematics}{11}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Referencing mathematics and other things}{11}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Some more mathematical formulas}{12}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Figures and tables}{13}{section.5}%
+\contentsline {section}{\numberline {6}Bibliography}{15}{section.6}%
+\contentsline {section}{\numberline {A}Appendix: Some important stuff}{18}{appendix.A}%
+\contentsline {section}{List of tables}{23}{table.3}%
+\contentsline {section}{List of figures}{24}{section*.8}%
+\contentsline {section}{Streszczenie}{25}{section*.9}%

@@ -71,10 +71,11 @@ payoffs_SG[2,2] = [P_SG, P_SG]
 
 payoffs_SG
 
+edge
 
 #Defining functions to map strategies onto edges
 
-function transform(e::Vector{Graphs.SimpleEdge{Int16}})
+function transform(e)
 
     p = [src(e), dst(e)]
 
@@ -87,6 +88,8 @@ end
 @time begin
 edges_new = map(transform, edge)
 end
+
+edges_new
 
 @time begin
     edges_with_strat = map(strat, edges_new)

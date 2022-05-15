@@ -212,7 +212,8 @@ We see that the above restrictions order the parameters as follows:
 T > R > P = S
 \]
 
-\paragraph{Snowdrift Game.} The Snowdrift game represents a metaphor for cooperative interactions between players. Contrary to PD, the Snowdrift game stimulates cooperative behavior amongst
+\paragraph{Snowdrift Game.} 
+The Snowdrift game represents a metaphor for cooperative interactions between players. Contrary to PD, the Snowdrift game stimulates cooperative behavior amongst
 players. It doesn't make the deflection strategy inapplicable, but payoffs of this game favourize cooperative behaviors more than the PD. The optimal strategy
 is to cooperate when the other defects and to defect when the other cooperates.
 \begin{center}
@@ -277,8 +278,29 @@ Where P$_{i}$ is the probability of the chosen neighbor taking over the site x, 
 of strategies x, k$_{>}$ is the largest between k$_{y}$ and k$_{x}$ (k$_{y}$ is a number of neighbors with a strategy y, k$_{x}$ is a number of neighbors with a 
 strategy x), D depends on the game (it is equal to either T-S for PD or T-P for SG).
 
+\section{Algorithm}
+\subsection{Introduction to the algorithm}
+In this section of the dissertation, I'm going to describe the key elements of the algorithm used to replicate the results obtained in The Paper. 
+% All of the following code is written in the julia language
+My understanding of the mechanisms on which the algorithms are based is limited to the rather vague and unclear description in The Paper. 
 
-  % --- chapter ---------------------------------------------------------
+\subsection{Functions}
+In order to perform necessary calculations I had to define the following functions:
+
+\begin{enumerate}
+  \item Transform - This function is used to map strategies onto a vector of arrays. As an input this function takes one of the edges of a SF NOC,
+   as an output it returns a vector of length two (two vertices connected with an edge).
+  \item Strat - This function is used to map previously distributed strategies onto a vector of edges. As an input it takes an edge and as an output
+   it returnes a vector of length two (two strategies previously attributed to the vertices).
+  \item Games - This function is used to evaluate the results of games played between players (vertices connected with an edge). As an input this function
+   takes a vector of edges, vector of strategies and a vector of accumulated payoffs. It returns an adjusted vector of accumulated payoffs.
+  \item CheckStrat - This function fulfills a number of tasks. It takes as an input a randomly chosen vertex, vector of strategies, vector of accumulated
+  payoffs, and the SF NOC. It identifies all neighbors of the previously mentioned vertex, then shuffles all of its neighbors, and then looks for a neighbor
+  with a different strategy. Then it proceeds to change the strategy of the vertex with lower accumulated payoffs. The probability of the transition 
+  is described in section 1.5. 
+\end{enumerate}
+
+% --- chapter ---------------------------------------------------------
 \clearpage
 \section{Basic things}
 
