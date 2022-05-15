@@ -176,7 +176,7 @@ C = push!(C, D)
         #    Arr_paths = push!(Arr_paths, track)
         #end
 
-        global track = Vector{Float64}() # Keeping track of the coop/def proportion
+        global track = zeros(Float16,1000) # Keeping track of the coop/def proportion
 
         # This loop is responsible for evaluating results of games
 
@@ -191,7 +191,7 @@ C = push!(C, D)
             if k > 10000
                 c_d = counter(strategies)[1]/(counter(strategies)[2] + counter(strategies)[1])
 
-                track = append!(track, c_d)
+                track[k-10000] = c_d
             end
         end
 #    end
@@ -201,8 +201,11 @@ track
 
 rand(1:10000)
 
-c = counter(strategies)[1]/(counter(strategies)[2] + counter(strategies)[1])
+track = zeros(Float64,1000)
 
+@time begin
+track[1] = 1
+end
 # Creating Scale-Free Network in compliance with preferential attachment and growth rules. Each vertex corresponds 
 
 # Defining games that will be played throughout the population (snowdrift or prisoners dillema) in order to show the emergence of

@@ -157,7 +157,8 @@ Warszawa 2022
 \section{Introduction}
 \subsection{General Introduction}
 
-This paper aims to replicate, to an essential degree, the seminal paper on the emergence of cooperation, cf.~\cite{santos2005scale}. The secondary goal of this research is to provide the publicly available code allowing replication of the original results.
+This paper aims to replicate, to an essential degree, the seminal paper on the emergence of cooperation, cf.~\cite{santos2005scale}. The secondary goal 
+of this research is to provide the publicly available code allowing replication of the original results.
 
 Tutaj jest drugi akapit. 
 
@@ -170,21 +171,25 @@ either prove or disprove the research paper with title \mbox{\textbf{"Scale-Free
  
  \subsection{Description of The Paper}
 
-The Paper was published in "Physical Review Letters" on 26th August 2005 and according to Google Scholar has been since cited over 1600 times. 
-It clearly shows the magnitude of said paper and its groundbreaking character. This paper is presenting the results of simulations conducted by the authors and its 
-implications for evolutionary game theory. The crucial thing to understand is that the authors of The Paper changed the approach to modelling such games by applying
-Scale Free Networcs of Contacts (later on refferd to as "SF NOC's"). Its innovativeness lies in the never used before degree distribution of said graph. Before used
-graphs had a degree distribution with a single peak. It means that every "player" could interact only with a fixed number of other "players". SF NOC's is said to 
-perform better at modelling the actual, existing societies and networks. It complies with the rules of growth and preferential attachment (rich gets richer). If we 
-analyse some actual networks - for example Twitter network, we observe that those with bigger count of "followers" are more likely to gain new ones than accounts 
-with low count of "followers". One of the goals of The Paper was to compare results of simulations on different kinds of graphs. According to The Paper, players that 
-occupy vertices of SF NOC are much more likely to cooperate than of any other graph. Those results came up both in Snowdrift game (later on reffered to as SG) and 
-Prisoners Dilemma game (later on reffered to as PD). 
+ The Paper was published in "Physical Review Letters" on 26th August 2005 and according to Google Scholar has been since cited over 1600 times. 
+ It clearly shows the magnitude of said paper and its groundbreaking character. This paper is presenting the results of simulations conducted by the authors and its 
+ implications for evolutionary game theory.
+ 
+ The crucial thing to understand is that the authors of The Paper changed the approach to modeling such games by applying
+ Scale-Free Networks of Contacts (later on referred to as "SF NOCs"). Its innovativeness lies in the never used before degree distribution of said graph. Before being used
+ graphs had a degree distribution with a single peak. It means that every "player" could interact only with a fixed number of other "players". SF NOCs are said to 
+ perform better at modeling the actual, existing societies and networks. It complies with the rules of growth and preferential attachment (rich gets richer). When we 
+ analyze some actual networks, for example, the Twitter network, we observe that those with a bigger count of "followers" are more likely to gain new ones than accounts 
+ with a low count of "followers". 
+ 
+ One of the goals of The Paper was to compare the results of simulations on different kinds of graphs. According to The Paper, players that 
+ occupy vertices of SF NOC are much more likely to cooperate than on any other graph. Those results came up both in the Snowdrift game (later on referred to as SG) and 
+ Prisoners Dilemma game (later on referred to as PD).  
 
 
 \subsection{A brief description of Snowdrift game and Prisoners Dilemma game}
 
-\paragraph{Prisoners Dilemma Game}. The Prisoners Dillema game is a widely known problem in game theory and decision analysis. It shows that there exist situations in which the outcome is not optimal, even though players act in their own best interest. In the scope of our analysis, it is important to note that in the PD game, the best strategy is to defect, regardless of the opponent's choice. The game is parametrized as follows:
+\paragraph{Prisoners Dilemma Game}. The Prisoners Dilemma game is a widely known problem in game theory and decision analysis. It shows that there exist situations in which the outcome is not optimal, even though players act in their own best interest. In the scope of our analysis, it is important to note that in the PD game, the best strategy is to defect, regardless of the opponent's choice. The game is parameterized as follows:
 \begin{center}
 \begin{game}{2}{2}
   & $C$    & $D$    \\
@@ -207,9 +212,9 @@ We see that the above restrictions order the parameters as follows:
 T > R > P = S
 \]
 
-\paragraph{Snowdrift Game.} The Snowdrift game represents a metaphore for cooperative interactions between players. Contrary to PD, the Snowdrift game stimulates the cooperative behaviour amongst
-players. It doesn't make the deflection strategy totally inapplicable, but payoffs of this game favourizes cooperative behaviours more than the PD. The optimal strategy
-is to cooperate when the other defects and to defect when the other cooperates.\\
+\paragraph{Snowdrift Game.} The Snowdrift game represents a metaphor for cooperative interactions between players. Contrary to PD, the Snowdrift game stimulates cooperative behavior amongst
+players. It doesn't make the deflection strategy inapplicable, but payoffs of this game favourize cooperative behaviors more than the PD. The optimal strategy
+is to cooperate when the other defects and to defect when the other cooperates.
 \begin{center}
   \begin{game}{2}{2}
     & $C$    & $D$    \\
@@ -218,48 +223,47 @@ is to cooperate when the other defects and to defect when the other cooperates.\
   \end{game}
   \end{center}
   
-  Where the parametrisation is as follows:\\
-  \begin{center}
-  \(T = \beta > 1 \)\\
-  \(R = \beta - \frac{1}{2} \)\\
-  \(S = 1 - \beta \)\\
-  \(P = 0 \)
-  
-
-  \begin{center}
-    \( T > R > P > S \)
-  \end{center}
-
-
-  \end{center}
+  Where the parametrization is as follows:
+  \[
+  \begin{aligned}
+  T &= \beta > 1 ,\\
+  R &= \beta - \frac{1}{2} ,\\
+  S &= 1 - \beta ,\\
+  P &= 0. 
+  \end{aligned}
+\]
+We see that the above restrictions order the parameters as follows:
+\[
+ T > R > P > S 
+\]
 
 \subsection{Simulations description}
 
-Because of the nature of this paper (an attempt to clone the results of The Paper) our simulations must be conducted in a strickt accordance with the methods outlined
-in The Paper. Therefore it is only natural that we must follow each step with the utmost care and diligence. According to The Paper we must conduct 100 simulations 
-for each parametrisation. Each simulation is performed following those steps:\\
+Because of the nature of this paper (an attempt to clone the results of The Paper), our simulations must be conducted in strict accordance with the methods outlined
+in The Paper. Therefore it is only natural that we must follow each step with the utmost care and diligence. According to The Paper, we must conduct 100 simulations 
+for each parametrization. Each simulation is performed following those steps: Where the parametrization is as follows:
 \begin{enumerate}
-  \item Setting up the parameters which are needed to create SF NOC's (such as number of final vertices (population size), the avarage connectivity etc.).
-  \item Choosing the parameters of game which is to be simulated (either PD or SG).
+  \item Setting up the parameters which are needed to create SF NOCs (such as the number of final vertices (population size), the average connectivity, etc.).
+  \item Choosing the parameters of the game which is to be simulated (either PD or SG).
   \item Creating the randomly generated SF NOC (we use Barabasi - Albert model to do that). The SF NOC must be created in compliance with preferential attachment and 
   growth rules.
   \item Randomly distributing strategies amongst the population (SF NOC in this particular case). Each vertex can either get a cooperation or deflection strategy.
-  \item Each pair of cooperator - deflector engages in a round of given game. In compliance with replicatory dynamics we keep track of cumulative payoffs for both 
+  \item Each pair of cooperator-deflectors engages in a round of a given game. In compliance with replicators dynamics, we keep track of cumulative payoffs for both 
   strategies so that "players" can adjust their strategies throughout the population. This step is repeated 11 000 times, each time is called "generation". The first 
-  10 000 is so called "transient time".
-  \item We collect results (equilibrium frequencies of cooperators and defectors) by avaraging over the last 1 000 generations.
+  10 000 is the so-called "transient time".
+  \item We collect results (equilibrium frequencies of cooperators and defectors) by averaging over the last 1 000 generations.
 \end{enumerate}
 
 \subsection{Replicatory dynamics}
 
 In our analysis we consider replicator to be a strategy in a game. The general idea is that replicators compete for dominance throughout the population. Payoffs of
-their strategies represent their "fitness". It is important to note that each player can alter their strategy through inheritance. Attempt of inheritance occurs 
-whenever on of the sites is updated. For the sake of an example lets say that the site that was just updated is a site x. The procedure is as follows:
+their strategies represent their "fitness". It is important to note that each player can alter their strategy through inheritance. The attempt of inheritance occurs 
+whenever one of the sites is updated. For the sake of an example, let us say that the site that was just updated is site x. The procedure is as follows:
 
 \begin{enumerate}
   \item The site x is updated.
-  \item A neighbour y is drawn at random among all k$_{x}$ neighbours
-  \item if cumulative payoffs of y (P$_{y}$) is greater than cumulative payoffs of x (P$_{x}$), the chosen neighbour takes over site x with probability (P$_{i}$) given below.
+  \item A neighbor y is drawn at random among all k$_{x}$ neighbors
+  \item if cumulative payoffs of y (P$_{y}$) are greater than cumulative payoffs of x (P$_{x}$), the chosen neighbor takes over site x with probability (P$_{i}$) given below.
 \end{enumerate}
 
 
@@ -269,9 +273,9 @@ whenever on of the sites is updated. For the sake of an example lets say that th
   P_{i} = \frac{(P_{y} - P_{x})}{Dk_{>}}
   \]
 \end{center}
-Where P$_{i}$ is the probability of the chosen neighour taking over the site x, P$_{y}$ is a cumulated payoffs of strategies y, P$_{x}$ is a cumulated payoffs 
-of strategies x, k$_{>}$ is the largest between k$_{y}$ and k$_{x}$ (k$_{y}$ is a number of neighbours with a strategy y, k$_{x}$ is a number of neighbours with a 
-strategy x), D depends on the game (it is equal to either T-S for PD or T-P for SG).\\
+Where P$_{i}$ is the probability of the chosen neighbor taking over the site x, P$_{y}$ is a cumulated payoff of strategies y, P$_{x}$ is a cumulated payoff 
+of strategies x, k$_{>}$ is the largest between k$_{y}$ and k$_{x}$ (k$_{y}$ is a number of neighbors with a strategy y, k$_{x}$ is a number of neighbors with a 
+strategy x), D depends on the game (it is equal to either T-S for PD or T-P for SG).
 
 
   % --- chapter ---------------------------------------------------------
