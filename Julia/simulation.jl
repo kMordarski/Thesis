@@ -11,10 +11,11 @@ using Cairo, Fontconfig
 using Random
 using Base.Iterators: partition
 using DataStructures
+using JLD2
 
 # Parametrisation (for the PD game)
 
-T_PD = 1.1 # This parameter is the advantage of defectors over cooperators, being typically constrained to the interval 1 < b <= 2
+T_PD = 1.6 # This parameter is the advantage of defectors over cooperators, being typically constrained to the interval 1 < b <= 2
 R_PD = 1
 P_PD = 0
 S_PD = 0
@@ -30,29 +31,32 @@ r = 1/(2 * beta - 1) # Cost to benefit ratio of mutual cooperation
 
 # Parametrisation of SF NOC's (Barabassi-Albert models)
 
-z = 16
+z = 8
 m0 = Int16(z/2)
-N = 10000
+N = Int64(1000)
 st = N-m0
+
+
+# defining which game is to be played
+G = "PD"
 
 # Tracking of the game results
 
-acc_payoffs = zeros(Float64, 1, 100000)
+acc_payoffs = zeros(Float16, 1, 1000)
 
-BAM = Graphs.SimpleGraphs.barabasi_albert(10000, m0, m0)
+BAM = Graphs.SimpleGraphs.barabasi_albert(1000, m0, m0)
 
 nv(BAM)
 
+
 edge = collect(edges(BAM))
 
-edge_1 = edge[1]
-
 # Distribution of the strategies
-strategies = rand([1,2], 10000)
+strategies = rand([1,2], 1000)
 
 # Payoffs matrix for the PD game
 
-payoffs_PD = Array{Array{Float64,1},2}(undef, 2,2)
+payoffs_PD = Array{Array{Float16,1},2}(undef, 2,2)
 
 payoffs_PD[1,1] = [R_PD, R_PD]
 payoffs_PD[1,2] = [S_PD, T_PD]
@@ -63,7 +67,7 @@ payoffs_PD[1,2]
 
 # Payoffs matrix for the SG game
 
-payoffs_SG = Array{Array{Float64,1},2}(undef, 2,2)
+payoffs_SG = Array{Array{Float16,1},2}(undef, 2,2)
 payoffs_SG[1,1] = [R_SG, R_SG]
 payoffs_SG[1,2] = [T_SG, S_SG]
 payoffs_SG[2,1] = [S_SG, T_SG]
@@ -81,7 +85,7 @@ function transform(e)
 
 end
 
-function strat(e::Vector{Vector{Int16}})
+function strat(e)
     p = [strategies[e[1]],strategies[e[2]]]
 end
 
@@ -99,23 +103,28 @@ payoffs_PD[edges_with_strat[4][1], edges_with_strat[4][2]]
 
 typeof(edges_new)
 
-function games(x::Vector{Vector{Int64}}, y::Vector{Vector{Int8}}, V::Matrix{Float64}) # V is an array of cummulated payoffs, x is an array of edges, y is an array of strategies
+function games(x, y, V) # V is an array of cummulated payoffs, x is an array of edges, y is an array of strategies
     for n in 1:length(x)
-        V[y[n][1]] += payoffs_PD[x[n][1], x[n][2]][1]
-        V[y[n][2]] += payoffs_PD[x[n][1], x[n][2]][2]
+        if G == "PD"
+            V[y[n][1]] += payoffs_PD[Int64(x[n][1]), Int64(x[n][2])][1]
+            V[y[n][2]] += payoffs_PD[x[n][1], x[n][2]][2]
+        else
+            V[y[n][1]] += payoffs_SG[x[n][1], x[n][2]][1]
+            V[y[n][2]] += payoffs_SG[x[n][1], x[n][2]][2]
+        end
     end
     return V
 end
 
 @time begin
-acc_payoffs_new = games(edges_with_strat, edges_new, acc_payoffs)
+    acc_payoffs_new = games(edges_with_strat, edges_new, acc_payoffs)
 end
 
 # Defining a function to look for a neighbor with different strategy than agent selected
 
 n = neighbors(BAM, 100)
 
-function check_strat(a::Int64, y::Vector{Int64}, BAM::SimpleGraph{Int16}) # a is a randomly chosen vertex, y is an array of strategies, BAM is a Barabassi-Albert network, V is an array of cummulated payoffs
+function CheckStrat(a, y, BAM) # a is a randomly chosen vertex, y is an array of strategies, BAM is a Barabassi-Albert network, V is an array of cummulated payoffs
 
     neigh = shuffle(neighbors(BAM, a))
     for n in neigh
@@ -146,9 +155,6 @@ function check_strat(a::Int64, y::Vector{Int64}, BAM::SimpleGraph{Int16}) # a is
     end
     return b
 end
-# defining which game is to be played
-
-G = "PD"
 
 A = [1,2,3,4,5]
 B = [2,3,4,5,6]
@@ -158,51 +164,113 @@ C = [A,B]
 
 C = push!(C, D)
 
-
 # Loop that performs simulations
+A = zeros(500,1)
+A = A .+ 2
+B = zeros(500,1)
+B = B .+ 1
+C = vcat(A,B)
+
+D = shuffle(C)
+
 @time begin
-#    for j in 1:100 # This loop controlles building new NF SOC'sq and mapping their edges to define the stratgies
+for i in 1:20
+
+    if i == 1
+        global Data_to_save = Array{Vector}(undef,(20,1))
+    else
+        Data_to_save[i-1] = Arr_paths
+    end
+    # Parametrisation (for the PD game)
+
+    T_PD = 1 + 0.05 * (i-1) # This parameter is the advantage of defectors over cooperators, being typically constrained to the interval 1 < b <= 2
+    R_PD = 1
+    P_PD = 0
+    S_PD = 0
+
+    # Parametrisation (for the SG game)
+
+    r = 0.00001 + 0.05 * (i-1) # Cost to benefit ratio of mutual cooperation
+    beta = (1-r)/(2*r) # Just an example
+    T_SG = beta
+    R_SG = beta - 0.5
+    S_SG = beta - 1
+    P_SG = 0
+    
+
+    # Payoffs matrix for the PD game
+
+    payoffs_PD = Array{Array{Float16,1},2}(undef, 2,2)
+
+    payoffs_PD[1,1] = [R_PD, R_PD]
+    payoffs_PD[1,2] = [S_PD, T_PD]
+    payoffs_PD[2,1] = [T_PD, S_PD]
+    payoffs_PD[2,2] = [P_PD, P_PD]
+
+    payoffs_PD[1,2]
+
+    # Payoffs matrix for the SG game
+
+    payoffs_SG = Array{Array{Float16,1},2}(undef, 2,2)
+    payoffs_SG[1,1] = [R_SG, R_SG]
+    payoffs_SG[1,2] = [T_SG, S_SG]
+    payoffs_SG[2,1] = [S_SG, T_SG]
+    payoffs_SG[2,2] = [P_SG, P_SG]
+
+
+    for j in 1:100 # This loop controlles building new NF SOC'sq and mapping their edges to define the stratgies
 
         BAM = Graphs.SimpleGraphs.barabasi_albert(N, m0, m0, is_directed = false) # Generating SF NOC
 
-        strategies = rand([1,2], N)
+        strats_coop = zeros(Int8,500,1) .+ 1
+        strats_def = zeros(Int8,500,1) .+ 2
+        strategies = shuffle(vcat(strats_coop, strats_def))
 
         all_edges = collect(edges(BAM))
 
         all_edges_final = map(transform, all_edges)
 
         all_edges_strats = map(strat, all_edges_final)
-        
-        #if j == 1
-        #    global Arr_paths = [track]
-        #elseif j > 1
-        #    Arr_paths = push!(Arr_paths, track)
-        #end
 
-        global track = zeros(Float16,1000) # Keeping track of the coop/def proportion
+        acc_payoffs = zeros(Float16, 1, 1000)
+
+        global track = zeros(Float64, 1, 100) # Keeping track of the coop/def proportion
+
+        if j == 1
+            global Arr_paths = [track]
+        elseif j > 1
+            Arr_paths = push!(Arr_paths, track)
+        end
 
         # This loop is responsible for evaluating results of games
 
-        for k in 1:11000
+        for k in 1:Int64(N + (1/10)*N)
 
-            acc_payoffs_new = games(edges_with_strat, edges_new, acc_payoffs)
+            acc_payoffs_new = games(all_edges_strats, all_edges_final, acc_payoffs)
             
-            a = rand(1:10000)
+            a = rand(1:N)
 
-            check_strat(a, strategies, BAM)
+            CheckStrat(a, strategies, BAM)
 
-            if k > 10000
+            if k > N
                 c_d = counter(strategies)[1]/(counter(strategies)[2] + counter(strategies)[1])
 
-                track[k-10000] = c_d
+                track[Int64(k-N)] = c_d
             end
         end
-#    end
+    end
+    Data_to_save[i] = Arr_paths
+    save_object("Coop paths, z=8, N=1000, G=PD, b (1,2).jld2", Data_to_save)
+end    
 end
+
+Data_to_save
+
+
 
 track
 
-rand(1:10000)
+counter(strategies)
 
 track = zeros(Float64,1000)
 
