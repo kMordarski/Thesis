@@ -1,13 +1,13 @@
 # Symulacje do pracy licencjackiej
 
-import Distributions
+using Distributions
 using Pkg
 import Graphs
 using Graphs
 using Plots
-import TikzPictures 
-using GraphPlot, Compose
-using Cairo, Fontconfig
+# using TikzPictures 
+# using GraphPlot, Compose
+# using Cairo, Fontconfig
 using Random
 using Base.Iterators: partition
 using DataStructures
@@ -48,11 +48,10 @@ BAM = Graphs.SimpleGraphs.barabasi_albert(1000, m0, m0)
 
 nv(BAM)
 
-
 edge = collect(edges(BAM))
 
 # Distribution of the strategies
-strategies = rand([1,2], 1000)
+strategies = rand([Int16(1),Int16(2)], 1000)
 
 # Payoffs matrix for the PD game
 
@@ -64,6 +63,7 @@ payoffs_PD[2,1] = [T_PD, S_PD]
 payoffs_PD[2,2] = [P_PD, P_PD]
 
 payoffs_PD[1,2]
+payoffs_PD
 
 # Payoffs matrix for the SG game
 
@@ -103,7 +103,7 @@ payoffs_PD[edges_with_strat[4][1], edges_with_strat[4][2]]
 
 typeof(edges_new)
 
-function games(x, y, V) # V is an array of cummulated payoffs, x is an array of edges, y is an array of strategies
+function games(x, y, V) # V is an array of cummulated payoffs, x is an array of strategies, y is an array of edges
     for n in 1:length(x)
         if G == "PD"
             V[y[n][1]] += payoffs_PD[Int64(x[n][1]), Int64(x[n][2])][1]
@@ -120,20 +120,27 @@ end
     acc_payoffs_new = games(edges_with_strat, edges_new, acc_payoffs)
 end
 
+edges_new[1:40]
+edges_with_strat[1:40]
+
 # Defining a function to look for a neighbor with different strategy than agent selected
 
 n = neighbors(BAM, 100)
 
-function CheckStrat(a, y, BAM) # a is a randomly chosen vertex, y is an array of strategies, BAM is a Barabassi-Albert network, V is an array of cummulated payoffs
+shuffle(neighbors(BAM, 1))
+
+function CheckStrat(a, y, BAM) # a is a randomly chosen vertex, y is an array of strategies, BAM is a Barabassi-Albert network, 
 
     neigh = shuffle(neighbors(BAM, a))
     for n in neigh
-    if y[a] != y[n]
+        if y[a] != y[n]
             global b = n
             break
         end
     end
     
+    ### obsluzyc co sie dzieje jezeli w powyzszej petli nie jest wybrane b
+
     if G == "PD"
         D = T_PD
     elseif G == "SG"
@@ -249,6 +256,8 @@ for i in 1:20
             acc_payoffs_new = games(all_edges_strats, all_edges_final, acc_payoffs)
             
             a = rand(1:N)
+
+            # tutaj blad!!!
 
             CheckStrat(a, strategies, BAM)
 
