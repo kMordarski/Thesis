@@ -125,21 +125,26 @@ edges_with_strat[1:40]
 
 # Defining a function to look for a neighbor with different strategy than agent selected
 
-n = neighbors(BAM, 100)
+n = neighbors(BAM, 1)
 
 shuffle(neighbors(BAM, 1))
 
 function CheckStrat(a, y, BAM) # a is a randomly chosen vertex, y is an array of strategies, BAM is a Barabassi-Albert network, 
 
     neigh = shuffle(neighbors(BAM, a))
+
+    global b = 0
+
     for n in neigh
         if y[a] != y[n]
-            global b = n
+            global b = n 
             break
         end
     end
-    
-    ### obsluzyc co sie dzieje jezeli w powyzszej petli nie jest wybrane b
+
+    if b == 0
+        return
+    end
 
     if G == "PD"
         D = T_PD
@@ -149,18 +154,18 @@ function CheckStrat(a, y, BAM) # a is a randomly chosen vertex, y is an array of
 
     k = max(length(neighbors(BAM, a)), length(neighbors(BAM, b)))
 
-    if acc_payoffs[a] > acc_payoffs[b]
-        prob = (acc_payoffs[a] - acc_payoffs[b])/D*k
+    if acc_payoffs_new[a] > acc_payoffs_new[b]
+        prob = (acc_payoffs_new[a] - acc_payoffs_new[b])/(D*k)
         if rand() <= prob
             y[b] = y[a]
         end
-    elseif acc_payoffs[a] < acc_payoffs[b]
-        prob = (acc_payoffs[b] - acc_payoffs[a])/D*k
+    elseif acc_payoffs_new[a] < acc_payoffs_new[b]
+        prob = (acc_payoffs_new[b] - acc_payoffs_new[a])/(D*k)
         if rand() <= prob
             y[a] = y[b]
         end
     end
-    return b
+    return
 end
 
 A = [1,2,3,4,5]
@@ -251,13 +256,11 @@ for i in 1:20
 
         # This loop is responsible for evaluating results of games
 
-        for k in 1:Int64(N + (1/10)*N)
+        for k in 1:Int64(2*N + (1/10)*N)
 
             acc_payoffs_new = games(all_edges_strats, all_edges_final, acc_payoffs)
             
             a = rand(1:N)
-
-            # tutaj blad!!!
 
             CheckStrat(a, strategies, BAM)
 
@@ -269,23 +272,12 @@ for i in 1:20
         end
     end
     Data_to_save[i] = Arr_paths
-    save_object("Coop paths, z=8, N=1000, G=PD, b (1,2).jld2", Data_to_save)
+    save_object("PD_8_1000.jld2", Data_to_save)
 end    
 end
 
 Data_to_save
 
-
-
-track
-
-counter(strategies)
-
-track = zeros(Float64,1000)
-
-@time begin
-track[1] = 1
-end
 # Creating Scale-Free Network in compliance with preferential attachment and growth rules. Each vertex corresponds 
 
 # Defining games that will be played throughout the population (snowdrift or prisoners dillema) in order to show the emergence of

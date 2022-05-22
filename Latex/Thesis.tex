@@ -21,6 +21,7 @@
 \usepackage{enumitem}
 \usepackage[english]{babel}
 \usepackage[centering, left=3.5cm, right=2.5cm, textheight=24cm]{geometry}
+\usepackage{listings}
 
 % --- packages for citations ------------------------------------------
 \usepackage{natbib}
@@ -300,11 +301,19 @@ In order to perform necessary calculations I had to define the following functio
   is described in section 1.5. 
 \end{enumerate}
 
-\subsection{Data structures and variables types}
+\subsection{Description of the algorithm}
 
-In order to efficiently perform the necessary calculations, we had to pay close attention to the types of variables and data structures.
-Since Julia allows us to specify the variable type (for example Int16, Float64, etc.) to save the memory space. Therefore 
-we can speed up the calculations and ultimately the entire process. 
+The main algorithm is the fundamental element of this dissertation. It consists of 3 nested loops executing instructions necessary to conduct simulations on which
+my research is based. I will be describing those loops in an inside-out order. 
+
+The first loop is responsible for evaluating the results of the games, potentially changing the strategies of players, and keeping track of the proportion of the strategies
+used by players. To run properly it requires previously set parametrization and a set of edges of the Barabassi-Albert graph. As an end result it produces a vector of length 
+100 in which elements are proportions of coop/def strategies, after each generation (1001-1100) in population of players. 
+
+
+%In order to efficiently perform the necessary calculations, we had to pay close attention to the types of variables and data structures.
+%Since Julia allows us to specify the variable type (for example Int16, Float64, etc.) to save the memory space. Therefore 
+%we can speed up the calculations and ultimately the entire process. 
 
 % --- chapter ---------------------------------------------------------
 \clearpage
