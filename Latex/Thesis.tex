@@ -181,7 +181,7 @@ either prove or disprove the research paper with title \mbox{\textbf{"Scale-Free
  graphs had a degree distribution with a single peak. It means that every "player" could interact only with a fixed number of other "players". SF NOCs are said to 
  perform better at modeling the actual, existing societies and networks. It complies with the rules of growth and preferential attachment (rich gets richer). When we 
  analyze some actual networks, for example, the Twitter network, we observe that those with a bigger count of "followers" are more likely to gain new ones than accounts 
- with a low count of "followers". 
+ with a low count of followers. 
  
  One of the goals of The Paper was to compare the results of simulations on different kinds of graphs. According to The Paper, players that 
  occupy vertices of SF NOC are much more likely to cooperate than on any other graph. Those results came up both in the Snowdrift game (later on referred to as SG) and 
@@ -296,19 +296,59 @@ In order to perform necessary calculations I had to define the following functio
   \item Games --- This function is used to evaluate the results of games played between players (vertices connected with an edge). As an input this function
    takes a vector of edges, vector of strategies and a vector of accumulated payoffs. It returns an adjusted vector of accumulated payoffs.
   \item CheckStrat --- This function fulfills a number of tasks. It takes as an input a randomly chosen vertex, vector of strategies, vector of accumulated
-  payoffs, and the SF NOC. It identifies all neighbors of the previously mentioned vertex, then shuffles all of its neighbors, and then looks for a neighbor
+  payoffs, and the SF NOC. It identifies all neighbors of the previously mentioned vertex, then shuffles them, and then looks for a neighbor
   with a different strategy. Then it proceeds to change the strategy of the vertex with lower accumulated payoffs. The probability of the transition 
   is described in section 1.5. 
 \end{enumerate}
 
 \subsection{Description of the algorithm}
 
-The main algorithm is the fundamental element of this dissertation. It consists of 3 nested loops executing instructions necessary to conduct simulations on which
+The main algorithm is the fundamental element of this dissertation. It consists of 3 nested loops executing instructions necessary to conduct simulations, on which
 my research is based. I will be describing those loops in an inside-out order. 
 
 The first loop is responsible for evaluating the results of the games, potentially changing the strategies of players, and keeping track of the proportion of the strategies
-used by players. To run properly it requires previously set parametrization and a set of edges of the Barabassi-Albert graph. As an end result it produces a vector of length 
-100 in which elements are proportions of coop/def strategies, after each generation (1001-1100) in population of players. 
+used by players. To run properly, it requires previously set parametrization and a set of edges of the Barabasi-Albert graph. As a result, it produces a vector of length 
+100 in which elements are proportions of coop/def strategies, measured after each generation (1001-1100) in the population of players. This loop is repeated 2 000 times, which gives
+us a total of 2 200 000 generations for one Barabasi-Albert graph parametrization for a given game.
+
+The loop itself operates as follows:
+
+\begin{enumerate}
+  \item Each pair of connected players (vertices of a graph) engage in a single round of a given game. It means that function GAMES is applied throughout the entire array of edges, adjusting their accumulated payoffs.
+  \item One player is chosen randomly.
+  \item An attempt to change strategy is being embarked on. It indicates that the function CHECKSTRAT is applied to the player chosen in the previous step.
+  \item If the current iteration is higher than 1000, it calculates the share of cooperators in the entire population and then passes it onto a corresponding value of a vector TRACK.
+  \item After 1 100 iterations (generations), it ends, and then the next iteration of the outside loop is triggered.
+\end{enumerate}
+
+The outer loop to the one described above is responsible for "resetting" the Barabasi-Albert graph. Since separate simulations are supposed to be carried out 
+on a randomly generated SF NOC (but with the same parametrization), we need to conduct 100 of them (for each payoff parametrization), this loop is an indispensable
+element of the algorithm. The crucial fact to note is that this loop is also responsible for creating an object named ARRPATHS --- vector of length 100, used to 
+store the results of the simulations.
+
+The procedure followed by this loop is as shown below:
+
+\begin{enumerate}
+  \item It generates the random Barabasi-Albert graph with N vertices and average connectivity equal to Z. Both parameters are chosen deliberately at the beginning of the code.
+  \item The next step is constructing an array of strategies. This array is of length 1000 (number of players). The strategies are represented by numbers 1 (cooperation) and 2 (defection). The choice of these numbers is strict because later on, we use them to index the payoffs matrix.
+        The process of creating such an array is following:
+        \begin{enumerate}
+          \item Creating two vectors of length 500, one filled with ones, and one filled with twos.
+          \item Concatenate those two vectors to get a vector of length 1000.
+          \item Shuffle the values in a vector and save them as STRATEGIES.
+        \end{enumerate}
+  \item For the inner loop to conduct games, we need to transform our SF NOC into two arrays --- one containing edges (tuples of players) and the other containing strategies for each edge. To achieve this, we apply the following steps:
+        \begin{enumerate}
+          \item We use function COLLECT on the function EDGES used on the Barabasi-Albert model, which results in an iterable, however not easily callable, array of edges.  
+          \item Then we map a function TRANSFORM onto the previously obtained object. This produces us an array of tuples, each tuple representing one edge.
+          \item Lastly, we map function STRAT onto an array of tuples representing the edges.
+        \end{enumerate}
+  \item The array of accumulated payoffs is created --- initially with all values equal to zero (after each game, the results are added to the corresponding values in this array).
+  \item A global variable is created. This variable is named TRACK and it is a vector of length 100. This vector is used by the inner loop to store the proportion of cooperators in the population.
+  \item The final step before triggering the inner loop is creating ARRPATH, which will be used to store 100 TRACK variables. If it is the first iteration of this loop, we create a global variable named ARRPATH, which is an array. If, on the other hand, it is not the first iteration, we are using the function PUSH! to 
+        add the next TRACK to our existing array. 
+\end{enumerate}
+
 
 
 %In order to efficiently perform the necessary calculations, we had to pay close attention to the types of variables and data structures.

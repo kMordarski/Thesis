@@ -31,7 +31,7 @@ r = 1/(2 * beta - 1) # Cost to benefit ratio of mutual cooperation
 
 # Parametrisation of SF NOC's (Barabassi-Albert models)
 
-z = 8
+z = 4
 m0 = Int16(z/2)
 N = Int64(1000)
 st = N-m0
@@ -142,15 +142,16 @@ function CheckStrat(a, y, BAM) # a is a randomly chosen vertex, y is an array of
         end
     end
 
-    if b == 0
-        return
-    end
-
     if G == "PD"
         D = T_PD
     elseif G == "SG"
         D = T_SG
     end
+
+    if b == 0
+        return
+    end
+
 
     k = max(length(neighbors(BAM, a)), length(neighbors(BAM, b)))
 
@@ -164,6 +165,8 @@ function CheckStrat(a, y, BAM) # a is a randomly chosen vertex, y is an array of
         if rand() <= prob
             y[a] = y[b]
         end
+    else
+        return
     end
     return
 end
@@ -247,7 +250,7 @@ for i in 1:20
         acc_payoffs = zeros(Float16, 1, 1000)
 
         global track = zeros(Float64, 1, 100) # Keeping track of the coop/def proportion
-
+        
         if j == 1
             global Arr_paths = [track]
         elseif j > 1
@@ -264,15 +267,15 @@ for i in 1:20
 
             CheckStrat(a, strategies, BAM)
 
-            if k > N
+            if k > 2*N
                 c_d = counter(strategies)[1]/(counter(strategies)[2] + counter(strategies)[1])
 
-                track[Int64(k-N)] = c_d
+                track[Int64(k-2*N)] = c_d
             end
         end
     end
     Data_to_save[i] = Arr_paths
-    save_object("PD_8_1000.jld2", Data_to_save)
+    save_object("PD_4_2000.jld2", Data_to_save)
 end    
 end
 

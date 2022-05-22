@@ -11,17 +11,17 @@
 \contentsline {subsection}{\numberline {2.1}Introduction to the algorithm}{9}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Functions}{9}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}Description of the algorithm}{10}{subsection.2.3}%
-\contentsline {section}{\numberline {3}Basic things}{11}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Compiling \LaTeX files}{11}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}Basic formatting for a text}{11}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}Fonts and fonts' sizes}{11}{subsection.3.3}%
-\contentsline {section}{\numberline {4}Mathematics}{12}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Basic mathematics}{12}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Referencing mathematics and other things}{12}{subsection.4.2}%
-\contentsline {subsection}{\numberline {4.3}Some more mathematical formulas}{13}{subsection.4.3}%
-\contentsline {section}{\numberline {5}Figures and tables}{14}{section.5}%
-\contentsline {section}{\numberline {6}Bibliography}{16}{section.6}%
-\contentsline {section}{\numberline {A}Appendix: Some important stuff}{19}{appendix.A}%
-\contentsline {section}{List of tables}{24}{table.3}%
-\contentsline {section}{List of figures}{25}{section*.8}%
-\contentsline {section}{Streszczenie}{26}{section*.9}%
+\contentsline {section}{\numberline {3}Basic things}{13}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Compiling \LaTeX files}{13}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Basic formatting for a text}{13}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Fonts and fonts' sizes}{13}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Mathematics}{14}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Basic mathematics}{14}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Referencing mathematics and other things}{14}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Some more mathematical formulas}{15}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Figures and tables}{16}{section.5}%
+\contentsline {section}{\numberline {6}Bibliography}{18}{section.6}%
+\contentsline {section}{\numberline {A}Appendix: Some important stuff}{21}{appendix.A}%
+\contentsline {section}{List of tables}{26}{table.3}%
+\contentsline {section}{List of figures}{27}{section*.8}%
+\contentsline {section}{Streszczenie}{28}{section*.9}%
