@@ -8,7 +8,7 @@ using JLD2
 cd("./ramsza");
 
 ### Wczytanie pliku
-a = load_object("../PD_4_2000_b_fixed.jld2");
+a = load_object("../Julia/PD_16_1000.jld2")
 length(a) # parametryzacje / wypłaty
 a[1] # pojedyncza parametryzacja
 
@@ -21,9 +21,9 @@ for k in 1:20
         end
     end
     if k < 10
-        CSV.write("./PD_04b_0$k.csv", DataFrame(g, :auto))
+        CSV.write("./data/PD_16_1000_0$k.csv", DataFrame(g, :auto))
     else
-        CSV.write("./PD_04b_$k.csv", DataFrame(g, :auto))  
+        CSV.write("./data/PD_16_1000_$k.csv", DataFrame(g, :auto))  
     end
 end 
 
