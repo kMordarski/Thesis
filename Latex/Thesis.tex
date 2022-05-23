@@ -1,11 +1,11 @@
+% !TEX TS-program = pdflatexmk
+
 % Style for a MSc paper at Warsaw School of Economics
 % Michał Ramsza
 % Friday, December 14, 2012
 
 % --- document class and other global stuff ---------------------------
 \documentclass[english, twoside, 12pt, a4paper]{article}
-
-
 
 % --- packages --------------------------------------------------------
 \usepackage{textcomp}
@@ -60,6 +60,10 @@
 % --- support for no widows --------------------------------------------
 \usepackage[defaultlines=4,all]{nowidow}
 
+% --- quotation for polish language \enquote{}
+\usepackage[autostyle]{csquotes}
+\DeclareQuoteAlias{dutch}{polish}
+
 % --- definitions for environments -------------------------------------
 \theoremstyle{definition}
     \newtheorem{condition}{Assumption}
@@ -101,7 +105,6 @@
    \belowdisplayskip \abovedisplayskip
 }
 \makeatother
-
 
 % ---------------------------------------------------------------------
 \begin{document}
@@ -158,39 +161,23 @@ Warszawa 2022
 \section{Introduction}
 \subsection{General Introduction}
 
-This paper aims to replicate, to an essential degree, the seminal paper on the emergence of cooperation, cf.~\cite{santos2005scale}. The secondary goal 
-of this research is to provide the publicly available code allowing replication of the original results.
+This paper aims to replicate, to some degree, the seminal paper \cite{santos2005scale} on the emergence of cooperation. The secondary goal of this research is to provide the publicly available code allowing replication of the actual results.
 
-Tutaj jest drugi akapit. 
-
------
-
-either prove or disprove the research paper with title \mbox{\textbf{"Scale-Free Networks Provide a Unifying Framework for the Emergence of Cooperation"}}
- written by F.C. Santos and J. M. Pacheco and published in Physical Review Letters nr 95 (later on reffered to as "The Paper"). Regardless of the outcome this work is going to be useful
- because the above mentioned authors did not provide the code that was used to conduct the necessary simulations. Therefore goal is not only
- to disprove the above mantioned paper but also to provide readers with clear and easy to follow code. 
+%either prove or disprove the research paper with title \mbox{\textbf{"Scale-Free Networks Provide a Unifying Framework for the Emergence of Cooperation"}}  written by F.C. Santos and J. M. Pacheco and published in Physical Review Letters nr 95 (later on reffered to as "The Paper"). Regardless of the outcome this work is going to be useful because the above mentioned authors did not provide the code that was used to conduct the necessary simulations. Therefore goal is not only to disprove the above mantioned paper but also to provide readers with clear and easy to follow code. 
  
  \subsection{Description of The Paper}
 
- The Paper was published in "Physical Review Letters" on 26th August 2005 and according to Google Scholar has been since cited over 1600 times. 
- It clearly shows the magnitude of said paper and its groundbreaking character. This paper is presenting the results of simulations conducted by the authors and its 
- implications for evolutionary game theory.
+The Paper was published in \enquote{Physical Review Letters} on the 26th of August 2005 and, according to Google Scholar, has been since cited over 1600 times. It clearly shows the magnitude of the said paper and its groundbreaking character. This paper presents the results of simulations conducted by the authors and their implications for evolutionary game theory.
  
- The crucial thing to understand is that the authors of The Paper changed the approach to modeling such games by applying
- Scale-Free Networks of Contacts (later on referred to as "SF NOCs"). Its innovativeness lies in the never used before degree distribution of said graph. Before being used
- graphs had a degree distribution with a single peak. It means that every "player" could interact only with a fixed number of other "players". SF NOCs are said to 
- perform better at modeling the actual, existing societies and networks. It complies with the rules of growth and preferential attachment (rich gets richer). When we 
- analyze some actual networks, for example, the Twitter network, we observe that those with a bigger count of "followers" are more likely to gain new ones than accounts 
+ The crucial thing to understand is that the authors of The Paper changed the approach to modeling such games by applying Scale-Free Networks of Contacts (later on referred to as "SF NOCs"). Its innovativeness lies in the never used before degree distribution of said graph. Before being used graphs had a degree distribution with a single peak. It means that every "player" could interact only with a fixed number of other "players". SF NOCs are said to 
+ perform better at modeling the actual, existing societies and networks. It complies with the rules of growth and preferential attachment (rich gets richer). When we analyze some actual networks, for example, the Twitter network, we observe that those with a bigger count of "followers" are more likely to gain new ones than accounts 
  with a low count of followers. 
  
- One of the goals of The Paper was to compare the results of simulations on different kinds of graphs. According to The Paper, players that 
- occupy vertices of SF NOC are much more likely to cooperate than on any other graph. Those results came up both in the Snowdrift game (later on referred to as SG) and 
- Prisoners Dilemma game (later on referred to as PD).  
+ One of the goals of The Paper was to compare the results of simulations on different kinds of graphs. According to The Paper, players that occupy vertices of SF NOC are much more likely to cooperate than on any other graph. Those results came up both in the Snowdrift game (later on referred to as SG) and Prisoners Dilemma game (later on referred to as PD).  
 
+\subsection{A brief description of Snowdrift and Prisoners Dilemma games}
 
-\subsection{A brief description of Snowdrift game and Prisoners Dilemma game}
-
-\paragraph{Prisoners Dilemma Game}. The Prisoners Dilemma game is a widely known problem in game theory and decision analysis. It shows that there exist situations in which the outcome is not optimal, even though players act in their own best interest. In the scope of our analysis, it is important to note that in the PD game, the best strategy is to defect, regardless of the opponent's choice. The game is parameterized as follows:
+\paragraph{Prisoners Dilemma Game.} The Prisoners Dilemma game is a widely known problem in game theory and decision analysis. It shows situations in which the outcome is not optimal, even though players act in their own best interest. In the scope of our analysis, it is essential to note that in the PD game, the best strategy is to defect, regardless of the opponent's choice. The game is parameterized as follows:
 \begin{center}
 \begin{game}{2}{2}
   & $C$    & $D$    \\
@@ -201,22 +188,17 @@ $D$ & $T,S$ & $P,P$
 where the values are given as follows:
 \[
 \begin{aligned}
-T &= b > 1, \\
-R &= 1, \\
-P &= 0, \\
-S &= 0, \\
+T &= b > 1, & R &= 1, \\
+P &= 0, & S &= 0, \\
 1 &< b \le 2. 
 \end{aligned}
 \]
 We see that the above restrictions order the parameters as follows:
 \[
-T > R > P = S
+T > R > P = S .
 \]
 
-\paragraph{Snowdrift Game.} 
-The Snowdrift game represents a metaphor for cooperative interactions between players. Contrary to PD, the Snowdrift game stimulates cooperative behavior amongst
-players. It doesn't make the deflection strategy inapplicable, but payoffs of this game favourize cooperative behaviors more than the PD. The optimal strategy
-is to cooperate when the other defects and to defect when the other cooperates.
+\paragraph{Snowdrift Game.} The Snowdrift game represents a metaphor for cooperative interactions between players. Contrary to the PD game, the Snowdrift game stimulates cooperative behavior amongst players. It doesn't make the deflection strategy inapplicable, but the game's payoffs encourage cooperative behavior more than the payoffs of the PD game. The optimal strategy is to cooperate when the other defects and to defect when the other cooperates. The game is parametrize as follows:
 \begin{center}
   \begin{game}{2}{2}
     & $C$    & $D$    \\
@@ -224,19 +206,16 @@ is to cooperate when the other defects and to defect when the other cooperates.
   $D$ & $S,T$ & $P,P$
   \end{game}
   \end{center}
-  
-  Where the parametrization is as follows:
-  \[
+where the parameters' values are:
+\[
   \begin{aligned}
-  T &= \beta > 1 ,\\
-  R &= \beta - \frac{1}{2} ,\\
-  S &= 1 - \beta ,\\
-  P &= 0. 
+  T &= \beta > 1 , &  R &= \beta - \frac{1}{2} ,\\
+  S &= 1 - \beta , &  P &= 0. 
   \end{aligned}
 \]
 We see that the above restrictions order the parameters as follows:
 \[
- T > R > P > S 
+ T > R > P > S .
 \]
 
 \subsection{Simulations description}
@@ -303,28 +282,21 @@ In order to perform necessary calculations I had to define the following functio
 
 \subsection{Description of the algorithm}
 
-The main algorithm is the fundamental element of this dissertation. It consists of 3 nested loops executing instructions necessary to conduct simulations, on which
-my research is based. I will be describing those loops in an inside-out order. 
+The main algorithm is the fundamental element of this dissertation. It consists of 3 nested loops executing instructions necessary to conduct simulations, on which my research is based. I will be describing those loops in an inside-out order. 
 
-The first loop is responsible for evaluating the results of the games, potentially changing the strategies of players, and keeping track of the proportion of the strategies
-used by players. To run properly, it requires previously set parametrization and a set of edges of the Barabasi-Albert graph. As a result, it produces a vector of length 
-100 in which elements are proportions of coop/def strategies, measured after each generation (1001-1100) in the population of players. This loop is repeated 2 000 times, which gives
-us a total of 2 200 000 generations for one Barabasi-Albert graph parametrization for a given game.
+The first loop is responsible for evaluating the results of the games, potentially changing the strategies of players, and keeping track of the proportion of the strategies used by players. To run properly, it requires previously set parametrization and a set of edges of the Barabasi-Albert graph. As a result, it produces a vector of length 100 in which elements are proportions of coop/def strategies, measured after each generation (1001--1100) in the population of players. This loop is repeated 2 000 times, which gives us a total of 2~200~000 generations for one Barabasi-Albert graph parametrization for a given game.
 
 The loop itself operates as follows:
 
-\begin{enumerate}
+\begin{enumerate}[noitemsep]
   \item Each pair of connected players (vertices of a graph) engage in a single round of a given game. It means that function GAMES is applied throughout the entire array of edges, adjusting their accumulated payoffs.
   \item One player is chosen randomly.
   \item An attempt to change strategy is being embarked on. It indicates that the function CHECKSTRAT is applied to the player chosen in the previous step.
   \item If the current iteration is higher than 1000, it calculates the share of cooperators in the entire population and then passes it onto a corresponding value of a vector TRACK.
-  \item After 1 100 iterations (generations), it ends, and then the next iteration of the outside loop is triggered.
+  \item After 1~100 iterations (generations), it ends, and then the next iteration of the outside loop is triggered.
 \end{enumerate}
 
-The outer loop to the one described above is responsible for "resetting" the Barabasi-Albert graph. Since separate simulations are supposed to be carried out 
-on a randomly generated SF NOC (but with the same parametrization), we need to conduct 100 of them (for each payoff parametrization), this loop is an indispensable
-element of the algorithm. The crucial fact to note is that this loop is also responsible for creating an object named ARRPATHS --- vector of length 100, used to 
-store the results of the simulations.
+The outer loop to the one described above is responsible for \enquote{resetting} the Barabasi-Albert graph. Since separate simulations are supposed to be carried out on a randomly generated SF NOC (but with the same parametrization), we need to conduct 100 of them (for each payoff parametrization); this loop is an indispensable element of the algorithm. The crucial fact to note is that this loop is also responsible for creating an object named ARRPATHS --- vector of length 100, used to store the results of the simulations.
 
 The procedure followed by this loop is as shown below:
 
