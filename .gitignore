@@ -9,4 +9,6 @@
 *.out
 *.toc
 *.synctex.gz
+*.lof
+*.lot
 
