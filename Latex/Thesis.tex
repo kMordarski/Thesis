@@ -1,3 +1,5 @@
+% !TEX TS-program = pdflatexmk
+
 % Style for a MSc paper at Warsaw School of Economics
 % Michał Ramsza
 % Friday, December 14, 2012
@@ -159,39 +161,23 @@ Warszawa 2022
 \section{Introduction}
 \subsection{General Introduction}
 
-This paper aims to replicate, to an essential degree, the seminal paper on the emergence of cooperation, cf.~\cite{santos2005scale}. The secondary goal 
-of this research is to provide the publicly available code allowing replication of the original results.
+This paper aims to replicate, to some degree, the seminal paper \cite{santos2005scale} on the emergence of cooperation. The secondary goal of this research is to provide the publicly available code allowing replication of the actual results.
 
-Tutaj jest drugi akapit. 
-
------
-
-either prove or disprove the research paper with title \mbox{\textbf{"Scale-Free Networks Provide a Unifying Framework for the Emergence of Cooperation"}}
- written by F.C. Santos and J. M. Pacheco and published in Physical Review Letters nr 95 (later on reffered to as "The Paper"). Regardless of the outcome this work is going to be useful
- because the above mentioned authors did not provide the code that was used to conduct the necessary simulations. Therefore goal is not only
- to disprove the above mantioned paper but also to provide readers with clear and easy to follow code. 
+%either prove or disprove the research paper with title \mbox{\textbf{"Scale-Free Networks Provide a Unifying Framework for the Emergence of Cooperation"}}  written by F.C. Santos and J. M. Pacheco and published in Physical Review Letters nr 95 (later on reffered to as "The Paper"). Regardless of the outcome this work is going to be useful because the above mentioned authors did not provide the code that was used to conduct the necessary simulations. Therefore goal is not only to disprove the above mantioned paper but also to provide readers with clear and easy to follow code. 
  
  \subsection{Description of The Paper}
 
- The Paper was published in "Physical Review Letters" on 26th August 2005 and according to Google Scholar has been since cited over 1600 times. 
- It clearly shows the magnitude of said paper and its groundbreaking character. This paper is presenting the results of simulations conducted by the authors and its 
- implications for evolutionary game theory.
+The Paper was published in \enquote{Physical Review Letters} on the 26th of August 2005 and, according to Google Scholar, has been since cited over 1600 times. It clearly shows the magnitude of the said paper and its groundbreaking character. This paper presents the results of simulations conducted by the authors and their implications for evolutionary game theory.
  
- The crucial thing to understand is that the authors of The Paper changed the approach to modeling such games by applying
- Scale-Free Networks of Contacts (later on referred to as "SF NOCs"). Its innovativeness lies in the never used before degree distribution of said graph. Before being used
- graphs had a degree distribution with a single peak. It means that every "player" could interact only with a fixed number of other "players". SF NOCs are said to 
- perform better at modeling the actual, existing societies and networks. It complies with the rules of growth and preferential attachment (rich gets richer). When we 
- analyze some actual networks, for example, the Twitter network, we observe that those with a bigger count of "followers" are more likely to gain new ones than accounts 
+ The crucial thing to understand is that the authors of The Paper changed the approach to modeling such games by applying Scale-Free Networks of Contacts (later on referred to as "SF NOCs"). Its innovativeness lies in the never used before degree distribution of said graph. Before being used graphs had a degree distribution with a single peak. It means that every "player" could interact only with a fixed number of other "players". SF NOCs are said to 
+ perform better at modeling the actual, existing societies and networks. It complies with the rules of growth and preferential attachment (rich gets richer). When we analyze some actual networks, for example, the Twitter network, we observe that those with a bigger count of "followers" are more likely to gain new ones than accounts 
  with a low count of followers. 
  
- One of the goals of The Paper was to compare the results of simulations on different kinds of graphs. According to The Paper, players that 
- occupy vertices of SF NOC are much more likely to cooperate than on any other graph. Those results came up both in the Snowdrift game (later on referred to as SG) and 
- Prisoners Dilemma game (later on referred to as PD).  
-
+ One of the goals of The Paper was to compare the results of simulations on different kinds of graphs. According to The Paper, players that occupy vertices of SF NOC are much more likely to cooperate than on any other graph. Those results came up both in the Snowdrift game (later on referred to as SG) and Prisoners Dilemma game (later on referred to as PD).  
 
 \subsection{A brief description of Snowdrift and Prisoners Dilemma games}
 
-\paragraph{Prisoners Dilemma Game.} The Prisoners Dilemma game is a widely known problem in game theory and decision analysis. It shows that there exist situations in which the outcome is not optimal, even though players act in their own best interest. In the scope of our analysis, it is important to note that in the PD game, the best strategy is to defect, regardless of the opponent's choice. The game is parameterized as follows:
+\paragraph{Prisoners Dilemma Game.} The Prisoners Dilemma game is a widely known problem in game theory and decision analysis. It shows situations in which the outcome is not optimal, even though players act in their own best interest. In the scope of our analysis, it is essential to note that in the PD game, the best strategy is to defect, regardless of the opponent's choice. The game is parameterized as follows:
 \begin{center}
 \begin{game}{2}{2}
   & $C$    & $D$    \\
@@ -202,22 +188,17 @@ $D$ & $T,S$ & $P,P$
 where the values are given as follows:
 \[
 \begin{aligned}
-T &= b > 1, \\
-R &= 1, \\
-P &= 0, \\
-S &= 0, \\
+T &= b > 1, & R &= 1, \\
+P &= 0, & S &= 0, \\
 1 &< b \le 2. 
 \end{aligned}
 \]
 We see that the above restrictions order the parameters as follows:
 \[
-T > R > P = S
+T > R > P = S .
 \]
 
-\paragraph{Snowdrift Game.} 
-The Snowdrift game represents a metaphor for cooperative interactions between players. Contrary to PD, the Snowdrift game stimulates cooperative behavior amongst
-players. It doesn't make the deflection strategy inapplicable, but payoffs of this game favourize cooperative behaviors more than the PD. The optimal strategy
-is to cooperate when the other defects and to defect when the other cooperates.
+\paragraph{Snowdrift Game.} The Snowdrift game represents a metaphor for cooperative interactions between players. Contrary to the PD game, the Snowdrift game stimulates cooperative behavior amongst players. It doesn't make the deflection strategy inapplicable, but the game's payoffs encourage cooperative behavior more than the payoffs of the PD game. The optimal strategy is to cooperate when the other defects and to defect when the other cooperates. The game is parametrize as follows:
 \begin{center}
   \begin{game}{2}{2}
     & $C$    & $D$    \\
@@ -225,19 +206,16 @@ is to cooperate when the other defects and to defect when the other cooperates.
   $D$ & $S,T$ & $P,P$
   \end{game}
   \end{center}
-  
-  Where the parametrization is as follows:
-  \[
+where the parameters' values are:
+\[
   \begin{aligned}
-  T &= \beta > 1 ,\\
-  R &= \beta - \frac{1}{2} ,\\
-  S &= 1 - \beta ,\\
-  P &= 0. 
+  T &= \beta > 1 , &  R &= \beta - \frac{1}{2} ,\\
+  S &= 1 - \beta , &  P &= 0. 
   \end{aligned}
 \]
 We see that the above restrictions order the parameters as follows:
 \[
- T > R > P > S 
+ T > R > P > S .
 \]
 
 \subsection{Simulations description}
