@@ -152,7 +152,6 @@ function CheckStrat(a, y, BAM) # a is a randomly chosen vertex, y is an array of
         return
     end
 
-
     k = max(length(neighbors(BAM, a)), length(neighbors(BAM, b)))
 
     if acc_payoffs_new[a] > acc_payoffs_new[b]
