@@ -31,14 +31,14 @@ r = 1/(2 * beta - 1) # Cost to benefit ratio of mutual cooperation
 
 # Parametrisation of SF NOC's (Barabassi-Albert models)
 
-z = 4
+z = 8
 m0 = Int16(z/2)
 N = Int64(1000)
 st = N-m0
 
 
 # defining which game is to be played
-G = "PD"
+G = "SG"
 
 # Tracking of the game results
 
@@ -259,7 +259,7 @@ for i in 1:20
 
         # This loop is responsible for evaluating results of games
 
-        for k in 1:Int64(2*N + (1/10)*N)
+        for k in 1:Int64(N + (1/10)*N)
 
             acc_payoffs_new = games(all_edges_strats, all_edges_final, acc_payoffs)
             
@@ -267,15 +267,15 @@ for i in 1:20
 
             CheckStrat(a, strategies, BAM)
 
-            if k > 2*N
+            if k > N
                 c_d = counter(strategies)[1]/(counter(strategies)[2] + counter(strategies)[1])
 
-                track[Int64(k-2*N)] = c_d
+                track[Int64(k-N)] = c_d
             end
         end
     end
     Data_to_save[i] = Arr_paths
-    save_object("PD_4_2000.jld2", Data_to_save)
+    save_object("SG_16_1000.jld2", Data_to_save)
 end    
 end
 
