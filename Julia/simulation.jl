@@ -275,8 +275,8 @@ for i in 1:20
         end
     end
     Data_to_save[i] = Arr_paths
-    save_object("SG_16_1000.jld2", Data_to_save)
-end    
+end
+save_object("SG_16_1000.jld2", Data_to_save)
 end
 
 Data_to_save

@@ -162,7 +162,6 @@ Warszawa 2022
 % --- chapter ---------------------------------------------------------
 \cleardoublepage
 \section{Introduction}
-\subsection{General Introduction}
 
 This paper aims to replicate, to some degree, the seminal paper of \cite{santos2005scale} on the emergence of cooperation. The secondary goal of this research is to provide the publicly available code allowing replication of the actual results.
 
@@ -170,8 +169,6 @@ This paper aims to replicate, to some degree, the seminal paper of \cite{santos2
 
 either prove or disprove the research paper with title \textbf{"Scale-Free Networks Provide a Unifying Framework for the Emergence of Cooperation"}  written by F.C. Santos and J. M. Pacheco and published in Physical Review Letters nr 95 (later on reffered to as "The Paper"). Regardless of the outcome this work is going to be useful because the above mentioned authors did not provide the code that was used to conduct the necessary simulations. Therefore goal is not only to disprove the above mantioned paper but also to provide readers with clear and easy to follow code. 
  
- \subsection{Description of The Paper}
-
 The Paper was published in \enquote{Physical Review Letters} on the 26th of August 2005 and, according to Google Scholar, has been since cited over 1600 times. It clearly shows the magnitude of the said paper and its groundbreaking character. This paper presents the results of simulations conducted by the authors and their implications for evolutionary game theory.
  
 The crucial thing to understand is that the authors of The Paper changed the approach to modeling such games by applying Scale-Free Networks of Contacts (later on referred to as "SF NOCs"). Its innovativeness lies in the never used before degree distribution of said graph. Before being used graphs had a degree distribution with a single peak. It means that every "player" could interact only with a fixed number of other "players". SF NOCs are said to 
@@ -251,7 +248,6 @@ We see that the above restrictions order the parameters as follows:
 
 \todo{Tutaj analiza równowag Nasha w opisanych powyżej grach w one-shot games. Pokazać, że jest albo nie mam kooperacji. Tutaj również wprowadzamy grę na grafach losowych, a więc musimy opisać na jakich grafach, itd. Tutaj również opis uczenia się ale w sensie algorytmu matematycznego nie implementacji.}
 
-\subsection{Replicatory dynamics}
 
 %
 %\subsection{Replicatory dynamics}
@@ -277,11 +273,6 @@ We see that the above restrictions order the parameters as follows:
 %of strategies x, k$_{>}$ is the largest between k$_{y}$ and k$_{x}$ (k$_{y}$ is a number of neighbors with a strategy y, k$_{x}$ is a number of neighbors with a 
 %strategy x), D depends on the game (it is equal to either T-S for PD or T-P for SG).
 
-\begin{enumerate}
-  \item The site x is updated.
-  \item A neighbor y is drawn at random among all k$_{x}$ neighbors
-  \item if cumulative payoffs of y (P$_{y}$) are greater than cumulative payoffs of x (P$_{x}$), the chosen neighbor takes over site x with probability (P$_{i}$) given below.
-\end{enumerate}
 
 % --- chapter ---------------------------------------------------------
 \clearpage
@@ -291,7 +282,6 @@ This chapter contains a description of the algorithm used in the simulation.
 
 \todo{To co powyżej do rozszerzenia. Generalnie ten rozdział ma zawierać implementację koncepcji matematycznej z poprzedniego rozdziału.}
 
-\section{Algorithm}
 \subsection{Introduction to the algorithm}
 
 
@@ -359,7 +349,11 @@ The procedure followed by this loop is as shown below:
         add the next TRACK to our existing array. 
 \end{enumerate}
 
+Last but certainly not least, we have the outer loop. This loop fulfills two tasks. First of all, it controls the parametrization of the games. It not only changes the values
+of crucial parameters but also updates the matrix of the payoffs. Since we want to generate 20 data points (one data point for each parametrization), said loop iterates 20 times. 
+The range of parameters is given in the paper as follows. The b parameter in the PD game is in the range of [1,2), and the r parameter in the SG game is in the range of (0,1]. Its secondary task is to collect results obtained in the previous loops. Those results will then be analyzed and undergo data manipulations and statistical analysis.
 
+<<<<<<< HEAD
 \subsection{Simulations description}
 
 Because of the nature of this paper (an attempt to clone the results of The Paper), our simulations must be conducted in strict accordance with the methods outlined
@@ -376,6 +370,17 @@ for each parametrization. Each simulation is performed following those steps: Wh
   10 000 is the so-called "transient time".
   \item We collect results (equilibrium frequencies of cooperators and defectors) by averaging over the last 1 000 generations.
 \end{enumerate}
+=======
+The exact steps followed by this loop are shown below:
+
+\begin{enumerate}
+  \item It creates a global variable called DATATOSAVE --- an array of length 20. In its first iteration this variable is created. With every next iteration, it stores data as values in this array. Each element of this array is going to be ARRPATHS generated in the previously described loops. Ultimately it will contain all necessary data for further calculations and visualizations.
+  \item The next step is to adjust the parameter values. With each iteration, it adds a fixed value to b and r. Since we have 20 iterations and need to fill a distance of 1, the value-added each time equals 0.05.
+  \item Then it adjusts the payoffs matrices.
+\end{enumerate}
+
+After all of the loops have been carried out, we use package JLD2 to save our results. 
+>>>>>>> 974c3322fe93ddfc301b20dcbed3c1018319af2c
 
 %In order to efficiently perform the necessary calculations, we had to pay close attention to the types of variables and data structures.
 %Since Julia allows us to specify the variable type (for example Int16, Float64, etc.) to save the memory space. Therefore 
@@ -383,7 +388,6 @@ for each parametrization. Each simulation is performed following those steps: Wh
 
 \todo{Poniżej wrzuciłem przykładowy algorytm w pseudokodzie. Myślę, że to jest to co chcemy wykorzystać aby zapisać sam algorytm. To oczywiście musi być potem opisane w tekście.}
 
-\subsection{Compiling \LaTeX files}
 
 \begin{algorithm}[H]
  \KwData{this text}
@@ -413,8 +417,6 @@ for each parametrization. Each simulation is performed following those steps: Wh
 
 \todo{Tutaj na samym końcu dopisujemy dlaczego i co zrobiliśmy oraz jakie mamy dalsze plany na badania.}
 
-\begin{table}[hbt]
-  \centering
 
 %% --- chapter ---------------------------------------------------------
 %\clearpage
@@ -689,9 +691,7 @@ for each parametrization. Each simulation is performed following those steps: Wh
 %\end{longtable}
 %
 
-\includegraphics[width=.4\textwidth]{figure-2}
 
-\captionsetup{margin=10pt,font=small,labelfont=bf,width=.42\textwidth}
 
 %% --- appendices ------------------------------------------------------
 %\appendix
