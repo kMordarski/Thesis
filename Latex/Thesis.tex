@@ -349,7 +349,19 @@ The procedure followed by this loop is as shown below:
         add the next TRACK to our existing array. 
 \end{enumerate}
 
+Last but certainly not least, we have the outer loop. This loop fulfills two tasks. First of all, it controls the parametrization of the games. It not only changes the values
+of crucial parameters but also updates the matrix of the payoffs. Since we want to generate 20 data points (one data point for each parametrization), said loop iterates 20 times. 
+The range of parameters is given in the paper as follows. The b parameter in the PD game is in the range of [1,2), and the r parameter in the SG game is in the range of (0,1]. Its secondary task is to collect results obtained in the previous loops. Those results will then be analyzed and undergo data manipulations and statistical analysis.
 
+The exact steps followed by this loop are shown below:
+
+\begin{enumerate}
+  \item It creates a global variable called DATATOSAVE --- an array of length 20. In its first iteration this variable is created. With every next iteration, it stores data as values in this array. Each element of this array is going to be ARRPATHS generated in the previously described loops. Ultimately it will contain all necessary data for further calculations and visualizations.
+  \item The next step is to adjust the parameter values. With each iteration, it adds a fixed value to b and r. Since we have 20 iterations and need to fill a distance of 1, the value-added each time equals 0.05.
+  \item Then it adjusts the payoffs matrices.
+\end{enumerate}
+
+After all of the loops have been carried out, we use package JLD2 to save our results. 
 
 %In order to efficiently perform the necessary calculations, we had to pay close attention to the types of variables and data structures.
 %Since Julia allows us to specify the variable type (for example Int16, Float64, etc.) to save the memory space. Therefore 

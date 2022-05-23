@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 22.3) (preloaded format=xelatex 2022.3.20)  22 MAY 2022 23:37
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 22.3) (preloaded format=xelatex 2022.3.20)  23 MAY 2022 15:32
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -649,13 +649,13 @@ Overfull \hbox (32.55287pt too wide) in paragraph at lines 168--172
  []
 
 [5] [6] [7] [8] [9] [10] [11] [12]
-LaTeX Font Info:    Trying to load font information for T1+pcr on input line 36
-5.
+LaTeX Font Info:    Trying to load font information for T1+pcr on input line 37
+6.
 
 (C:\Users\kacpe\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\t1pcr.fd
 File: t1pcr.fd 2001/06/04 font definitions for T1/pcr.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 380--381
+Underfull \hbox (badness 10000) in paragraph at lines 391--392
 []\T1/ptm/m/n/12 Alignment is done through en-vi-ron-ments [][]\T1/pcr/m/n/12 c
 enter[]\T1/ptm/m/n/12 , [][]\T1/pcr/m/n/12 flushleft []\T1/ptm/m/n/12 and
  []
@@ -663,19 +663,19 @@ enter[]\T1/ptm/m/n/12 , [][]\T1/pcr/m/n/12 flushleft []\T1/ptm/m/n/12 and
 [13
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 408--409
+Underfull \hbox (badness 10000) in paragraph at lines 419--420
 \T1/ptm/m/n/12 There are two types of math-e-mat-ics in-side a L[]T[]X doc-u-me
 nt. The first
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 408--409
+Underfull \hbox (badness 10000) in paragraph at lines 419--420
 \T1/ptm/m/n/12 one is the in-line math-e-mat-ics and the dis-played math-e-mat-
 ics. The first
  []
 
 
-Underfull \hbox (badness 3281) in paragraph at lines 408--409
+Underfull \hbox (badness 3281) in paragraph at lines 419--420
 \T1/ptm/m/n/12 one looks like this: $\OML/cmm/m/it/12 F\OT1/cmr/m/n/12 (\OML/cm
 m/m/it/12 x\OT1/cmr/m/n/12 ) = [][] \OML/cmm/m/it/12 f\OT1/cmr/m/n/12 (\OML/cmm
 /m/it/12 !\OT1/cmr/m/n/12 )\OML/cmm/m/it/12 d!$ \T1/ptm/m/n/12 with the code lo
@@ -683,7 +683,7 @@ ok-ing like this:
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 408--409
+Underfull \hbox (badness 10000) in paragraph at lines 419--420
 [][]\T1/pcr/m/n/12 \( F(x) = \int_{-\infty}^{x} f(\omega) d\omega \)[]\T1/ptm/m
 /n/12 . The dis-
  []
@@ -703,40 +703,36 @@ File: figure-2.pdf Graphic file (type pdf)
 File: figure-2.pdf Graphic file (type pdf)
 <use figure-2.pdf>
 
-Underfull \hbox (badness 1112) in paragraph at lines 553--554
+Underfull \hbox (badness 1112) in paragraph at lines 564--565
 []\T1/ptm/m/n/12 The con-tent for the bib-li-og-ra-phy is in
  []
 
 
-Underfull \hbox (badness 5203) in paragraph at lines 553--554
+Underfull \hbox (badness 5203) in paragraph at lines 564--565
 \T1/ptm/m/n/12 can change the name but then you
  []
 
 
-Underfull \hbox (badness 2818) in paragraph at lines 553--554
+Underfull \hbox (badness 2818) in paragraph at lines 564--565
 [][]\T1/pcr/m/n/12 \bibliography{new-name} []\T1/ptm/m/n/12 where
  []
 
 
 Package natbib Warning: Citation `garland2010' on page 18 undefined on input li
-ne 555.
+ne 566.
 
 
 Package natbib Warning: Citation `benaim2003' on page 18 undefined on input lin
-e 555.
+e 566.
 
 
 Package natbib Warning: Citation `osborne1998' on page 18 undefined on input li
-ne 555.
+ne 566.
 
 
-Underfull \hbox (badness 2617) in paragraph at lines 555--556
+Underfull \hbox (badness 2617) in paragraph at lines 566--567
 []\T1/ptm/m/n/12 The pro-cess of ci-ta-tion is sim-ple.
  []
-
-
-Package longtable Warning: Column widths have changed
-(longtable)                in table 2 on input line 629.
 
 [18
 
@@ -855,9 +851,6 @@ Missing character: There is no ł in font ptmr8t!
 Missing character: There is no ł in font ptmr8t!
 
 Package natbib Warning: There were undefined citations.
-
-
-Package longtable Warning: Table widths have changed. Rerun LaTeX.
 
 [28
 
