@@ -192,15 +192,37 @@ One of the goals of The Paper was to compare the results of simulations on diffe
 \todo{Tutaj trzeba opisać wszystkie koncepcje matematyczne związane z teorią gier. Wydaje się, że to co jest nam potrzebne to definicja gry w postaci normalnej i definicja równowagi Nasha. Na koniec zamieścić przykłady pojedynczych gier (ale niekoniecznie PD i SD. Poza tym warto chyba jednak opisać jakiś ogólny framework, w którym gra jest populacyjna, co w takiej sytuacji jest mierzone i jak to ewoluuje w czasie. Myślę, że tutaj mogę Panu pomóc. Dodałem tutaj dwa cytowania typowe dla modelu: \cite{vega1996evolution,weibull1997evolutionary,ramsza2010elementy}. Typowe cytowanie do teorii gier to \cite{fudenberg1991game,gibbons1992game}.}
 
 The noncooperative game theory is the basis for this dissertation. For a game to be noncooperative means that all of the game participants (players)
-act in their own best interest and therefore compete with each other. Moreover they need to be economically rational --- choose a strategy based on its optimality.
+act in their own best interest and therefore compete with each other. Moreover, they need to be economically rational --- choose a strategy based on its optimality.
 Games in this paper will be presented as normal-form games. For the normal-form game to be described, it requires a couple of elements. First of all, 
 let us define a set of players $i \in I$, where $I$ is a finite set of natural numbers (i. e. $I = {1,2,...,N}$). 
 For each player $i$, we define the pure strategy space $S_i$ consisting of $k$ pure strategies. The sequence of strategies --- $(s_1, ..., s_k) \in \prod_{i \in N} S_i$ is called the strategy profile of a player. 
 Lastly we define function (denoted as $u_i(s)$). This function maps the von Neumann-Morgenstern utility (payoff) for each profile of strategies for a given player.
-Methematically speaking we can denote this function as $u_i: \prod_{i \in N}S_i \rightarrow \mathbb{R}$. The last two assumption of 
-a normal-form game is that the structure of the game is perfectly known --- each player knows all of the possible strategies and utility functions in the given round of a game and 
-that players have no knowledge of other player choices. It means that each time they select their strategy simultaneously and thus
+Mathematically speaking we can denote this function as $u_i: \prod_{i \in N}S_i \rightarrow \mathbb{R}$. The last two assumptions of 
+a normal-form game are that the structure of the game is perfectly known --- each player knows all of the possible strategies and utility functions in the given round of a game and 
+that players have no knowledge of other player choices. It means that each time they select their strategy simultaneously, thus
 cannot respond to the actions of other players. 
+
+The next important part of the game theory is known as the Nash equilibrium, introduced by Antoine Cournot and furtherly developed by John Nash in his famous article \cite{nash1951non}. 
+The general idea behind this theory is that in some games there exist an equilibrium in which none of the players has an incentive to alter their strategy.
+By a lack of incentive we reffer to a situation in which one player, given set of strategies chosen by the other players, cannot achieve higher payoff (utility) by altering his strategy.
+
+In a mathematical framework we define the Nash equilibrium as follows:
+
+wLet $S_i$ be be the set of all possible strategies for player $i$, $s^* = (s^*_i, s_{-i}^*)$ be a strategy profile (set containing one strategy for each player --- $s_{-1}^*$ denotes strategies of all the other players except of $i$).
+To represent the incentive of players we use utility function $u_i(s_i,s_{-i}^*)$. It is a set of all possible payoffs for player $i$ with fixed strategies used by all of the other players.
+For the strategy profile $s^*$ to be the Nash equilibrium, it must satisfy the inequality:
+
+\[\forall s_i \in S_i:\:u_i(s_i^*, s_{-i}^*) \geq u_i(s_i, s_{-i}^*)\]
+
+This version of Nash equilibrium is called weak. It means that the player $i$ is indifferent to two or more strategies. For the Nash equilibrium to be strong, it must satisfy the strict inequality:
+
+\[\forall s_i \in S_i:\:u_i(s_i^*, s_{-i}^*) > u_i(s_i, s_{-i}^*)\]
+
+Analysis of example games.
+
+"Battle of sexes"
+
+The game introduced by R. Duncan Luce and Howard Raiffa in their book \cite{luce1989games}. 
 
    \cite{fudenberg1991game} 
 
