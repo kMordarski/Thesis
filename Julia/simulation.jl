@@ -46,6 +46,7 @@ acc_payoffs = zeros(Float16, 1, 1000)
 
 BAM = Graphs.SimpleGraphs.barabasi_albert(1000, m0, m0)
 
+
 nv(BAM)
 
 edge = collect(edges(BAM))

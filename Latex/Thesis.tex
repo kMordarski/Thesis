@@ -269,12 +269,39 @@ We are going to be discussing noncooperative games played by two players with pu
 \todo{Tutaj musimy opisać wybrane elementy teorii grafów. Myślę, że pojęcie grafu nieskierowanego oraz wybrane grafy losowe, razem z cytowaniami. Tutaj można załączyć przykłady zarówno grafów losowych ale również małych grafów losowych tak aby było jasne jaka jest struktura tych grafów. Dodać oczywiście odpowiednie cytowania.}
 40,5
 
-The next important element of our work is the graph theory. We can define graph as two sets --- one containing objects called vertices and the other containing pairs of vertices called edges. \cite{ross1985discrete}. A single vertex is usually denoted by a natural number. It can stand for various objects, but in this dissertation, we'll use the vertices of a graph as representation of players. The edges epitomize relations between vertices. In our case, the vertices connected via an edge stand for players connected, thus able to engage in a game. 
-We can distinguish between two types of a graph --- directed and undirected ones. A directed graph not only shows relations between vertices but also specifies the direction in which the relation occurs. As an example of a directed graph, we can give a simple illustration of an electric circuit \cite{leighton1965feynman}. In those graphs, the notation of edges is crucial since the edge \{$2,3$\} is not equal to the edge \{$3,2$\} (the relation is in the opposite direction). For undirected graphs this is not the case.
-Since edges represent relations with no regard of their direction, we can denote the relation between vertices $a$ and $b$ either as \{$a,b$\} or \{$b,a$\}. 
+The next important element of our work is the graph theory. We can define a graph as two sets --- one containing objects called vertices and the other containing pairs of vertices called edges. \cite{ross1985discrete}. A single vertex is usually denoted by a natural number. It can stand for various objects, but in this dissertation, we'll use the vertices of a graph as a representation of players. The edges epitomize relations between vertices. In our case, the vertices connected via an edge stand for players connected, thus able to engage in a game. 
+We can distinguish between two types of a graph --- directed and undirected ones.
 
-In order to carry out the simulations necessary for obtaining the results, we must assume a model that represents relations between players. To do so we are using the Scale-Free Networks. Those networks are created using Barabasi-Albert Model. Each network is basically a graph
-with fixed number of vertices.
+A directed graph not only shows relations between vertices but also specifies the direction in which the relation occurs. As an example of a directed graph, we can give a simple illustration of an electric circuit \cite{leighton1965feynman} [PRZYKŁADOWY OBWÓD]. In those graphs, the notation of edges is crucial since the edge \{$2,3$\} is not equal to the edge \{$3,2$\} (the relation is in the opposite direction). 
+
+For undirected graphs, this is not the case. Since edges represent relations with no regard of their direction, we can denote the relation between vertices $a$ and $b$ either as \{$a,b$\} or \{$b,a$\}. As an example of an undirected graph, we can think of a graph in which vertices represent humans and the edges represent the relation of the fact that they live in the same city. [WSTAWIĆ GRAF, 5 węzłów] Since this relationship works both ways (if subject {a} lives in the same city as subject {b} it implies that subject {b} lives in the same city as subject {a}), we do not need to denote the relation as $\{a,b\}$ and $\{b, a\}$, but we can use more convenient denotation and just use one of those.
+Since we do not use directed graphs in this dissertation, henceforth, as a graph, we refer to an undirected graph. 
+
+Let us define a neighborhood of a vertex in a graph. The neighborhood of vertex $v$ in a graph $G$ is a subgraph of $G$, consisting of all vertices adjacent to the vertex $v$ and all of the relations (edges) between them. Two vertices are adjacent to each other when they are connected via an edge. By neighbors of a vertex $v$, we denote all of the vertices adjacent to the vertex $v$ however, we do not care for relations between them. This concept is crucial for our work because it will allow us to identify all of the vertices able to engage in a game with a previously chosen player. The degree of a vertex $n$ is a number of all vertices connected to the $n$ by an edge.
+The important, in our case, characteristic of a graph is its' degree distribution. The degree distribution is the probability distribution of degrees in a graph. This characteristic varies throughout the different types of graphs. For a regular graph, it is a single value with the probability of 1 (because in a regular graph all of the vertices have the same connectivity). 
+
+In our work we will be using a type of graph called Scale-Free Network. To generate this type of graph we will be using Barabasi-Albert Model \cite{albert2002statistical}. 
+
+In order to describe the procedure of creating such a graph we must mention a preferential attachment and growth rules. The growth rule means that, to a given extent, the graph evolves (grows) with time. The preferenctial attachment rule applies to adding new vertices to an existing graph. It defines the probability of connecting the new vertex $n$ to the preexisting vertex $i$. The probability is given as follows:
+\[ p_i = \frac{k_i}{\sum_j(k_j)}  \]
+where $k_i$ is a degree of vertex $i$ and $\sum_j(k_j)$ is a sum of degrees of all existing nodes (which, since our graph is an undirected graph, is equal to twice the amount of existing edges). This rule clearly favouritises the edges with higher connectivity and causes our graph to have so called hubs. A hub is term for a vertex with considerably higher degree then the other vertices. Thanks to this rule the degree distribution of a graph is given by the formula:
+\[ P(k) \backsim k^{-3}\]
+which makes it a scale-free graph. 
+
+
+The procedure of building a Scale-Free network using Barabasi-Albert model is as follows \cite{albert2002statistical}:
+
+\begin{algorithm}[H]
+ \KwData{parameters of Barabasi-Alber model --- avarage connectivity, number of initial nodes, number of final nodes}
+ \KwResult{Scale-Free network with a given number of vertices and avarage connectivity}
+ initialization\;
+ \While{number of vertices less than the set number}{
+  add new vertex in compliance with preferential attachment rule\;
+ }
+ \caption{Barabasi-Albert Model}
+\end{algorithm}
+
+
 
 % --- chapter ---------------------------------------------------------
 \clearpage
