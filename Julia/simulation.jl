@@ -284,7 +284,7 @@ for n in Z
         end
         Data_to_save[i] = Arr_paths
     end
-    save_object("die neuste Ergebnisse/PD_$z,_2000.jld2", Data_to_save)
+    save_object("die neuste Ergebnisse/SG_$z,_2000.jld2", Data_to_save)
     end
 end
 

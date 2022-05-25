@@ -194,7 +194,7 @@ One of the goals of The Paper was to compare the results of simulations on diffe
 The noncooperative game theory is the basis for this dissertation. For a game to be noncooperative means that all of the game participants (players)
 act in their own best interest and therefore compete with each other. Moreover, they need to be economically rational --- choose a strategy based on its optimality.
 Games in this paper will be presented as normal-form games. For the normal-form game to be described, it requires a couple of elements. First of all, 
-let us define a set of players $i \in I$, where $I$ is a finite set of natural numbers (i. e. $I = {1,2,...,N}$). 
+let us define a set of players $i \in I$, where $I$ is a finite set of natural numbers (i. e. $I = \{1,2,...,N\}$). 
 For each player $i$, we define the pure strategy space $S_i$ consisting of $k$ pure strategies. The sequence of strategies --- $(s_1, ..., s_k) \in \prod_{i \in N} S_i$ is called the strategy profile of a player. 
 Lastly we define function (denoted as $u_i(s)$). This function maps the von Neumann-Morgenstern utility (payoff) for each profile of strategies for a given player.
 Mathematically speaking we can denote this function as $u_i: \prod_{i \in N}S_i \rightarrow \mathbb{R}$. The last two assumptions of 
@@ -208,7 +208,7 @@ By a lack of incentive we reffer to a situation in which one player, given set o
 
 In a mathematical framework we define the Nash equilibrium as follows:
 
-wLet $S_i$ be be the set of all possible strategies for player $i$, $s^* = (s^*_i, s_{-i}^*)$ be a strategy profile (set containing one strategy for each player --- $s_{-1}^*$ denotes strategies of all the other players except of $i$).
+Let $S_i$ be be the set of all possible strategies for player $i$, $s^* = (s^*_i, s_{-i}^*)$ be a strategy profile (set containing one strategy for each player --- $s_{-1}^*$ denotes strategies of all the other players except of $i$).
 To represent the incentive of players we use utility function $u_i(s_i,s_{-i}^*)$. It is a set of all possible payoffs for player $i$ with fixed strategies used by all of the other players.
 For the strategy profile $s^*$ to be the Nash equilibrium, it must satisfy the inequality:
 
@@ -218,11 +218,42 @@ This version of Nash equilibrium is called weak. It means that the player $i$ is
 
 \[\forall s_i \in S_i:\:u_i(s_i^*, s_{-i}^*) > u_i(s_i, s_{-i}^*)\]
 
+It is important to note that obtaining an equilibrium in a Nash sense does not guarantee the optimality of the solution. To be specific, it means that payoffs may not be Pareto optimal \cite{wozny2012lecture} thus, there may exist strategy profile with a larger payoffs. 
+
 Analysis of example games.
 
 "Battle of sexes"
 
-The game introduced by R. Duncan Luce and Howard Raiffa in their book \cite{luce1989games}. 
+The game introduced by R. Duncan Luce and Howard Raiffa in their book \cite{luce1989games} is a classical decision analysis problem. Let us consider two music critics. They agreed on attending one of the two excellent concerts heppening in their whereabouts. They can either go to a Shostakovich or  Stravinsky concert. 
+One critic --- let us call him player 1 would prefer to go to the Shostakovich concert. Meanwhile, the other critic (player 2) would rather attend the Stravinsky concert. Unfortunately, they have no way of contacting each other, and therefore, the decision of where to go must be undertaken simultaneously.
+We have two players, each with two possible strategies - {Shostakovich, Stravinsky}. Each of them achieves a payoff of 1 if they get to go to their place of choice. Furthermore, if they both choose to go to the same event, they gain utility from spending time together. We can represent this game in form of a payoff matrix as follows:
+
+\begin{center}
+  \begin{game}{2}{2}
+    & $Shostakovich$    & $Stravinsky$    \\
+  $Shostakovich$ & $3,2$ & $1,1$  \\
+  $Stravinsky$ & $0,0$ & $2,3$
+  \end{game}
+\end{center}
+
+In this matrix the player one chooses the row strategy, and the player number two chooses the column strategy. Each cell represents two payoffs --- letf one is first players' payoff, the right one represents second players' payoff.
+There are two Nash equilibriums in this game. They occur for the following strategy profiles: {Shostakovich, Shostakovich}, {Stravinsky, Stravinsky}
+
+"Stag Hunt"
+
+The stag hunt game originates in a work of Jean-Jacques Rousseau \cite{rousseau1985discourse}. It represents the conflict between social cooperation and conflict. 
+The idea behind this game is that there are two hunters who can either hunt for a stag or a hare. Moreover, none of the hunters can singlehandedly take down a stag --- it is a job for two. If either hunter chooses to go for a stag and the other chosses a hare, they get a payoffs equal to 0 and 4, respectively.
+If they both go for hare, each one of them gets a payoff of 2 (there are only so many hares that they can provide an accumulated utility of 4). However, if they both decide to go for a stag, they get a payoff equal to 5 respectively. Therefore the payoff matrix looks as follows:
+
+\begin{center}
+  \begin{game}{2}{2}
+    & $Stag$    & $Hare$    \\
+  $Stag$ & $5,5$ & $0,4$  \\
+  $Hare$ & $4,0$ & $2,2$
+  \end{game}
+\end{center}
+
+As we can see, this game also has two Nash equilibriums --- strategy profiles {Stag, Stag} and {Hare, Hare}. Clearly the equilibrium {Stag, Stag} is Pareto optimal. 
 
    \cite{fudenberg1991game} 
 
@@ -237,6 +268,13 @@ We are going to be discussing noncooperative games played by two players with pu
 
 \todo{Tutaj musimy opisać wybrane elementy teorii grafów. Myślę, że pojęcie grafu nieskierowanego oraz wybrane grafy losowe, razem z cytowaniami. Tutaj można załączyć przykłady zarówno grafów losowych ale również małych grafów losowych tak aby było jasne jaka jest struktura tych grafów. Dodać oczywiście odpowiednie cytowania.}
 40,5
+
+The next important element of our work is the graph theory. We can define graph as two sets --- one containing objects called vertices and the other containing pairs of vertices called edges. \cite{ross1985discrete}. A single vertex is usually denoted by a natural number. It can stand for various objects, but in this dissertation, we'll use the vertices of a graph as representation of players. The edges epitomize relations between vertices. In our case, the vertices connected via an edge stand for players connected, thus able to engage in a game. 
+We can distinguish between two types of a graph --- directed and undirected ones. A directed graph not only shows relations between vertices but also specifies the direction in which the relation occurs. As an example of a directed graph, we can give a simple illustration of an electric circuit \cite{leighton1965feynman}. In those graphs, the notation of edges is crucial since the edge \{$2,3$\} is not equal to the edge \{$3,2$\} (the relation is in the opposite direction). For undirected graphs this is not the case.
+Since edges represent relations with no regard of their direction, we can denote the relation between vertices $a$ and $b$ either as \{$a,b$\} or \{$b,a$\}. 
+
+In order to carry out the simulations necessary for obtaining the results, we must assume a model that represents relations between players. To do so we are using the Scale-Free Networks. Those networks are created using Barabasi-Albert Model. Each network is basically a graph
+with fixed number of vertices.
 
 % --- chapter ---------------------------------------------------------
 \clearpage
