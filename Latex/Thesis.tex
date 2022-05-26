@@ -30,12 +30,20 @@
 
 % --- package for automatic insertion of R code -----------------------
 \usepackage{listings}
-\lstset{language=R,%
+\lstset{%
    numbers=left,%
    tabsize=3,%
    numberstyle=\footnotesize,%
    basicstyle=\ttfamily \footnotesize \color{black},%
    escapeinside={(*@}{@*)}}
+
+%\lstset{language=R,%
+%   numbers=left,%
+%   tabsize=3,%
+%   numberstyle=\footnotesize,%
+%   basicstyle=\ttfamily \footnotesize \color{black},%
+%   escapeinside={(*@}{@*)}}
+
 
 % --- support for links -----------------------------------------------	
 \usepackage{url}
@@ -109,6 +117,8 @@
 
 \newcommand{\todo}[1]{\noindent{\color{red}>>~#1}}
 
+\newcommand{\setn}{\mathbb{N}}
+
 % ---------------------------------------------------------------------
 \begin{document}
 
@@ -162,7 +172,6 @@ Warszawa 2022
 % --- chapter ---------------------------------------------------------
 \cleardoublepage
 \section{Introduction}
-\subsection{General Introduction}
 
 This paper aims to replicate, to some degree, the seminal paper of \cite{santos2005scale} on the emergence of cooperation. The secondary goal of this research is to provide the publicly available code allowing replication of the actual results.
 
@@ -170,8 +179,6 @@ This paper aims to replicate, to some degree, the seminal paper of \cite{santos2
 
 either prove or disprove the research paper with title \textbf{"Scale-Free Networks Provide a Unifying Framework for the Emergence of Cooperation"}  written by F.C. Santos and J. M. Pacheco and published in Physical Review Letters nr 95 (later on reffered to as "The Paper"). Regardless of the outcome this work is going to be useful because the above mentioned authors did not provide the code that was used to conduct the necessary simulations. Therefore goal is not only to disprove the above mantioned paper but also to provide readers with clear and easy to follow code. 
  
- \subsection{Description of The Paper}
-
 The Paper was published in \enquote{Physical Review Letters} on the 26th of August 2005 and, according to Google Scholar, has been since cited over 1600 times. It clearly shows the magnitude of the said paper and its groundbreaking character. This paper presents the results of simulations conducted by the authors and their implications for evolutionary game theory.
  
 The crucial thing to understand is that the authors of The Paper changed the approach to modeling such games by applying Scale-Free Networks of Contacts (later on referred to as "SF NOCs"). Its innovativeness lies in the never used before degree distribution of said graph. Before being used graphs had a degree distribution with a single peak. It means that every "player" could interact only with a fixed number of other "players". SF NOCs are said to 
@@ -189,46 +196,37 @@ One of the goals of The Paper was to compare the results of simulations on diffe
 \clearpage
 \section{Elements of the noncooperative game theory}
 
-\todo{Tutaj trzeba opisać wszystkie koncepcje matematyczne związane z teorią gier. Wydaje się, że to co jest nam potrzebne to definicja gry w postaci normalnej i definicja równowagi Nasha. Na koniec zamieścić przykłady pojedynczych gier (ale niekoniecznie PD i SD. Poza tym warto chyba jednak opisać jakiś ogólny framework, w którym gra jest populacyjna, co w takiej sytuacji jest mierzone i jak to ewoluuje w czasie. Myślę, że tutaj mogę Panu pomóc. Dodałem tutaj dwa cytowania typowe dla modelu: \cite{vega1996evolution,weibull1997evolutionary,ramsza2010elementy}. Typowe cytowanie do teorii gier to \cite{fudenberg1991game,gibbons1992game}.}
+The current chapter introduces the most fundamental concepts in the game theory and the appropriate notation. These concepts and notation are used later in subsequent chapters. The exposition follows \cite{fudenberg1991game,gibbons1992game}.
 
-The noncooperative game theory is the basis for this dissertation. For a game to be noncooperative means that all of the game participants (players)
-act in their own best interest and therefore compete with each other. Moreover, they need to be economically rational --- choose a strategy based on its optimality.
-Games in this paper will be presented as normal-form games. For the normal-form game to be described, it requires a couple of elements. First of all, 
-let us define a set of players $i \in I$, where $I$ is a finite set of natural numbers (i. e. $I = \{1,2,...,N\}$). 
-For each player $i$, we define the pure strategy space $S_i$ consisting of $k$ pure strategies. The sequence of strategies --- $(s_1, ..., s_k) \in \prod_{i \in N} S_i$ is called the strategy profile of a player. 
-Lastly we define function (denoted as $u_i(s)$). This function maps the von Neumann-Morgenstern utility (payoff) for each profile of strategies for a given player.
-Mathematically speaking we can denote this function as $u_i: \prod_{i \in N}S_i \rightarrow \mathbb{R}$. The last two assumptions of 
-a normal-form game are that the structure of the game is perfectly known --- each player knows all of the possible strategies and utility functions in the given round of a game and 
-that players have no knowledge of other player choices. It means that each time they select their strategy simultaneously, thus
-cannot respond to the actions of other players. 
+% normal-form game
 
-The next important part of the game theory is known as the Nash equilibrium, introduced by Antoine Cournot and furtherly developed by John Nash in his famous article \cite{nash1951non}. 
-The general idea behind this theory is that in some games there exist an equilibrium in which none of the players has an incentive to alter their strategy.
-By a lack of incentive we reffer to a situation in which one player, given set of strategies chosen by the other players, cannot achieve higher payoff (utility) by altering his strategy.
+The noncooperative game theory is the basis for this dissertation. We call a game a noncooperative game if all of the game's participants (players) act in their own best interest and, therefore, compete with each other. Moreover, they need to be rational --- choose a strategy based on its optimality. Games in this paper are presented as normal-form games. The definition of a norm-form game requires a couple of elements. 
 
-In a mathematical framework we define the Nash equilibrium as follows:
+First of all, let us define a set of players $i \in I$, where $I$ is a finite set of natural numbers, i. e., $I = \{1, 2, \ldots, N\}$. For each player $i$, we define the pure strategy space $S_i$ consisting of $k_i \in \setn$ pure strategies. The sequence of pure strategies $s = \left(s_1, \ldots, s_N \right) \in \prod_{i \in I} S_i = S$ is called the strategy profile. Lastly, we define a payoff functions, denoted as $u_i(s)$. A function \(u_i (s)\) maps a strategy profile \(s\) into player's payoff, that is $u_i: \prod_{i \in I}S_i \rightarrow \mathbb{R}$.
 
-Let $S_i$ be be the set of all possible strategies for player $i$, $s^* = (s^*_i, s_{-i}^*)$ be a strategy profile (set containing one strategy for each player --- $s_{-1}^*$ denotes strategies of all the other players except of $i$).
-To represent the incentive of players we use utility function $u_i(s_i,s_{-i}^*)$. It is a set of all possible payoffs for player $i$ with fixed strategies used by all of the other players.
-For the strategy profile $s^*$ to be the Nash equilibrium, it must satisfy the inequality:
+The last two assumptions of a normal-form game are that (a) players act independently and (b) the perfect knowledge is assumed. The former assumption means that players have no knowledge of other players' choices while making a decision. The latter means, roughly, that all players know the structure of the game and it is perfect knowledge.
+
+% Nash equilibrium
+
+The fundamental concept of the game theory is the concept of equilibrium. The most widely used and accepted concept of equilibrium is Nash equilibrium, cf.~\cite{nash1951non}. The general idea of the Nash equilibrium concept is that there is a strategy profile in which none of the players have an incentive to alter their strategy. Given a profile of strategies \(s\), no single player can change a strategy to get a higher payoff.
+
+Technically, we define the Nash equilibrium as follows. Let $S_i$ be be the set of all possible strategies for a player $i$, and let $s^* = (s^*_i, s_{-i}^*)$ be a strategy profile, where $s_{-1}^*$ denotes strategies of all other players except of $i$. For the strategy profile $s^*$ to be the (weak) Nash equilibrium, it must satisfy the inequality:
 \[
 \forall s_i \in S_i:\:u_i(s_i^*, s_{-i}^*) \geq u_i(s_i, s_{-i}^*).
 \]
-This version of Nash equilibrium is called weak. It means that the player $i$ is indifferent to two or more strategies. For the Nash equilibrium to be strong, it must satisfy the strict inequality:
+For the Nash equilibrium to be strict, it must satisfy the strict inequality:
 \[
 \forall s_i \in S_i:\:u_i(s_i^*, s_{-i}^*) > u_i(s_i, s_{-i}^*).
 \]
 
-It is important to note that obtaining an equilibrium in a Nash sense does not guarantee the optimality of the solution. To be specific, it means that payoffs may not be Pareto optimal \cite{wozny2012lecture} thus, there may exist strategy profile with a larger payoffs. 
+It is important to note that obtaining a Nash equilibrium does not guarantee the solution's optimality. To be specific, it means that payoffs may not be Pareto optimal \citep{wozny2012lecture}. Thus, there may exist a strategy profile yielding higher payoffs for at least one player with other players' payoffs not lower.
 
-Analysis of example games.
+% examples
 
-"Battle of sexes"
+We conclude this chapter with two simple examples of normal-form games and their Nash equilibria. We start with the \enquote{Battle of sexes} game. The game described in \cite{luce1989games} is a classical decision analysis problem. Let us consider two music critics. They agreed to attend one of the two excellent concerts happening in their whereabouts. They can either go to a Shostakovich or Stravinsky concert. 
 
-The game introduced by R. Duncan Luce and Howard Raiffa in their book \cite{luce1989games} is a classical decision analysis problem. Let us consider two music critics. They agreed on attending one of the two excellent concerts heppening in their whereabouts. They can either go to a Shostakovich or  Stravinsky concert. 
-One critic --- let us call him player 1 would prefer to go to the Shostakovich concert. Meanwhile, the other critic (player 2) would rather attend the Stravinsky concert. Unfortunately, they have no way of contacting each other, and therefore, the decision of where to go must be undertaken simultaneously.
-We have two players, each with two possible strategies - {Shostakovich, Stravinsky}. Each of them achieves a payoff of 1 if they get to go to their place of choice. Furthermore, if they both choose to go to the same event, they gain utility from spending time together. We can represent this game in form of a payoff matrix as follows:
-
+One critic --- let us call him player one --- would prefer to go to the Shostakovich concert. Meanwhile, the other critic, let us call him player two, would instead attend the Stravinsky concert. Unfortunately, they have no way of contacting each other, and therefore, the decision of where to go must be undertaken simultaneously.
+We have two players, each with two possible strategies: \(\{Shostakovich, Stravinsky\}\). Each of them achieves a payoff of \(1\) if they get to go to their place of choice. Furthermore, if they both choose to go to the same event, they gain utility from spending time together. We can represent this game in form of the following payoff matrix:
 \begin{center}
   \begin{game}{2}{2}
     & $Shostakovich$    & $Stravinsky$    \\
@@ -236,16 +234,13 @@ We have two players, each with two possible strategies - {Shostakovich, Stravins
   $Stravinsky$ & $0,0$ & $2,3$
   \end{game}
 \end{center}
+In the matrix, player one chooses the row strategy, and player two chooses the column strategy. Each cell represents two payoffs --- the left one is the first player's payoff, and the right one represents the second player's payoff. 
 
-In this matrix the player one chooses the row strategy, and the player number two chooses the column strategy. Each cell represents two payoffs --- letf one is first players' payoff, the right one represents second players' payoff.
-There are two Nash equilibriums in this game. They occur for the following strategy profiles: {Shostakovich, Shostakovich}, {Stravinsky, Stravinsky}
+There are two Nash equilibriums in this game. They occur for the following strategy profiles: \((Shostakovich, Shostakovich)\) and \((Stravinsky, Stravinsky) \).
 
-"Stag Hunt"
+The second example concerns the \enquote{Stag Hunt} game. The stag hunt game originates from the work of Jean-Jacques Rousseau, cf.~\cite{rousseau1985discourse}. It represents the conflict between social cooperation and conflict. 
 
-The stag hunt game originates in a work of Jean-Jacques Rousseau \cite{rousseau1985discourse}. It represents the conflict between social cooperation and conflict. 
-The idea behind this game is that there are two hunters who can either hunt for a stag or a hare. Moreover, none of the hunters can singlehandedly take down a stag --- it is a job for two. If either hunter chooses to go for a stag and the other chosses a hare, they get a payoffs equal to 0 and 4, respectively.
-If they both go for hare, each one of them gets a payoff of 2 (there are only so many hares that they can provide an accumulated utility of 4). However, if they both decide to go for a stag, they get a payoff equal to 5 respectively. Therefore the payoff matrix looks as follows:
-
+The idea behind the game is that two hunters can either hunt for a stag or a hare. Moreover, none of the hunters can single-handedly take down a stag --- it is a job for two. If either hunter chooses to go for a stag and the other selects a hare, they get payoffs equal to \(0\) and \(4\), respectively. If they both go for a hare, each gets a payoff of \(2\) --- there are only so many hares that they can provide an accumulated utility of 4. However, if they both decide to go for a stag, they get a payoff equal to \(5\). Therefore, the payoff matrix looks as follows:
 \begin{center}
   \begin{game}{2}{2}
     & $Stag$    & $Hare$    \\
@@ -254,54 +249,70 @@ If they both go for hare, each one of them gets a payoff of 2 (there are only so
   \end{game}
 \end{center}
 
-As we can see, this game also has two Nash equilibriums --- strategy profiles \{Stag, Stag\} and \{Hare, Hare\}. Clearly the equilibrium \{Stag, Stag\} is Pareto optimal. 
+This game also has two Nash equilibriums --- strategy profiles \((Stag, Stag)\) and \((Hare, Hare)\). Clearly, the equilibrium \((Stag, Stag)\) is Pareto optimal. 
 
-   \cite{fudenberg1991game} 
-
-
-
-We are going to be discussing noncooperative games played by two players with pure strategies.
-
+In the remaining of this paper, we only use two-player normal-form games without mixed strategies. Hence, the above introduction is sufficient for our purposes.
 
 % --- chapter ---------------------------------------------------------
 \clearpage
 \section{Elements of the graph theory}
 
-\todo{Tutaj musimy opisać wybrane elementy teorii grafów. Myślę, że pojęcie grafu nieskierowanego oraz wybrane grafy losowe, razem z cytowaniami. Tutaj można załączyć przykłady zarówno grafów losowych ale również małych grafów losowych tak aby było jasne jaka jest struktura tych grafów. Dodać oczywiście odpowiednie cytowania.}
-40,5
+% pojęcie grafu nieskierowanego
 
-The next important element of our work is the graph theory. We can define a graph as two sets --- one containing objects called vertices and the other containing pairs of vertices called edges. \cite{ross1985discrete}. A single vertex is usually denoted by a natural number. It can stand for various objects, but in this dissertation, we'll use the vertices of a graph as a representation of players. The edges epitomize relations between vertices. In our case, the vertices connected via an edge stand for players connected, thus able to engage in a game. 
-We can distinguish between two types of a graph --- directed and undirected ones.
+The next important element that we use in the current paper is the graph theory. We can define a graph as two sets --- one containing objects called vertices and the other containing pairs of vertices called edges, cf.~\cite{ross1985discrete}. A single vertex is usually denoted by a natural number. It can stand for various objects, but in this paper, we use the vertices of a graph to represent players. The edges epitomize relations between vertices. In our case, the connected vertices stand for connected players. Thus, these players can engage in a game. We can distinguish between two types of a graph --- directed and undirected ones. As we use only undirected graphs, only these graphs are discussed below.
 
-A directed graph not only shows relations between vertices but also specifies the direction in which the relation occurs. As an example of a directed graph, we can give a simple illustration of an electric circuit \cite{leighton1965feynman} [PRZYKŁADOWY OBWÓD]. In those graphs, the notation of edges is crucial since the edge \{$2,3$\} is not equal to the edge \{$3,2$\} (the relation is in the opposite direction). 
+ \begin{figure}[hbt]
+  \centering
+  \begin{subfigure}[t]{0.40\textwidth}
+    \includegraphics[width=\textwidth]{../ramsza/figs/graph_complete.pdf}
+    \caption{Regular graph with \(n = 10\) vertices}
+    \label{fig:graphsa}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.40\textwidth}
+    \includegraphics[width=\textwidth]{../ramsza/figs/graph_ba.pdf}
+    \caption{BA graph with \( n = 30 \) and \( k = 1\)}
+    \label{fig:graphsb}
+  \end{subfigure}
+  
+    \begin{subfigure}[t]{0.40\textwidth}
+    \includegraphics[width=\textwidth]{../ramsza/figs/graph_ba_a.pdf}
+    \caption{BA graph with \( n = 30 \) and \( k = 2\)}
+    \label{fig:graphsc}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.40\textwidth}
+    \includegraphics[width=\textwidth]{../ramsza/figs/empty.pdf}
+  \end{subfigure}
+  
+  \captionsetup{margin=10pt,font=small,labelfont=bf,width=.8\textwidth}
 
-For undirected graphs, this is not the case. Since edges represent relations with no regard of their direction, we can denote the relation between vertices $a$ and $b$ either as \{$a,b$\} or \{$b,a$\}. As an example of an undirected graph, we can think of a graph in which vertices represent humans and the edges represent the relation of the fact that they live in the same city. [WSTAWIĆ GRAF, 5 węzłów] Since this relationship works both ways (if subject {a} lives in the same city as subject {b} it implies that subject {b} lives in the same city as subject {a}), we do not need to denote the relation as $\{a,b\}$ and $\{b, a\}$, but we can use more convenient denotation and just use one of those.
-Since we do not use directed graphs in this dissertation, henceforth, as a graph, we refer to an undirected graph. 
+  \caption[Exampls of graphs]{Example of regular and BA graphs. \textit{Source:} own calculations}\label{fig:graphs}
+\end{figure}
 
-Let us define a neighborhood of a vertex in a graph. The neighborhood of vertex $v$ in a graph $G$ is a subgraph of $G$, consisting of all vertices adjacent to the vertex $v$ and all of the relations (edges) between them. Two vertices are adjacent to each other when they are connected via an edge. By neighbors of a vertex $v$, we denote all of the vertices adjacent to the vertex $v$ however, we do not care for relations between them. This concept is crucial for our work because it will allow us to identify all of the vertices able to engage in a game with a previously chosen player. The degree of a vertex $n$ is a number of all vertices connected to the $n$ by an edge.
-The important, in our case, characteristic of a graph is its' degree distribution. The degree distribution is the probability distribution of degrees in a graph. This characteristic varies throughout the different types of graphs. For a regular graph, it is a single value with the probability of 1 (because in a regular graph all of the vertices have the same connectivity). 
+Since in an undirected graph edges represent relations with no regard to their direction, we can denote the relation between vertices $a$ and $b$ either as \(\{$a,b$\}\) or \(\{$b,a$\}\). As an example of an undirected graph, we can think of a graph in which vertices represent humans and edges represent relations between humans, e.g., being friends or connected in a given social network. 
 
-In our work we will be using a type of graph called Scale-Free Network. To generate this type of graph we will be using Barabasi-Albert Model \cite{albert2002statistical}. 
+Since these relationships work both ways (if subject \( a\) is a friend of subject \( b\), it implies that subject \(b\) is a friend of subject \(a\)), we only need to use a set \(\{a, b\}\) to denote an edge. We do not use directed graphs in this paper. Henceforth, as a graph, we refer to an undirected graph. 
 
-In order to describe the procedure of creating such a graph we must mention a preferential attachment and growth rules. The growth rule means that, to a given extent, the graph evolves (grows) with time. The preferenctial attachment rule applies to adding new vertices to an existing graph. It defines the probability of connecting the new vertex $n$ to the preexisting vertex $i$. The probability is given as follows:
-\[ p_i = \frac{k_i}{\sum_j(k_j)}  \]
-where $k_i$ is a degree of vertex $i$ and $\sum_j(k_j)$ is a sum of degrees of all existing nodes (which, since our graph is an undirected graph, is equal to twice the amount of existing edges). This rule clearly favouritises the edges with higher connectivity and causes our graph to have so called hubs. A hub is term for a vertex with considerably higher degree then the other vertices. Thanks to this rule the degree distribution of a graph is given by the formula:
-\[ P(k) \backsim k^{-3}\]
-which makes it a scale-free graph. 
+% sąsiedzi wierzchołka
 
+Let us define a neighborhood of a vertex in a graph. The neighborhood of vertex $v$ in a graph $G$ is a set of vertices adjacent to the vertex $v$. We call two vertices adjacent when they are connected. The graph induced by a neighborhood of \( v \) is called a neighborhood graph. This concept is crucial for our work because it will allow us to identify all of the vertices able to engage in a game with a previously chosen player. 
 
-The procedure of building a Scale-Free network using Barabasi-Albert model is as follows \cite{albert2002statistical}:
+% rząd (?) wierzchołka
 
-\begin{algorithm}[H]
- \KwData{parameters of Barabasi-Alber model --- avarage connectivity, number of initial nodes, number of final nodes}
- \KwResult{Scale-Free network with a given number of vertices and avarage connectivity}
- initialization\;
- \While{number of vertices less than the set number}{
-  add new vertex in compliance with preferential attachment rule\;
- }
- \caption{Barabasi-Albert Model}
-\end{algorithm}
+The degree of a vertex $v$ is a number of all vertices connected to the $v$. The important characteristic of a graph is its' degree distribution. The degree distribution is the probability distribution of degrees in a graph. This characteristic varies throughout the different types of graphs. For a regular graph, it is a single value with the probability of 1 because, in a regular graph, all of the vertices have the same degree. Figure~\ref{fig:graphsa} show an example of a regular graph. 
 
+In our work, we use a type of graph called Scale-Free Network. This type of graph is generated according to the Barabasi-Albert Model, cf.~\cite{albert2002statistical}. The scale-free networks are built in a sequence of steps. We start with a single vertex and, in each step, add a single vertex. The new vertex is connected to the previous vertices with the probability proportional to the vertices' degrees. More precisely, the probability of attaching a new vertex to an already existing vertex \(v\) is given as:
+\[ 
+p_v = \frac{k_v}{\sum_{j} k_j},
+\]
+where $k_v$ is a degree of vertex $v$ and $\sum_{j} k_j$ is a sum of degrees of all existing nodes (which, since our graph is an undirected graph, is equal to twice the amount of existing edges). 
+
+This rule favorites the vertices with higher connectivity and causes the graph to have so-called hubs. A hub is a term for a vertex with a considerably higher degree than other vertices. Thanks to this rule, the degree distribution of a graph is given by the formula:
+\[
+P(k) \backsim k^{-3}.
+\]
+Figures~\ref{fig:graphsb}--\ref{fig:graphsb} show example of scale-free networks. More precisely, figure~\ref{fig:graphsb} shows an example of a scale-free network built by adding only one edge at every step. Figure~\ref{fig:graphsb} show an example of a scale-free network created by adding two edges at every step. 
 
 
 % --- chapter ---------------------------------------------------------
@@ -356,38 +367,6 @@ We see that the above restrictions order the parameters as follows:
 \paragraph{Nash equilibria.}
 
 \todo{Tutaj analiza równowag Nasha w opisanych powyżej grach w one-shot games. Pokazać, że jest albo nie mam kooperacji. Tutaj również wprowadzamy grę na grafach losowych, a więc musimy opisać na jakich grafach, itd. Tutaj również opis uczenia się ale w sensie algorytmu matematycznego nie implementacji.}
-
-\subsection{Replicator dynamics}
-
-%
-%\subsection{Replicatory dynamics}
-%
-%In our analysis we consider replicator to be a strategy in a game. The general idea is that replicators compete for dominance throughout the population. Payoffs of
-%their strategies represent their "fitness". It is important to note that each player can alter their strategy through inheritance. The attempt of inheritance occurs 
-%whenever one of the sites is updated. For the sake of an example, let us say that the site that was just updated is site x. The procedure is as follows:
-%
-%\begin{enumerate}
-%  \item The site x is updated.
-%  \item A neighbor y is drawn at random among all k$_{x}$ neighbors
-%  \item if cumulative payoffs of y (P$_{y}$) are greater than cumulative payoffs of x (P$_{x}$), the chosen neighbor takes over site x with probability (P$_{i}$) given below.
-%\end{enumerate}
-%
-%
-%\begin{center}
-%
-%\[
-%  P_{i} = \frac{(P_{y} - P_{x})}{Dk_{>}}
-%  \]
-%\end{center}
-%Where P$_{i}$ is the probability of the chosen neighbor taking over the site x, P$_{y}$ is a cumulated payoff of strategies y, P$_{x}$ is a cumulated payoff 
-%of strategies x, k$_{>}$ is the largest between k$_{y}$ and k$_{x}$ (k$_{y}$ is a number of neighbors with a strategy y, k$_{x}$ is a number of neighbors with a 
-%strategy x), D depends on the game (it is equal to either T-S for PD or T-P for SG).
-
-\begin{enumerate}
-  \item The site x is updated.
-  \item A neighbor y is drawn at random among all k$_{x}$ neighbors
-  \item if cumulative payoffs of y (P$_{y}$) are greater than cumulative payoffs of x (P$_{x}$), the chosen neighbor takes over site x with probability (P$_{i}$) given below.
-\end{enumerate}
 
 % --- chapter ---------------------------------------------------------
 \clearpage
@@ -547,29 +526,31 @@ for each parametrization. Each simulation is performed following those steps: Wh
 
 \todo{Poniżej wrzuciłem przykładowy algorytm w pseudokodzie. Myślę, że to jest to co chcemy wykorzystać aby zapisać sam algorytm. To oczywiście musi być potem opisane w tekście.}
 
-\subsection{Compiling \LaTeX files}
-
-\begin{algorithm}[H]
- \KwData{this text}
- \KwResult{how to write algorithm with \LaTeX2e }
- initialization\;
- \While{not at end of this document}{
-  read current\;
-  \eIf{understand}{
-   go to next section\;
-   current section becomes this one\;
-   }{
-   go back to the beginning of current section\;
-  }
- }
- \caption{How to write algorithms}
-\end{algorithm}
-
 % --- chapter ---------------------------------------------------------
 \clearpage
 \section{Results and discussion}
 
 \todo{Tutaj wpisujemy uzyskane wyniki oraz dyskutujemy je, np. porównujemy do wyników z oryginalnego artykułu.}
+
+ \begin{figure}[hbt]
+  \centering
+  \begin{subfigure}[t]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{../ramsza/figs/PD_profiles.pdf}
+    \caption{PD game}
+    \label{fig:resa}
+  \end{subfigure}
+  \hfill
+  \begin{subfigure}[t]{0.45\textwidth}
+    \includegraphics[width=\textwidth]{../ramsza/figs/SD_profiles.pdf}
+    \caption{SD game}
+    \label{fig:resb}
+  \end{subfigure}
+
+  
+  \captionsetup{margin=10pt,font=small,labelfont=bf,width=.8\textwidth}
+
+  \caption[Cooperation profiles]{Cooperation profiles for the PD and SD games. \textit{Source:} own calculations}\label{fig:res}
+\end{figure}
 
 % --- chapter ---------------------------------------------------------
 \clearpage
