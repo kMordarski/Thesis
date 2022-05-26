@@ -253,7 +253,7 @@ If they both go for hare, each one of them gets a payoff of 2 (there are only so
   \end{game}
 \end{center}
 
-As we can see, this game also has two Nash equilibriums --- strategy profiles {Stag, Stag} and {Hare, Hare}. Clearly the equilibrium {Stag, Stag} is Pareto optimal. 
+As we can see, this game also has two Nash equilibriums --- strategy profiles \{Stag, Stag\} and \{Hare, Hare\}. Clearly the equilibrium \{Stag, Stag\} is Pareto optimal. 
 
    \cite{fudenberg1991game} 
 
@@ -413,11 +413,11 @@ In order to perform necessary calculations I had to define the following functio
 \begin{enumerate}
   \item \lstinline+Transform+ --- This function is used to map strategies onto a vector of arrays. As an input this function takes one of the edges of a SF NOC,
    as an output it returns a vector of length two (two vertices connected with an edge).
-  \item Strat --- This function is used to map previously distributed strategies onto a vector of edges. As an input it takes an edge and as an output
+  \item \lstinline+Strat+ --- This function is used to map previously distributed strategies onto a vector of edges. As an input it takes an edge and as an output
    it returnes a vector of length two (two strategies previously attributed to the vertices).
-  \item Games --- This function is used to evaluate the results of games played between players (vertices connected with an edge). As an input this function
+  \item \lstinline+Games+ --- This function is used to evaluate the results of games played between players (vertices connected with an edge). As an input this function
    takes a vector of edges, vector of strategies and a vector of accumulated payoffs. It returns an adjusted vector of accumulated payoffs.
-  \item CheckStrat --- This function fulfills a number of tasks. It takes as an input a randomly chosen vertex, vector of strategies, vector of accumulated
+  \item \lstinline+CheckStrat+ --- This function fulfills a number of tasks. It takes as an input a randomly chosen vertex, vector of strategies, vector of accumulated
   payoffs, and the SF NOC. It identifies all neighbors of the previously mentioned vertex, then shuffles them, and then looks for a neighbor
   with a different strategy. Then it proceeds to change the strategy of the vertex with lower accumulated payoffs. The probability of the transition 
   is described in section 1.5. 
@@ -428,41 +428,99 @@ In order to perform necessary calculations I had to define the following functio
 The main algorithm is the fundamental element of this dissertation. It consists of 3 nested loops executing instructions necessary to conduct simulations, on which my research is based. I will be describing those loops in an inside-out order. 
 
 The first loop is responsible for evaluating the results of the games, potentially changing the strategies of players, and keeping track of the proportion of the strategies used by players. To run properly, it requires previously set parametrization and a set of edges of the Barabasi-Albert graph. As a result, it produces a vector of length 100 in which elements are proportions of coop/def strategies, measured after each generation (1001--1100) in the population of players. This loop is repeated 2 000 times, which gives us a total of 2~200~000 generations for one Barabasi-Albert graph parametrization for a given game.
-
 The loop itself operates as follows:
 
-\begin{enumerate}[noitemsep]
-  \item Each pair of connected players (vertices of a graph) engage in a single round of a given game. It means that function GAMES is applied throughout the entire array of edges, adjusting their accumulated payoffs.
-  \item One player is chosen randomly.
-  \item An attempt to change strategy is being embarked on. It indicates that the function CHECKSTRAT is applied to the player chosen in the previous step.
-  \item If the current iteration is higher than 1000, it calculates the share of cooperators in the entire population and then passes it onto a corresponding value of a vector TRACK.
-  \item After 1~100 iterations (generations), it ends, and then the next iteration of the outside loop is triggered.
-\end{enumerate}
+%\begin{enumerate}[noitemsep]
+%  \item Each pair of connected players (vertices of a graph) engage in a single round of a given game. It means that function GAMES is applied throughout the entire array of edges, adjusting their accumulated payoffs.
+%  \item One player is chosen randomly.
+%  \item An attempt to change strategy is being embarked on. It indicates that the function CHECKSTRAT is applied to the player chosen in the previous step.
+%  \item If the current iteration is higher than 1000, it calculates the share of cooperators in the entire population and then passes it onto a corresponding value of a vector TRACK.
+%  \item After 1~100 iterations (generations), it ends, and then the next iteration of the outside loop is triggered.
+%\end{enumerate}
 
-The outer loop to the one described above is responsible for \enquote{resetting} the Barabasi-Albert graph. Since separate simulations are supposed to be carried out on a randomly generated SF NOC (but with the same parametrization), we need to conduct 100 of them (for each payoff parametrization); this loop is an indispensable element of the algorithm. The crucial fact to note is that this loop is also responsible for creating an object named ARRPATHS --- vector of length 100, used to store the results of the simulations.
-
+\begin{algorithm}[H]
+  \KwData{Barabasi-Albert Moedel, array of edges, array of strategies, array of accumulated payoffs (initially equal to 0), empty vector of length 100, parametrization of the games}
+  \KwResult{Vector of length 100 containing coop/def proportion for the population}
+  initialization\;
+  \For{k in generations}{
+    Play a single round of a given game between all possible pairs of players by applying function \lstinline+games+ on a vector of edges.\;
+    Randomly choose one vertex. \;
+    Attempt to change the strategy of the previously chosen player (or one of his neighbors) by applying function \lstinline+CheckStrat+. \;
+   \eIf{k is greater than the number of generations minus 100}{
+    Evaluate the coop/def proportion in the entire population\;
+    Save the result to the appropriate value of a vector.\;
+    }{}
+  }
+\caption{The inner loop}
+\end{algorithm}
+ 
+The outer loop to the one described above is responsible for \enquote{resetting} the Barabasi-Albert graph. Since separate simulations are supposed to be carried out on a randomly generated SF NOC (but with the same parametrization), we need to conduct 100 of them (for each payoff parametrization); this loop is an indispensable element of the algorithm. The crucial fact to note is that this loop is also responsible for creating an object named \lstinline+ArrPath+ --- vector of length 100, used to store the results of the simulations.
 The procedure followed by this loop is as shown below:
 
-\begin{enumerate}
-  \item It generates the random Barabasi-Albert graph with N vertices and average connectivity equal to Z. Both parameters are chosen deliberately at the beginning of the code.
-  \item The next step is constructing an array of strategies. This array is of length 1000 (number of players). The strategies are represented by numbers 1 (cooperation) and 2 (defection). The choice of these numbers is strict because later on, we use them to index the payoffs matrix.
-        The process of creating such an array is following:
-        \begin{enumerate}
-          \item Creating two vectors of length 500, one filled with ones, and one filled with twos.
-          \item Concatenate those two vectors to get a vector of length 1000.
-          \item Shuffle the values in a vector and save them as STRATEGIES.
-        \end{enumerate}
-  \item For the inner loop to conduct games, we need to transform our SF NOC into two arrays --- one containing edges (tuples of players) and the other containing strategies for each edge. To achieve this, we apply the following steps:
-        \begin{enumerate}
-          \item We use function COLLECT on the function EDGES used on the Barabasi-Albert model, which results in an iterable, however not easily callable, array of edges.  
-          \item Then we map a function TRANSFORM onto the previously obtained object. This produces us an array of tuples, each tuple representing one edge.
-          \item Lastly, we map function STRAT onto an array of tuples representing the edges.
-        \end{enumerate}
-  \item The array of accumulated payoffs is created --- initially with all values equal to zero (after each game, the results are added to the corresponding values in this array).
-  \item A global variable is created. This variable is named TRACK and it is a vector of length 100. This vector is used by the inner loop to store the proportion of cooperators in the population.
-  \item The final step before triggering the inner loop is creating ARRPATH, which will be used to store 100 TRACK variables. If it is the first iteration of this loop, we create a global variable named ARRPATH, which is an array. If, on the other hand, it is not the first iteration, we are using the function PUSH! to 
-        add the next TRACK to our existing array. 
-\end{enumerate}
+%\begin{enumerate}
+%  \item It generates the random Barabasi-Albert graph with N vertices and average connectivity equal to Z. Both parameters are chosen deliberately at the beginning of the code.
+%  \item The next step is constructing an array of strategies. This array is of length 1000 (number of players). The strategies are represented by numbers 1 (cooperation) and 2 (defection). The choice of these numbers is strict because later on, we use them to index the payoffs matrix.
+%        The process of creating such an array is following:
+%        \begin{enumerate}
+%          \item Creating two vectors of length 500, one filled with ones, and one filled with twos.
+%          \item Concatenate those two vectors to get a vector of length 1000.
+%          \item Shuffle the values in a vector and save them as STRATEGIES.
+%        \end{enumerate}
+%  \item For the inner loop to conduct games, we need to transform our SF NOC into two arrays --- one containing edges (tuples of players) and the other containing strategies for each edge. To achieve this, we apply the following steps:
+%        \begin{enumerate}
+%          \item We use function COLLECT on the function EDGES used on the Barabasi-Albert model, which results in an iterable, however not easily callable, array of edges.  
+%          \item Then we map a function TRANSFORM onto the previously obtained object. This produces us an array of tuples, each tuple representing one edge.
+%          \item Lastly, we map function STRAT onto an array of tuples representing the edges.
+%        \end{enumerate}
+%  \item The array of accumulated payoffs is created --- initially with all values equal to zero (after each game, the results are added to the corresponding values in this array).
+%  \item A global variable is created. This variable is named TRACK and it is a vector of length 100. This vector is used by the inner loop to store the proportion of cooperators in the population.
+%  \item The final step before triggering the inner loop is creating ARRPATH, which will be used to store 100 TRACK variables. If it is the first iteration of this loop, we create a global variable named ARRPATH, which is an array. If, on the other hand, it is not the first iteration, we are using the function PUSH! to 
+%        add the next TRACK to our existing array. 
+%\end{enumerate}
+
+\begin{algorithm}[H]
+  \KwData{Barabasi-Albert parametrization}
+  \KwResult{Scale-Free Network built by Barabasi-Albert Model, list of edges, list of strategies, vector of accumulated payoffs, ArrPath --- an array of length 100 storing results of the simulations}
+  initialization\;
+  \For{j in simulations}{
+   Create a Scale-Free Network by using the Barabasi-Albert model with previously set parameters.\;
+   Create an array of length equal to the number of players, containing their strategies. \;
+   Extract an array of edges from a previously created graph by mapping function \lstinline+transform+ onto a list of edges. \;
+   Produce an array of tuples representing strategies for every player by mapping a function \lstinline+strat+ onto an array of edges. \;
+   Create an array of accumulated payoffs (initially filled with zeros). \;
+   Generate a vector of length 100 filled with zeros, called \lstinline+track+. This vector will be later on used to store coop/def proportions. \;
+   \eIf{j equals to 1}{
+    Create an object called \lstinline+ArrPath+ with one element equal to \lstinline+track+\;
+    }{
+    Merge the current \lstinline+track+ with \lstinline+ArrPath+. \;
+   }
+   Initiate the inner loop described above. \;
+  }
+  \caption{Second loop}
+ \end{algorithm}
+
+ The outer loop is in charge of setting the parametrs of the games. Since we want to obtain 20 data points for a single Barabasi-Albert Model parametrization, we need to iterate 20 times executing the previously described loops. The payoffs for our games are 
+ of range $[1,2)$ and $(0,1]$ for PD and SD respectively, we need to divide the span (which is equal to 1 in both cases) by the number of data points, and we gain a result of 0.05. Thus each iteration adds 0.05 to the payoffs of both games. Furthermore, this loop is also responsible for creating and object called \lstinline+DataToSave+ that will store our results. Atfer the loop ends, the \lstinline+DataToSave+ object is saved into the local repository.
+ 
+ \begin{algorithm}[H]
+  \KwData{None}
+  \KwResult{Parametrization for the games, \lstinline+DataToSave+ --- an array of vectors that will be used to store and ultimately save our results.}
+  initialization\;
+  \For{i in number of parametrizations}{
+   \eIf{i is equal to 1}{
+    Create an array of length 20 --- \lstinline+DataToSave+. ;
+    }{
+    Store the current \lstinline+ArrPath+ as a value of \lstinline+DataToSave+. \;
+   }
+   Set up payoffs of the games based on the current iteration. In each iteration, add 0.05 to the current values of the payoffs. \;
+   Create a matrix of payoffs for the games with current parametrization. \;
+   Initiate the second loop. \;
+   Save \lstinline+DataToSave+ to the local repository. \;
+  }
+  \caption{The outer loop}
+ \end{algorithm}
+ 
+
 
 
 \subsection{Simulations description}
