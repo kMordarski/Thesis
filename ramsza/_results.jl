@@ -8,22 +8,28 @@ using JLD2
 cd("./ramsza");
 
 ### Wczytanie pliku
-a = load_object("../Julia/PD_16_1000.jld2")
-length(a) # parametryzacje / wypłaty
-a[1] # pojedyncza parametryzacja
+path_file = "SG_16_2000.jld2";
+path_dir = "../die_neuste_ergebnisse/";
+path_dir_out = "./data/";
 
-for k in 1:20
-    for n in 1:100
+a = load_object(string(path_dir, path_file));
+n_top = length(a); # parametryzacje / wypłaty
+n_bottom = length(a[1]); # pojedyncza parametryzacja
+
+for k in 1:n_top
+    for n in 1:n_bottom
         if n == 1
             global g = a[k][n]
         else
             g = vcat(g, a[k][n])
         end
     end
+    
     if k < 10
-        CSV.write("./data/PD_16_1000_0$k.csv", DataFrame(g, :auto))
+        temp_name =  string(path_dir_out, chop(path_file, tail = 5), "___", "0$k.csv");
+        CSV.write(temp_name, DataFrame(g, :auto))
     else
-        CSV.write("./data/PD_16_1000_$k.csv", DataFrame(g, :auto))  
+        temp_name =  string(path_dir_out, chop(path_file, tail = 5), "___", "$k.csv");
+        CSV.write(temp_name, DataFrame(g, :auto))  
     end
 end 
-
