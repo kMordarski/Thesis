@@ -269,6 +269,10 @@ for n in Z
 
             for k in 1:Int64(2*N + (1/10)*N)
 
+                if k > 1
+                    all_edges_strats = map(strat, all_edges_final)
+                end
+                
                 acc_payoffs_new = games(all_edges_strats, all_edges_final, acc_payoffs_new)
                 
                 a = rand(1:N)

@@ -316,14 +316,15 @@ This rule favorites the vertices with higher connectivity and causes the graph t
 \[
 P(k) \backsim k^{-3}.
 \]
-Figures~\ref{fig:graphsb}--\ref{fig:graphsb} show example of scale-free networks. More precisely, figure~\ref{fig:graphsb} shows an example of a scale-free network built by adding only one edge at every step. Figure~\ref{fig:graphsb} show an example of a scale-free network created by adding two edges at every step. 
+Figures~\ref{fig:graphsb}--\ref{fig:graphsc} show example of scale-free networks. More precisely, figure~\ref{fig:graphsb} shows an example of a scale-free network built by adding only one edge at every step. Figure~\ref{fig:graphsc} show an example of a scale-free network created by adding two edges at every step. 
 
 
 % --- chapter ---------------------------------------------------------
 \clearpage
 \section{Cooperation among the players}
 
-\todo{W tym miejscu w każdym rozdziale trzeba wpisać krótkie streszczenie co jest w danym rozdziale.}
+This chapter aims to apply the previously described game theory concepts to the cases used in the simulations. It means that we tell of the PD and SD games and then analyze them. We pay close attention to the parametrizations of the games and how they influence both their solutions (Nash equilibriums) and the eagerness to cooperate among the players.
+We also introduce the concept of games played throughout the population of players on preferential attachment graphs and the learning mechanisms in such games. 
 
 \subsection{A brief description of Snowdrift and Prisoners Dilemma games}
 
@@ -368,15 +369,16 @@ We see that the above restrictions order the parameters as follows:
  T > R > P > S .
 \]
 
-To represent the cost-to-benefit ratio of mutual cooperation we define $r$ as follows: \[r = \frac{1}{2\beta-1}\], with $0<r\leq1$ cf.~\cite{santos2005scale}.
+To represent the cost-to-benefit ratio of mutual cooperation we define $r$ as follows: 
+\[
+  r = \frac{1}{2\beta-1},
+\] with $0<r\leq1$ cf.~\cite{santos2005scale}.
 
 \subsection{Analysis of PD and SD games}
 
 \paragraph{Nash equilibria.}
 
-\todo{Tutaj analiza równowag Nasha w opisanych powyżej grach w one-shot games. Pokazać, że jest albo nie mam kooperacji. Tutaj również wprowadzamy grę na grafach losowych, a więc musimy opisać na jakich grafach, itd. Tutaj również opis uczenia się ale w sensie algorytmu matematycznego nie implementacji.}
-
-Since our work covers 20 parametrizations for each game, we discuss Nash equilibrium in those games for the two farthest parametrizations. Let us start with a description of the Prisoners Dilemma game. For the smallest possible value of parameter $b$ equal to \[1\], we represent the game as follows:
+Since our work covers 20 parametrizations for each game, we discuss Nash equilibrium in those games for the two farthest parametrizations. Let us start with a description of the Prisoners Dilemma game. For the smallest possible value of parameter $b$ equal to $1$, we represent the game as follows:
 
 \begin{center}
   \begin{game}{2}{2}
@@ -403,7 +405,14 @@ In the case of $b = 2$, we have only one Nash equilibrium for the strategy profi
 
 The term \enquote{strictly (weakly) dominant strategy} refers to a situation in which one of the player's strategies gets him higher (or at least the same utility) as any other strategy for all of the possible strategy profiles cf.~\cite{wozny2012lecture}. 
 
-To parametrize the second game --- SD, we vary the $r$ parameter. To present the payoff matrix, we need to manipulate formula \[r = \frac{1}{2\beta -1}\] so that we can easily calculate the $\beta$ value. It's given as follows: \[\beta = \frac{1-r}{2r}\]. The lowest value of $r$ is supposed to be as close to $0$ as possible. For this paper, we use the smallest value of $r$ equal to $10^{-5}$ and consider it a good enough approximation. For the said value of $r$, we write the payoff matrix as follows:
+To parametrize the second game --- SD, we vary the $r$ parameter. To present the payoff matrix, we need to manipulate formula 
+\[
+  r = \frac{1}{2\beta -1},
+\] 
+so that we can easily calculate the $\beta$ value. It's given as follows: 
+\[
+  \beta = \frac{1-r}{2r}.
+\] The lowest value of $r$ is supposed to be as close to $0$ as possible. For this paper, we use the smallest value of $r$ equal to $10^{-5}$ and consider it a good enough approximation. For the said value of $r$, we write the payoff matrix as follows:
 
 \begin{center}
   \begin{game}{2}{2}
@@ -433,21 +442,33 @@ There are two Nash equilibriums in this game. One occurs for the strategy profil
 
 \subsection{Games on graphs}
 
-The model for the population of players in this paper is a previously described Barabasi-Albert model (i. e. Scale-Free Network). This model is generated randomly, with set parameters, for each simulation. Players occupy vertices of these graphs. For two players to be able to engage in a game, they have to be connected --- there must exist a vertex between two vertices. 
-We use this type of graph because it is considered the best description of complex networks of agents in many areas of study --- e. g. biology, sociology, and economics cf.~\cite{volchenkov2002epidemic}. The most important characteristic of those graphs is that there exist \enquote{hubs} --- vertices with a considerably higher degree than the average. Those differences in vertices' degrees might be interpreted as inequalities among the players. 
 
-The 
+The model for the population of players in this paper is a previously described Barabasi-Albert model (i. e. Scale-Free Network). This model is generated randomly, with set parameters, for each simulation. Players occupy vertices of these graphs. Two players are able to engage in a game when they are connected --- there must exist a vertex between two vertices. 
 
+We use this type of graph because it is considered the best description of complex networks of agents in many areas of study --- e. g. biology, sociology, and economics \cite{volchenkov2002epidemic}. The most important characteristic of those graphs is that there exist \enquote{hubs} --- vertices with a considerably higher degree than the average. Those differences in vertices' degrees might be interpreted as inequalities among the players. 
 
+\subsection{Learning procedure in population games}
+
+The main objective of this paper is to present the proportion of $cooperate$ and $defect$ strategies for both PD and SD games. To do so, we must introduce the concept of learning in population games. The main objective of this paper is to present the proportion of $cooperate$ and $defect$ strategies for both PD and SD games.  For that purpose, we must introduce the concept of learning in population games. This idea is based on the hypothesis that players can \enquote{adapt} to the games' rules by changing their strategy. For the description of this procedure we rely on the \cite{santos2005scale}. 
+
+The incentive for the players to alter their strategies is represented by their accumulated payoff. By the accumulated payoff, we mean the sum of all payoffs obtained by the player in the current simulation. 
+After all edges (pairs of connected players) engage in a single round of given game, one player is chosen arbitrarily --- let us call him player one. Then of all his neighbors we randomly select one with a different strategy (i. e. if player one's strategy is $cooperate$, we select a neighbor with a strategy $defect$) --- let us name him player two.
+
+We determine which strategy is to be altered. We do this by comparing their accumulated payoffs --- the player with a greater value will try to \enquote{take over} the other player and impose his strategy onto him. This procedure is nonetheless not definite and comes with a given probability. 
+
+Let us introduce an example of player $1$ taking over player $2$. The probability of the transition is given as follows:
+\[
+  p_t = \frac{P_1-P_2}{Dk_>},
+\]
+where $p_t$ is the probability of transition, $P_1$ and $P_2$ are accumulated payoffs of player one and player two, respectively. Parameter $D$ depends on the type of game that is being played --- generally speaking it is the biggest obtainable payoff in a single round of a game, decreased by the $S$ or $P$ paramter for PD and SD, respectively. Therefore for both PD and SD, it is equal to the parameter $T$, because both $S$ and $P$ parameters are equal to $0$. The $k_>$ parameter is the greater value between both players' number of neighbors.
+If the transition is sucessful we adjust the vector of strategies by alterint the responding element. 
 % --- chapter ---------------------------------------------------------
 \clearpage
 \section{Algorithms and simulations}
 
-This chapter contains a description of the functions, algorithms, and procedures used to conduct the necessary simulations. All mathematical concepts and ideas presented beforehand must be remolded into a functioning code that allows us to produce analyzable results. The code is written in the julia language to obtain high efficiency while easy to follow and readable.
+This chapter contains a description of the functions, algorithms, and procedures used to conduct the necessary simulations. We must remold all mathematical concepts and ideas presented beforehand into a functioning code that allows us to produce analyzable results. The code is written in the julia language to obtain high efficiency while easy to follow and readable.
 
 The description of the algorithm used in the paper \cite{santos2005scale} is unclear, therefore insufficient for exact replication. As a result, we may create a couple of different procedures based on different interpretations of said description. The algorithm described in this paper is the simplest and easiest to carry out. 
-
-\todo{To co powyżej do rozszerzenia. Generalnie ten rozdział ma zawierać implementację koncepcji matematycznej z poprzedniego rozdziału.}
 
 \subsection{Simulations description}
 
@@ -459,14 +480,10 @@ for each parametrization. Each simulation is performed following those steps:
   \item Choosing the parameters, e. g. the payoffs, of the game which is to be simulated (either PD or SG).
   \item Creating the randomly generated SF NOC (we use Barabasi - Albert model to do that). The SF NOC must be created in compliance with preferential attachment and 
   growth rules.
-  \item Randomly distributing strategies amongst the population (SF NOC in this particular case). Each vertex can either get a $cooperate$ or $deflect$ strategy.
+  \item Randomly distributing strategies amongst the population. Each vertex (player) can either get a $cooperate$ or $defect$ strategy.
   \item Every edge (i. e. two connected players) engage in a round of a given game --- this procedure is one \enquote{generation}. One simpulation consists of 2100 generations. After every generation an attempt is made to alter one of the players strategy.
   \item We collect results (equilibrium frequencies of cooperators and defectors) by averaging over the last 100 generations.
 \end{enumerate}
-
-In this section of the dissertation, I'm going to describe the key elements of the algorithm used to replicate the results obtained in The Paper. 
-% All of the following code is written in the julia language
-My understanding of the mechanisms on which the algorithms are based is limited to the rather vague and unclear description in The Paper. 
 
 \subsection{Functions}
 
@@ -482,7 +499,7 @@ In order to perform necessary calculations I had to define the following functio
   \item \lstinline+CheckStrat+ --- This function fulfills a number of tasks. It takes as an input a randomly chosen vertex, vector of strategies, vector of accumulated
   payoffs, and the SF NOC. It identifies all neighbors of the previously mentioned vertex, then shuffles them, and then looks for a neighbor
   with a different strategy. Then it proceeds to change the strategy of the vertex with lower accumulated payoffs. The probability of the transition 
-  is described in section 1.5. 
+  is described in section 4.4. \todo{Jak dodać odnośnik do podrozdziału 4.4?} 
 \end{enumerate}
 
 \subsection{Description of the algorithm}
@@ -501,14 +518,19 @@ The loop itself operates as follows:
 %\end{enumerate}
 
 \begin{algorithm}[H]
-  \KwData{Barabasi-Albert Moedel, array of edges, array of strategies, array of accumulated payoffs (initially equal to 0), empty vector of length 100, parametrization of the games}
+  \KwData{Barabasi-Albert Model, array of edges, array of strategies, array of accumulated payoffs (initially equal to 0), empty vector of length 100, parametrization of the games}
   \KwResult{Vector of length 100 containing coop/def proportion for the population}
   initialization\;
   \For{k in generations}{
+
+    \eIf{k is greater than $1$}{
+      Adjust the array of strategies associated to players.
+    }
+
     Play a single round of a given game between all possible pairs of players by applying function \lstinline+games+ on a vector of edges.\;
     Randomly choose one vertex. \;
     Attempt to change the strategy of the previously chosen player (or one of his neighbors) by applying function \lstinline+CheckStrat+. \;
-   \eIf{k is greater than the number of generations minus 100}{
+   \eIf{k is greater than the number of generations minus $100$}{
     Evaluate the coop/def proportion in the entire population\;
     Save the result to the appropriate value of a vector.\;
     }{}
