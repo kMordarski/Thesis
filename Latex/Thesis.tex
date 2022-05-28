@@ -198,7 +198,7 @@ One of the goals of The Paper was to compare the results of simulations on diffe
 
 The current chapter introduces the most fundamental concepts in the game theory and the appropriate notation. These concepts and notation are used later in subsequent chapters. The exposition follows \cite{fudenberg1991game,gibbons1992game}.
 
-% normal-form game
+\subsection{Normal-form game}
 
 The noncooperative game theory is the basis for this dissertation. We call a game a noncooperative game if all of the game's participants (players) act in their own best interest and, therefore, compete with each other. Moreover, they need to be rational --- choose a strategy based on its optimality. Games in this paper are presented as normal-form games. The definition of a norm-form game requires a couple of elements. 
 
@@ -206,7 +206,7 @@ First of all, let us define a set of players $i \in I$, where $I$ is a finite se
 
 The last two assumptions of a normal-form game are that (a) players act independently and (b) the perfect knowledge is assumed. The former assumption means that players have no knowledge of other players' choices while making a decision. The latter means, roughly, that all players know the structure of the game and it is perfect knowledge.
 
-% Nash equilibrium
+\subsection{The Nash equilibrium}
 
 The fundamental concept of the game theory is the concept of equilibrium. The most widely used and accepted concept of equilibrium is Nash equilibrium, cf.~\cite{nash1951non}. The general idea of the Nash equilibrium concept is that there is a strategy profile in which none of the players have an incentive to alter their strategy. Given a profile of strategies \(s\), no single player can change a strategy to get a higher payoff.
 
@@ -221,7 +221,7 @@ For the Nash equilibrium to be strict, it must satisfy the strict inequality:
 
 It is important to note that obtaining a Nash equilibrium does not guarantee the solution's optimality. To be specific, it means that payoffs may not be Pareto optimal \citep{wozny2012lecture}. Thus, there may exist a strategy profile yielding higher payoffs for at least one player with other players' payoffs not lower.
 
-% examples
+\subsection{Example games}
 
 We conclude this chapter with two simple examples of normal-form games and their Nash equilibria. We start with the \enquote{Battle of sexes} game. The game described in \cite{luce1989games} is a classical decision analysis problem. Let us consider two music critics. They agreed to attend one of the two excellent concerts happening in their whereabouts. They can either go to a Shostakovich or Stravinsky concert. 
 
@@ -257,7 +257,9 @@ In the remaining of this paper, we only use two-player normal-form games without
 \clearpage
 \section{Elements of the graph theory}
 
-% pojęcie grafu nieskierowanego
+In this chapter, we focus on the topic of graph theory. We introduce the concepts essential for the description of mechanisms and procedures used in carrying out the simulations. 
+
+\subsection{Non-directed graph}
 
 The next important element that we use in the current paper is the graph theory. We can define a graph as two sets --- one containing objects called vertices and the other containing pairs of vertices called edges, cf.~\cite{ross1985discrete}. A single vertex is usually denoted by a natural number. It can stand for various objects, but in this paper, we use the vertices of a graph to represent players. The edges epitomize relations between vertices. In our case, the connected vertices stand for connected players. Thus, these players can engage in a game. We can distinguish between two types of a graph --- directed and undirected ones. As we use only undirected graphs, only these graphs are discussed below.
 
@@ -294,13 +296,15 @@ Since in an undirected graph edges represent relations with no regard to their d
 
 Since these relationships work both ways (if subject \( a\) is a friend of subject \( b\), it implies that subject \(b\) is a friend of subject \(a\)), we only need to use a set \(\{a, b\}\) to denote an edge. We do not use directed graphs in this paper. Henceforth, as a graph, we refer to an undirected graph. 
 
-% sąsiedzi wierzchołka
+\subsection{Vertex neighborhood}
 
 Let us define a neighborhood of a vertex in a graph. The neighborhood of vertex $v$ in a graph $G$ is a set of vertices adjacent to the vertex $v$. We call two vertices adjacent when they are connected. The graph induced by a neighborhood of \( v \) is called a neighborhood graph. This concept is crucial for our work because it will allow us to identify all of the vertices able to engage in a game with a previously chosen player. 
 
-% rząd (?) wierzchołka
+\subsection{Degree distribution}
 
 The degree of a vertex $v$ is a number of all vertices connected to the $v$. The important characteristic of a graph is its' degree distribution. The degree distribution is the probability distribution of degrees in a graph. This characteristic varies throughout the different types of graphs. For a regular graph, it is a single value with the probability of 1 because, in a regular graph, all of the vertices have the same degree. Figure~\ref{fig:graphsa} show an example of a regular graph. 
+
+\subsection{Scale-Free Networks}
 
 In our work, we use a type of graph called Scale-Free Network. This type of graph is generated according to the Barabasi-Albert Model, cf.~\cite{albert2002statistical}. The scale-free networks are built in a sequence of steps. We start with a single vertex and, in each step, add a single vertex. The new vertex is connected to the previous vertices with the probability proportional to the vertices' degrees. More precisely, the probability of attaching a new vertex to an already existing vertex \(v\) is given as:
 \[ 
@@ -326,9 +330,9 @@ Figures~\ref{fig:graphsb}--\ref{fig:graphsb} show example of scale-free networks
 \paragraph{Prisoners Dilemma Game.} The Prisoners Dilemma game is a widely known problem in game theory and decision analysis. It shows situations in which the outcome is not optimal, even though players act in their own best interest. In the scope of our analysis, it is essential to note that in the PD game, the best strategy is to defect, regardless of the opponent's choice. The game is parameterized as follows:
 \begin{center}
 \begin{game}{2}{2}
-  & $C$    & $D$    \\
-$C$ & $R,R$ & $S,T$  \\
-$D$ & $T,S$ & $P,P$
+  & $Cooperate$    & $Defect$    \\
+$Cooperate$ & $R,R$ & $S,T$  \\
+$Defect$ & $T,S$ & $P,P$
 \end{game}
 \end{center}
 where the values are given as follows:
@@ -347,9 +351,9 @@ T > R > P = S .
 \paragraph{Snowdrift Game.} The Snowdrift game represents a metaphor for cooperative interactions between players. Contrary to the PD game, the Snowdrift game stimulates cooperative behavior amongst players. It doesn't make the deflection strategy inapplicable, but the game's payoffs encourage cooperative behavior more than the payoffs of the PD game. The optimal strategy is to cooperate when the other defects and to defect when the other cooperates. The game is parametrize as follows:
 \begin{center}
   \begin{game}{2}{2}
-    & $C$    & $D$    \\
-  $C$ & $R,R$ & $T,S$  \\
-  $D$ & $S,T$ & $P,P$
+    & $Cooperate$    & $Defect$    \\
+  $Cooperate$ & $R,R$ & $T,S$  \\
+  $Defect$ & $S,T$ & $P,P$
   \end{game}
   \end{center}
 where the parameters' values are:
@@ -364,23 +368,101 @@ We see that the above restrictions order the parameters as follows:
  T > R > P > S .
 \]
 
+To represent the cost-to-benefit ratio of mutual cooperation we define $r$ as follows: \[r = \frac{1}{2\beta-1}\], with $0<r\leq1$ cf.~\cite{santos2005scale}.
+
+\subsection{Analysis of PD and SD games}
+
 \paragraph{Nash equilibria.}
 
 \todo{Tutaj analiza równowag Nasha w opisanych powyżej grach w one-shot games. Pokazać, że jest albo nie mam kooperacji. Tutaj również wprowadzamy grę na grafach losowych, a więc musimy opisać na jakich grafach, itd. Tutaj również opis uczenia się ale w sensie algorytmu matematycznego nie implementacji.}
+
+Since our work covers 20 parametrizations for each game, we discuss Nash equilibrium in those games for the two farthest parametrizations. Let us start with a description of the Prisoners Dilemma game. For the smallest possible value of parameter $b$ equal to \[1\], we represent the game as follows:
+
+\begin{center}
+  \begin{game}{2}{2}
+    & $Cooperate$    & $Defect$    \\
+  $Cooperate$ & $1,1$ & $0,1$  \\
+  $Defect$ & $1,0$ & $0,0$
+\end{game}
+\end{center}
+
+Player one chooses the row strategy and player two chooses the column strategy. In each cell of the matrix, player one's payoff is represented as the left value. 
+
+For the second parametrization of PD we want to show the one with biggest payoffs. The payoff matrix looks like following:
+
+\begin{center}
+  \begin{game}{2}{2}
+    & $Cooperate$    & $Defect$    \\
+  $Cooperate$ & $1,1$ & $0,2$  \\
+  $Defect$ & $2,0$ & $0,0$
+\end{game}
+\end{center}
+
+For both of these parametrizations, we obtain at least one Nash equilibrium. In the first case, we get two Nash equilibriums. One for strategy profile $\{Cooperate, Cooperate\}$, the other for $\{Defect, Defect\}$. In both cases, the Nash equilibrium is weak, hence the players are indifferent to the choice of their strategy.
+In the case of $b = 2$, we have only one Nash equilibrium for the strategy profile of $\{Defect, Defect\}$. Moreover, in this case, the strategy $Defect$ is a weakly dominant strategy for both players. 
+
+The term \enquote{strictly (weakly) dominant strategy} refers to a situation in which one of the player's strategies gets him higher (or at least the same utility) as any other strategy for all of the possible strategy profiles cf.~\cite{wozny2012lecture}. 
+
+To parametrize the second game --- SD, we vary the $r$ parameter. To present the payoff matrix, we need to manipulate formula \[r = \frac{1}{2\beta -1}\] so that we can easily calculate the $\beta$ value. It's given as follows: \[\beta = \frac{1-r}{2r}\]. The lowest value of $r$ is supposed to be as close to $0$ as possible. For this paper, we use the smallest value of $r$ equal to $10^{-5}$ and consider it a good enough approximation. For the said value of $r$, we write the payoff matrix as follows:
+
+\begin{center}
+  \begin{game}{2}{2}
+    & $Cooperate$    & $Defect$    \\
+  $Cooperate$ & $4999,4999$ & $4999.5,4998.5$  \\
+  $Defect$ & $4998.5,4999.5$ & $0,0$
+\end{game}
+\end{center}
+
+We conclude that, for this game, both players have a strictly dominant strategy --- $Cooperate$. Therefore we also get a strict Nash equilibrium for the strategy profile of $\{Cooperate, Cooperate\}$. 
+
+As the $r$ parameter reaches its highest value --- $1$, the value of $\beta$ approaches to $0$. Thus, the payoff matrix looks as follows:
+
+\begin{center}
+  \begin{game}{2}{2}
+    & $Cooperate$    & $Defect$    \\
+  $Cooperate$ & $-\frac{1}{2},-\frac{1}{2}$ & $0,-1$  \\
+  $Defect$ & $-1,0$ & $0,0$
+\end{game}
+\end{center}
+
+The SD game with those payoffs also favorites the $Cooperate$ strategy because this strategy is dominant (even though it is only weakly dominant).
+
+There are two Nash equilibriums in this game. One occurs for the strategy profile of $\{Cooperate, Cooperate\}$, and the other is for strategy profile $\{Defect, Defect\}$. Even though the Nash equilibrium for $defection$ gives higher payoffs, players are more likely to $cooperate$ because of this strategy dominance.
+
+% --- Gry na grafach losowych -----------------------------------------
+
+\subsection{Games on graphs}
+
+The model for the population of players in this paper is a previously described Barabasi-Albert model (i. e. Scale-Free Network). This model is generated randomly, with set parameters, for each simulation. Players occupy vertices of these graphs. For two players to be able to engage in a game, they have to be connected --- there must exist a vertex between two vertices. 
+We use this type of graph because it is considered the best description of complex networks of agents in many areas of study --- e. g. biology, sociology, and economics cf.~\cite{volchenkov2002epidemic}. The most important characteristic of those graphs is that there exist \enquote{hubs} --- vertices with a considerably higher degree than the average. Those differences in vertices' degrees might be interpreted as inequalities among the players. 
+
+The 
+
 
 % --- chapter ---------------------------------------------------------
 \clearpage
 \section{Algorithms and simulations}
 
-This chapter contains a description of the algorithm used in the simulation.
+This chapter contains a description of the functions, algorithms, and procedures used to conduct the necessary simulations. All mathematical concepts and ideas presented beforehand must be remolded into a functioning code that allows us to produce analyzable results. The code is written in the julia language to obtain high efficiency while easy to follow and readable.
+
+The description of the algorithm used in the paper \cite{santos2005scale} is unclear, therefore insufficient for exact replication. As a result, we may create a couple of different procedures based on different interpretations of said description. The algorithm described in this paper is the simplest and easiest to carry out. 
 
 \todo{To co powyżej do rozszerzenia. Generalnie ten rozdział ma zawierać implementację koncepcji matematycznej z poprzedniego rozdziału.}
 
-%\section{Algorithm}
-%\subsection{Introduction to the algorithm}
+\subsection{Simulations description}
 
-
-
+Because of the nature of this paper, our simulations must be conducted in a strict accordance with the methods outlined
+in \cite{santos2005scale}. Therefore it is only natural that we must follow each step with the utmost care and diligence. According to The Paper, we must conduct 100 simulations 
+for each parametrization. Each simulation is performed following those steps:
+\begin{enumerate}
+  \item Setting up the parameters which are needed to create SF NOCs (such as the number of final vertices (population size), the average connectivity, etc.).
+  \item Choosing the parameters, e. g. the payoffs, of the game which is to be simulated (either PD or SG).
+  \item Creating the randomly generated SF NOC (we use Barabasi - Albert model to do that). The SF NOC must be created in compliance with preferential attachment and 
+  growth rules.
+  \item Randomly distributing strategies amongst the population (SF NOC in this particular case). Each vertex can either get a $cooperate$ or $deflect$ strategy.
+  \item Every edge (i. e. two connected players) engage in a round of a given game --- this procedure is one \enquote{generation}. One simpulation consists of 2100 generations. After every generation an attempt is made to alter one of the players strategy.
+  \item We collect results (equilibrium frequencies of cooperators and defectors) by averaging over the last 100 generations.
+\end{enumerate}
 
 In this section of the dissertation, I'm going to describe the key elements of the algorithm used to replicate the results obtained in The Paper. 
 % All of the following code is written in the julia language
@@ -500,32 +582,6 @@ The procedure followed by this loop is as shown below:
   \caption{The outer loop}
  \end{algorithm}
  
-
-
-
-\subsection{Simulations description}
-
-Because of the nature of this paper (an attempt to clone the results of The Paper), our simulations must be conducted in strict accordance with the methods outlined
-in The Paper. Therefore it is only natural that we must follow each step with the utmost care and diligence. According to The Paper, we must conduct 100 simulations 
-for each parametrization. Each simulation is performed following those steps: Where the parametrization is as follows:
-\begin{enumerate}
-  \item Setting up the parameters which are needed to create SF NOCs (such as the number of final vertices (population size), the average connectivity, etc.).
-  \item Choosing the parameters of the game which is to be simulated (either PD or SG).
-  \item Creating the randomly generated SF NOC (we use Barabasi - Albert model to do that). The SF NOC must be created in compliance with preferential attachment and 
-  growth rules.
-  \item Randomly distributing strategies amongst the population (SF NOC in this particular case). Each vertex can either get a cooperation or deflection strategy.
-  \item Each pair of cooperator-deflectors engages in a round of a given game. In compliance with replicators dynamics, we keep track of cumulative payoffs for both 
-  strategies so that "players" can adjust their strategies throughout the population. This step is repeated 11 000 times, each time is called "generation". The first 
-  10 000 is the so-called "transient time".
-  \item We collect results (equilibrium frequencies of cooperators and defectors) by averaging over the last 1 000 generations.
-\end{enumerate}
-
-%In order to efficiently perform the necessary calculations, we had to pay close attention to the types of variables and data structures.
-%Since Julia allows us to specify the variable type (for example Int16, Float64, etc.) to save the memory space. Therefore 
-%we can speed up the calculations and ultimately the entire process. 
-
-\todo{Poniżej wrzuciłem przykładowy algorytm w pseudokodzie. Myślę, że to jest to co chcemy wykorzystać aby zapisać sam algorytm. To oczywiście musi być potem opisane w tekście.}
-
 % --- chapter ---------------------------------------------------------
 \clearpage
 \section{Results and discussion}

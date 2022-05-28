@@ -38,14 +38,13 @@ st = N-m0
 
 print("This is $z, and this is $T_PD.")
 # defining which game is to be played
-G = "SG"
+G = "PD"
 
 # Tracking of the game results
 
 acc_payoffs = zeros(Float16, 1, 1000)
 
 BAM = Graphs.SimpleGraphs.barabasi_albert(1000, m0, m0)
-e
 
 nv(BAM)
 
@@ -285,12 +284,12 @@ for n in Z
         end
         Data_to_save[i] = Arr_paths
     end
-    save_object("die neuste Ergebnisse/SG_$z,_2000.jld2", Data_to_save)
+    save_object("die_neuste_ergebnisse/PD_$z,_2000.jld2", Data_to_save)
     end
 end
 
 
-Data_to_save
+9Data_to_save
 
 # Creating Scale-Free Network in compliance with preferential attachment and growth rules. Each vertex corresponds 
 
