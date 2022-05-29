@@ -279,6 +279,8 @@ for n in Z
 
                 CheckStrat(a, strategies, BAM)
 
+                all_edges_strats = map(strat, all_edges_final)
+
                 if k > 2*N
                     c_d = counter(strategies)[1]/(counter(strategies)[2] + counter(strategies)[1])
 

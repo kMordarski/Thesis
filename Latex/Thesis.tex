@@ -627,6 +627,32 @@ The procedure followed by this loop is as shown below:
 \clearpage
 \section{Results and discussion}
 
+In this chapter we describe the data manipulations and methods used to transform our results into a readable and easy-to-present format. Then we describe and discuss our results. We compare them to those presented in \cite{santos2005scale} and discuss the eventual discrepancies. 
+
+\subsection{Format of obtained data}
+
+The data we end up with is in form of a vector of length 20 --- let us call it $P$. Each value of this vector is another vector of length 100, containing vectors of length 100. Therefore it can be easily transformed into a vector of matrices of size $100 x 100$. We interpret row number as a simulation's number (for each parametrization we performed 100 simulations) and column number as generation's number from which the proportion is extracted. Therefore we can present results for a single parametrization of games' payoffs as follows:
+
+\[
+R = \begin{bmatrix} 
+    r_{11} & \dots & r_{1M} \\
+    \vdots & \ddots & \vdots \\
+    r_{N1} &  \dots      & a_{NM} 
+    \end{bmatrix}
+,\]
+where $R$ is a matrix of the results, $r_{NM}$ is a coop/def proportion after $M$th generation in $N$th simulation. Now we may denote $R$ as:
+\[
+  P = (R_1, \dots, R_{20}),
+\]
+where $R_i$ is the matrix of results for the i-th iteration of the parametrization loop.
+
+To present our data as a plot, we bring the $R_i$ matrices into a single value. We do that by simply averaging all matrix elements. The formula is as follows:
+\[
+  \frac{\sum_{k=1}^{N}\sum_{j=1}^{M} r_{kj}}{N \cdot M}
+\] 
+
+\subsection{Discussion}
+
 \todo{Tutaj wpisujemy uzyskane wyniki oraz dyskutujemy je, np. porównujemy do wyników z oryginalnego artykułu.}
 
  \begin{figure}[hbt]
