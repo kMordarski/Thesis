@@ -174,23 +174,27 @@ Warszawa 2022
 \section{Introduction}
 
 This paper aims to replicate, to some degree, the seminal paper of \cite{santos2005scale} on the emergence of cooperation. The secondary goal of this research is to provide the publicly available code allowing replication of the actual results.
+ 
+The paper in question was published in \enquote{Physical Review Letters} on the 26th of August 2005 and, according to Google Scholar, has been since cited over 1600 times. It clearly shows the magnitude of the said paper and its groundbreaking character. This paper presents the results of simulations conducted by the authors and their implications for evolution game theory.
+ 
+The crucial thing to note is that the authors of said paper changed the approach to modeling such games by applying Scale-Free Networks of Contacts. Its' innovativeness is based on the never-used degree distribution of said graph. Before being used graphs had a degree distribution with a single peak. Contrarily, the SF NOCs' degree distribution follows the power law.  Those networks also comply with the rules of growth and preferential attachment. 
 
-\todo{To co jest poniżej to do poprawki. Trzeba tutaj napisać taki standardowy wstęp machany rękami. Koniecznie trzeba się pozbyć ``The paper'', to jednak jest nie do przyjęcia.}
-
-either prove or disprove the research paper with title \textbf{"Scale-Free Networks Provide a Unifying Framework for the Emergence of Cooperation"}  written by F.C. Santos and J. M. Pacheco and published in Physical Review Letters nr 95 (later on reffered to as "The Paper"). Regardless of the outcome this work is going to be useful because the above mentioned authors did not provide the code that was used to conduct the necessary simulations. Therefore goal is not only to disprove the above mantioned paper but also to provide readers with clear and easy to follow code. 
+When we analyze some real networks, for example, the Twitter network, we observe that those with a larger count of "followers" are more likely to gain new ones than accounts 
+with a low count of followers. The fundamental assumption is that the networks of contacts in societies have the same characteristic. 
  
-The Paper was published in \enquote{Physical Review Letters} on the 26th of August 2005 and, according to Google Scholar, has been since cited over 1600 times. It clearly shows the magnitude of the said paper and its groundbreaking character. This paper presents the results of simulations conducted by the authors and their implications for evolutionary game theory.
- 
-The crucial thing to understand is that the authors of The Paper changed the approach to modeling such games by applying Scale-Free Networks of Contacts (later on referred to as "SF NOCs"). Its innovativeness lies in the never used before degree distribution of said graph. Before being used graphs had a degree distribution with a single peak. It means that every "player" could interact only with a fixed number of other "players". SF NOCs are said to 
- perform better at modeling the actual, existing societies and networks. It complies with the rules of growth and preferential attachment (rich gets richer). When we analyze some actual networks, for example, the Twitter network, we observe that those with a bigger count of "followers" are more likely to gain new ones than accounts 
- with a low count of followers. 
- 
-One of the goals of The Paper was to compare the results of simulations on different kinds of graphs. According to The Paper, players that occupy vertices of SF NOC are much more likely to cooperate than on any other graph. Those results came up both in the Snowdrift game (later on referred to as SG) and Prisoners Dilemma game (later on referred to as PD).  
+One of the goals of \cite{santos2005scale} was to compare the results of simulations on different kinds of graphs. According to their results, players that occupy vertices of SF NOCs are much more likely to cooperate than on any other graph. Those results came up in the Snowdrift game (later referred to as SD) and Prisoners Dilemma game (later referred to as PD).  
 
 \todo{Tutaj opisać jaka jest struktura całej pracy, w sensie w tym rozdziale to jest to, w tamtym rozdziale to jest tamto. Robimy to na końcu.}
 
+Our work consists of several sections describing concepts and methods necessary to conduct simulations and therefore obtain results presented in \cite{santos2005scale}. We started off by presenting mathematical and economic ideas used later on. 
 
+In section 2, we introduce elements of noncooperative game theory crucial for understanding the underlying mechanisms of our work, e. g. the Nash equilibrium or the Normal-form game. Those concepts are being established as non-complicated as possible to remain easy to follow and readable. We also provide easy-to-follow examples of games (\enquote{Battle of sexes}, \enquote{Stag hunt}), with included analysis of said games.
 
+Section 3 is on the topic of graph theory. Since the structures of connections between players are modeled on the scale-free networks, we begin with a gentle introduction of basic concepts --- a definition of a graph, vertices and edges. Then move to more sophisticated ideas and characteristics --- degree distribution, procedure of creating the scale-free networks. We visualize the described graphs on figures \ref{fig:graphsa} - \ref{fig:graphsc}.
+
+The fourth chapter applies the concepts introduced in section 2 to games that are the basis for our simulations (e. g., PD and SD). We describe those games, analyze their equilibriums for different payoffs parameters, and conclude the interpretation in terms of population games. In this section, we also introduce the idea of conducting games on graphs representing the population of players. For the description to be complete, we also bring in the concept of learning in such games.
+
+Section 5 is arguably the most important one because we describe our understanding of algorithms and mechanisms introduced in \cite{santos2005scale}, as well as presenting our implementation of said algorithms in a form a pseudocode. To be precise, we present in this chapter the description of algorithm concluded from \cite{santos2005scale}, highlighting functions that had to be defined by us. Finally we get to present the pseudocode implementation of all concepts and ideas presented so far in this paper.
 
 % --- chapter ---------------------------------------------------------
 \clearpage
@@ -200,7 +204,7 @@ The current chapter introduces the most fundamental concepts in the game theory 
 
 \subsection{Normal-form game}
 
-The noncooperative game theory is the basis for this dissertation. We call a game a noncooperative game if all of the game's participants (players) act in their own best interest and, therefore, compete with each other. Moreover, they need to be rational --- choose a strategy based on its optimality. Games in this paper are presented as normal-form games. The definition of a norm-form game requires a couple of elements. 
+The noncooperative game theory is the basis for this paper. We call a game a noncooperative game if all of the game's participants (players) act in their own best interest and, therefore, compete with each other. Moreover, they need to be rational --- choose a strategy based on its optimality. Games in this paper are presented as normal-form games. The definition of a norm-form game requires a couple of elements. 
 
 First of all, let us define a set of players $i \in I$, where $I$ is a finite set of natural numbers, i. e., $I = \{1, 2, \ldots, N\}$. For each player $i$, we define the pure strategy space $S_i$ consisting of $k_i \in \setn$ pure strategies. The sequence of pure strategies $s = \left(s_1, \ldots, s_N \right) \in \prod_{i \in I} S_i = S$ is called the strategy profile. Lastly, we define a payoff functions, denoted as $u_i(s)$. A function \(u_i (s)\) maps a strategy profile \(s\) into player's payoff, that is $u_i: \prod_{i \in I}S_i \rightarrow \mathbb{R}$.
 
@@ -449,10 +453,12 @@ We use this type of graph because it is considered the best description of compl
 
 \subsection{Learning procedure in population games}
 
-The main objective of this paper is to present the proportion of $cooperate$ and $defect$ strategies for both PD and SD games. To do so, we must introduce the concept of learning in population games. The main objective of this paper is to present the proportion of $cooperate$ and $defect$ strategies for both PD and SD games.  For that purpose, we must introduce the concept of learning in population games. This idea is based on the hypothesis that players can \enquote{adapt} to the games' rules by changing their strategy. For the description of this procedure we rely on the \cite{santos2005scale}. 
+The main objective of this paper is to present the proportion of $cooperate$ and $defect$ strategies for both PD and SD games. To do so, we must introduce the concept of learning in population games. This idea is based on the hypothesis that players can \enquote{adapt} to the games' rules by changing their strategy. For the description of this procedure we rely on the \cite{santos2005scale}. 
 
 The incentive for the players to alter their strategies is represented by their accumulated payoff. By the accumulated payoff, we mean the sum of all payoffs obtained by the player in the current simulation. 
-After all edges (pairs of connected players) engage in a single round of given game, one player is chosen arbitrarily --- let us call him player one. Then of all his neighbors we randomly select one with a different strategy (i. e. if player one's strategy is $cooperate$, we select a neighbor with a strategy $defect$) --- let us name him player two.
+After all edges (pairs of connected players) engage in a single round of given game, one player is chosen arbitrarily --- let us call him player one. 
+
+Then of all his neighbors we randomly select one with a different strategy (i. e. if player one's strategy is $cooperate$, we select a neighbor with a strategy $defect$) --- let us name him player two.
 
 We determine which strategy is to be altered. We do this by comparing their accumulated payoffs --- the player with a greater value will try to \enquote{take over} the other player and impose his strategy onto him. This procedure is nonetheless not definite and comes with a given probability. 
 
@@ -473,15 +479,14 @@ The description of the algorithm used in the paper \cite{santos2005scale} is unc
 \subsection{Simulations description}
 
 Because of the nature of this paper, our simulations must be conducted in a strict accordance with the methods outlined
-in \cite{santos2005scale}. Therefore it is only natural that we must follow each step with the utmost care and diligence. According to The Paper, we must conduct 100 simulations 
-for each parametrization. Each simulation is performed following those steps:
+in \cite{santos2005scale}. Therefore it is only natural that we must follow each step with the utmost care and diligence. We must conduct 100 simulations for each parametrization. Each simulation is performed following those steps:
 \begin{enumerate}
   \item Setting up the parameters which are needed to create SF NOCs (such as the number of final vertices (population size), the average connectivity, etc.).
   \item Choosing the parameters, e. g. the payoffs, of the game which is to be simulated (either PD or SG).
   \item Creating the randomly generated SF NOC (we use Barabasi - Albert model to do that). The SF NOC must be created in compliance with preferential attachment and 
   growth rules.
   \item Randomly distributing strategies amongst the population. Each vertex (player) can either get a $cooperate$ or $defect$ strategy.
-  \item Every edge (i. e. two connected players) engage in a round of a given game --- this procedure is one \enquote{generation}. One simpulation consists of 2100 generations. After every generation an attempt is made to alter one of the players strategy.
+  \item Every edge (i. e. two connected players) engage in a round of a given game --- this procedure is one \enquote{generation}. One simulation consists of 2100 generations. After each generation an attempt is made to alter one of the players strategy.
   \item We collect results (equilibrium frequencies of cooperators and defectors) by averaging over the last 100 generations.
 \end{enumerate}
 
@@ -504,9 +509,13 @@ In order to perform necessary calculations I had to define the following functio
 
 \subsection{Description of the algorithm}
 
-The main algorithm is the fundamental element of this dissertation. It consists of 3 nested loops executing instructions necessary to conduct simulations, on which my research is based. I will be describing those loops in an inside-out order. 
+The main algorithm is the fundamental element of this paper. It consists of 3 nested loops executing instructions necessary to conduct simulations, on which our research is based. I will be describing those loops in an inside-out order. 
 
-The first loop is responsible for evaluating the results of the games, potentially changing the strategies of players, and keeping track of the proportion of the strategies used by players. To run properly, it requires previously set parametrization and a set of edges of the Barabasi-Albert graph. As a result, it produces a vector of length 100 in which elements are proportions of coop/def strategies, measured after each generation (1001--1100) in the population of players. This loop is repeated 2 000 times, which gives us a total of 2~200~000 generations for one Barabasi-Albert graph parametrization for a given game.
+The first loop is responsible for evaluating the results of the games, potentially changing the strategies of players, and keeping track of the proportion of the strategies used by players. To run properly, it requires previously set parametrization and a set of edges of the Barabasi-Albert graph. 
+
+As a result, it produces a vector of length 100 in which elements are proportions of coop/def strategies, measured after each generation (2001--2100) in the population of players. 
+
+This loop is repeated 2 000 times, which gives us a total of 2~200~000 generations for one Barabasi-Albert graph parametrization for a given game.
 The loop itself operates as follows:
 
 %\begin{enumerate}[noitemsep]
@@ -520,25 +529,28 @@ The loop itself operates as follows:
 \begin{algorithm}[H]
   \KwData{Barabasi-Albert Model, array of edges, array of strategies, array of accumulated payoffs (initially equal to 0), empty vector of length 100, parametrization of the games}
   \KwResult{Vector of length 100 containing coop/def proportion for the population}
-  initialization\;
+  initialization \;
   \For{k in generations}{
 
     \eIf{k is greater than $1$}{
-      Adjust the array of strategies associated to players.
+      Adjust the array of strategies associated to players. \;
     }
 
-    Play a single round of a given game between all possible pairs of players by applying function \lstinline+games+ on a vector of edges.\;
-    Randomly choose one vertex. \;
+    Play a single round of a given game between all possible pairs of players by applying function \lstinline+games+ on a vector of edges. \;
+    Randomly choose one vertex.\;
     Attempt to change the strategy of the previously chosen player (or one of his neighbors) by applying function \lstinline+CheckStrat+. \;
    \eIf{k is greater than the number of generations minus $100$}{
-    Evaluate the coop/def proportion in the entire population\;
-    Save the result to the appropriate value of a vector.\;
+    Evaluate the coop/def proportion in the entire population \;
+    Save the result to the appropriate value of a vector. \;
     }{}
   }
 \caption{The inner loop}
 \end{algorithm}
  
-The outer loop to the one described above is responsible for \enquote{resetting} the Barabasi-Albert graph. Since separate simulations are supposed to be carried out on a randomly generated SF NOC (but with the same parametrization), we need to conduct 100 of them (for each payoff parametrization); this loop is an indispensable element of the algorithm. The crucial fact to note is that this loop is also responsible for creating an object named \lstinline+ArrPath+ --- vector of length 100, used to store the results of the simulations.
+The outer loop to the one described above is responsible for \enquote{resetting} the Barabasi-Albert graph. Since separate simulations are supposed to be carried out on a randomly generated SF NOC (but with the same parametrization), we need to conduct 100 of them (for each payoff parametrization); this loop is an indispensable element of the algorithm. 
+
+The crucial fact to note is that this loop is also responsible for creating an object named \lstinline+ArrPath+ --- vector of length 100, used to store the results of the simulations.
+
 The procedure followed by this loop is as shown below:
 
 %\begin{enumerate}
@@ -565,7 +577,7 @@ The procedure followed by this loop is as shown below:
 \begin{algorithm}[H]
   \KwData{Barabasi-Albert parametrization}
   \KwResult{Scale-Free Network built by Barabasi-Albert Model, list of edges, list of strategies, vector of accumulated payoffs, ArrPath --- an array of length 100 storing results of the simulations}
-  initialization\;
+  initialization \;
   \For{j in simulations}{
    Create a Scale-Free Network by using the Barabasi-Albert model with previously set parameters.\;
    Create an array of length equal to the number of players, containing their strategies. \;
@@ -574,7 +586,7 @@ The procedure followed by this loop is as shown below:
    Create an array of accumulated payoffs (initially filled with zeros). \;
    Generate a vector of length 100 filled with zeros, called \lstinline+track+. This vector will be later on used to store coop/def proportions. \;
    \eIf{j equals to 1}{
-    Create an object called \lstinline+ArrPath+ with one element equal to \lstinline+track+\;
+    Create an object called \lstinline+ArrPath+ with one element equal to \lstinline+track+. \;
     }{
     Merge the current \lstinline+track+ with \lstinline+ArrPath+. \;
    }
@@ -584,7 +596,9 @@ The procedure followed by this loop is as shown below:
  \end{algorithm}
 
  The outer loop is in charge of setting the parametrs of the games. Since we want to obtain 20 data points for a single Barabasi-Albert Model parametrization, we need to iterate 20 times executing the previously described loops. The payoffs for our games are 
- of range $[1,2)$ and $(0,1]$ for PD and SD respectively, we need to divide the span (which is equal to 1 in both cases) by the number of data points, and we gain a result of 0.05. Thus each iteration adds 0.05 to the payoffs of both games. Furthermore, this loop is also responsible for creating and object called \lstinline+DataToSave+ that will store our results. Atfer the loop ends, the \lstinline+DataToSave+ object is saved into the local repository.
+ of range $[1,2)$ and $(0,1]$ for PD and SD, respectively. We need to divide the span (which is equal to 1 in both cases) by the number of data points, and we gain a result of 0.05. 
+ 
+ Thus each iteration adds 0.05 to the payoffs of both games. Furthermore, this loop is also responsible for creating and object called \lstinline+DataToSave+ that will store our results. Atfer the loop ends, the \lstinline+DataToSave+ object is saved into the local repository.
  
  \begin{algorithm}[H]
   \KwData{None}
