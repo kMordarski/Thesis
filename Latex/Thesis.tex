@@ -443,7 +443,7 @@ As the $r$ parameter reaches its highest\footnote{We use the highest value of \(
   $Defect$ & $-1,0$ & $0,0$
 \end{game}
 \end{center}
-The SD game with those payoffs also favorites the $Cooperate$ strategy because this strategy is dominant (even though it is only weakly dominant). There are, however, two Nash equilibria in this game. One occurs for the strategy profile of $(Cooperate, Cooperate)$, and the other is for strategy profile $(Defect, Defect)$. Even though the Nash equilibrium for $defection$ gives higher payoffs, players are more likely to $cooperate$ because of the strategy dominance.
+The SD game with those payoffs also favorites the $Cooperate$ strategy because this strategy is dominant (even though it is only weakly dominant). There are, however, two Nash equilibria in this game. One occurs for the strategy profile of $(Cooperate, Cooperate)$, and the other is for strategy profile $(Defect, Defect)$. Even though the Nash equilibrium for $Defect$ gives higher payoffs, players are more likely to $Cooperate$ because of the strategy dominance.
 
 % --- Gry na grafach losowych -----------------------------------------
 
@@ -455,12 +455,12 @@ We use this type of graph because it is considered the best description of compl
 
 \subsection{Learning procedure in population games}
 
-The main objective of this paper is to present the proportion of $cooperate$ and $defect$ strategies for both PD and SD games. To do so, we must introduce the concept of learning in population games. This idea is based on the hypothesis that players can \enquote{adapt} to the games' rules by changing their strategy. For the description of this procedure we rely on the \cite{santos2005scale}. 
+The main objective of this paper is to present the proportion of $cooperate$ and $Defect$ strategies for both PD and SD games. To do so, we must introduce the concept of learning in population games. This idea is based on the hypothesis that players can \enquote{adapt} to the games' rules by changing their strategy. For the description of this procedure we rely on the \cite{santos2005scale}. 
 
 The incentive for the players to alter their strategies is represented by their accumulated payoff. By the accumulated payoff, we mean the sum of all payoffs obtained by the player in the current generation. 
 After all edges (pairs of connected players) engage in a single round of given game, one player is chosen arbitrarily --- let us call him player one. 
 
-Then, from among all of his neighbors we randomly select one with a different strategy (i.e., if player one's strategy is $cooperate$, we select a neighbor with a strategy $defect$) --- let us name him player two.
+Then, from among all of his neighbors we randomly select one with a different strategy (i.e., if player one's strategy is $Cooperate$, we select a neighbor with a strategy $Defect$) --- let us name him player two.
 
 We determine which strategy is to be altered. We do this by comparing their accumulated payoffs --- the player with a greater value will try to \enquote{take over} the other player and impose his strategy onto him. This procedure is nonetheless not definite and comes with a given probability. 
 
@@ -487,7 +487,7 @@ in \cite{santos2005scale}. Therefore it is only natural that we must follow each
   \item Choosing the parameters, e. g. the payoffs, of the game which is to be simulated (either PD or SG).
   \item Creating the randomly generated SF NOC (we use the Barabasi-Albert model to do that). The SF NOC must be created in compliance with preferential attachment and 
   growth rules.
-  \item Randomly distributing strategies amongst the population. Each vertex (player) can either get a $cooperate$ or $defect$ strategy.
+  \item Randomly distributing strategies amongst the population. Each vertex (player) can either get a $Cooperate$ or $Defect$ strategy.
   \item Every edge (i. e. two connected players) engages in a round of a given game --- this procedure is one \enquote{generation}. One simulation consists of 2100 generations. After each generation, an attempt is made to alter a strategy of one of the players.
   \item We collect results (equilibrium frequencies of cooperators and defectors) by averaging over the last 100 generations.
 \end{enumerate}
@@ -507,13 +507,13 @@ In order to perform necessary calculations, it was necessary to define the follo
 
 The main algorithm is the fundamental element of this paper. It consists of 3 nested loops executing instructions necessary to conduct simulations, on which our research is based. These loops are described in the following part in an inside-out order. 
 
-The first loop is responsible for evaluating the results of the games, potentially changing the strategies of players, and keeping track of the proportion of the strategies used by players. To run properly, it requires previously set parametrization and a set of edges of the Barabasi-Albert graph. As a result, it produces a vector of length \(100\) in which elements are proportions of coop/def strategies, measured after each generation (\(2001\)--\(2100\)) in the population of players. This loop is repeated \(2000\) times, which gives us a total of \(2200000\) generations for one Barabasi-Albert graph parametrization for a given game.
+The first loop is responsible for evaluating the results of the games, potentially changing the strategies of players, and keeping track of the proportion of the strategies used by players. To run properly, it requires previously set parametrization and a set of edges of the Barabasi-Albert graph. As a result, it produces a vector of length \(100\) in which elements are the share of $Cooperation$ strategies, measured after each generation (\(2001\)--\(2100\)) in the population of players. This loop is repeated \(2000\) times, which gives us a total of \(2200000\) generations for one Barabasi-Albert graph parametrization for a given game.
 The loop itself if given by the alogrithm~\ref{alg:loop1}.
 
 \vspace*{1cm}
 \begin{algorithm}[hbt]
   \KwData{Barabasi-Albert Model, array of edges, array of strategies, array of accumulated payoffs (initially equal to 0), empty vector of length 100, parametrization of the games}
-  \KwResult{Vector of length 100 containing coop/def proportion for the population}
+  \KwResult{Vector of length 100 containing share of $Cooperation$ strategy for the population}
   initialization \;
   \For{k in generations}{
 
@@ -525,7 +525,7 @@ The loop itself if given by the alogrithm~\ref{alg:loop1}.
     Randomly choose one vertex.\;
     Attempt to change the strategy of the previously chosen player (or one of his neighbors) by applying function \lstinline+CheckStrat+. \;
    \eIf{k is greater than the number of generations minus $100$}{
-    Evaluate the coop/def proportion in the entire population \;
+    Evaluate the share of $Cooperate$ strategy in the entire population \;
     Save the result to the appropriate value of a vector. \;
     }{}
   }
@@ -546,7 +546,7 @@ The outer loop to the one described above is responsible for \enquote{resetting}
    Extract an array of edges from a previously created graph by mapping function \lstinline+transform+ onto a list of edges. \;
    Produce an array of tuples representing strategies for every player by mapping a function \lstinline+strat+ onto an array of edges. \;
    Create an array of accumulated payoffs (initially filled with zeros). \;
-   Generate a vector of length 100 filled with zeros, called \lstinline+track+. This vector will be later on used to store coop/def proportions. \;
+   Generate a vector of length 100 filled with zeros, called \lstinline+track+. This vector will be later on used to store the share of $Cooperation$ strategy. \;
    \eIf{j equals to 1}{
     Create an object called \lstinline+ArrPath+ with one element equal to \lstinline+track+. \;
     }{
@@ -593,7 +593,7 @@ R = \begin{bmatrix}
     r_{N1} &  \dots      & r_{NM} 
     \end{bmatrix}
 ,\]
-where $R$ is a matrix of the results, $r_{NM}$ is a coop/def proportion after $2000 + M$ generations in the $N$-th simulation. Now, we may denote $P$ as:
+where $R$ is a matrix of the results, $r_{NM}$ is the share of $Cooperate$ strategy after $2000 + M$ generations in the $N$-th simulation. Now, we may denote $P$ as:
 \[
   P = (R_1, \dots, R_{20}),
 \]
@@ -604,7 +604,7 @@ To present our data as a plot, we bring the $R_i$ matrices into a single value. 
   \frac{\sum_{k=1}^{N}\sum_{j=1}^{M} r_{kj}}{N \cdot M} .
 \] 
 
-Applying the above procedure to our vector \( P\) results in gaining 20 data points, and allows us to produce one plot for each Barabasi-Albert Model parametrization. Since we have three such parametrizations for each game, we gain 6 plots of coop/def tracks. We've decided to group them in regard to games so that they could be easily compared. 
+Applying the above procedure to our vector \( P\) results in gaining 20 data points, and allows us to produce one plot for each Barabasi-Albert Model parametrization. Since we have three such parametrizations for each game, we gain 6 plots of the share of $Cooperate$ strategies. We've decided to group them in regard to games so that they could be easily compared. 
 
 \subsection{Discussion}
 
@@ -636,7 +636,7 @@ Figure~\ref{fig:resa} shows cooperation share profiles in the PD game. It is cle
 
 % opis wyników dla SD
 
-As far as the SD goes, we obtained the quite opposite results. Since the main parameter $r$ represents the cost-to-benefit ratio of mutual cooperation, we expect our curve to increase sharply for low values of \(r\) and then stay high, and only eventually start decreasing. We can see from the plot \ref{fig:resb}, that it is the case indeed. Moreover, we can conclude that with the increase in average connectivity, the proportion of coop/def strategies seems to react slower to the adjustments of $r$. This means that if players can engage in more games during each generation, they are more likely to change their strategies to $Cooperate$ even for a higher cost-to-benefit ratio. 
+As far as the SD goes, we obtained the quite opposite results. Since the main parameter $r$ represents the cost-to-benefit ratio of mutual cooperation, we expect our curve to increase sharply for low values of \(r\) and then stay high, and only eventually start decreasing. We can see from the plot \ref{fig:resb}, that it is the case indeed. Moreover, we can conclude that with the increase in average connectivity, the share of $Cooperate$ strategy seems to react slower to the adjustments of $r$. This means that if players can engage in more games during each generation, they are more likely to change their strategies to $Cooperate$ even for a higher cost-to-benefit ratio. 
 
 % porównanie do wyników oryginalnego paperu
 
@@ -686,9 +686,16 @@ We intend to explore other similar algorithms to further try to replicate the or
 \addcontentsline{toc}{section}{Streszczenie}
 \section*{Streszczenie}
 
-Tutaj zamieszczają Państwo streszczenie pracy. Streszczenie powinno być długości około pół strony.
+Podstawą tej pracy jest próba replikacji wyników oraz symulacji zawartych w pracy~\cite{santos2005scale}. Zawarliśmy w niej opisy wszelkich elementów niezbędnych do prawidłowego opisu
+zjawisk oraz koncepcji będących podstawą wyżej wspomianych symulacji. 
 
+Opisywane są zatem elementy teorii gier, takie jak profile strategii czy równowaga Nasha, jak również elementy teorii grafów --- definicje węzłów, krawędzi, czy opis rozkładów prawdopodobieństwa charakterystycznych dla danych grafów.
 
+Następnie analizujemy gry PD oraz SD pod kątem elementów wymienionych w poprzedzających sekcjach, a także wprowadzamy pojecia gry rozgrywanej przez populację graczy reprezentowanej przy pomocy grafu oraz algorytmów uczenia się w grach populacyjnych. 
+
+Kolejnym elementem naszej pracy jest przedstawienie implementacji algorytmów zastosowanych przez nas do replikacji wyżej wspomnianych wyników oraz ich reprezentacja w formie pseudokodu. W dwóch ostatnich rozdziałach demonstrujemy otrzymane wyniki oraz porównujemy je z tymi przedstawionymi w~\cite{santos2005scale}. Przedkładamy również naszą koncepcję na kontynuację rozpoczętych w tej pracy badań. 
+
+Ostatnim elementem naszej pracy jest kod w jezyku Julia, pozwalający na replikację naszych wyników.
 \end{document}
 
 

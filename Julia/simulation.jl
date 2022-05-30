@@ -105,7 +105,8 @@ for n in Z
         end
         # Parametrisation (for the PD game)
 
-        T_PD = 1 + 0.05 * (i-1) # This parameter is the advantage of defectors over cooperators
+        T_PD = 1 + 0.05 * (i-1) # This parameter is
+                                # the advantage of defectors over cooperators
         R_PD = 1
         P_PD = 0
         S_PD = 0
