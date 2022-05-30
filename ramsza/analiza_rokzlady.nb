@@ -1,0 +1,835 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     36512,        827]
+NotebookOptionsPosition[     34687,        783]
+NotebookOutlinePosition[     35170,        802]
+CellTagsIndexPosition[     35127,        799]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Analiza danych SD", "Title",
+ CellChangeTimes->{{3.860986975881606*^9, 3.86098698099853*^9}, {
+  3.862566317816367*^9, 3.86256632015827*^9}, {3.862567462739586*^9, 
+  3.862567463317046*^9}},ExpressionUUID->"a407feea-a424-4241-a1e7-\
+f45d6f95c126"],
+
+Cell[CellGroupData[{
+
+Cell["Definicje \:015bcie\:017cek i tworzenie katalog\[OAcute]w", "Section",
+ CellChangeTimes->{{3.862566834612547*^9, 3.8625668392287807`*^9}, {
+  3.862566894942094*^9, 
+  3.862566900128024*^9}},ExpressionUUID->"4733fcb6-f87e-4596-9372-\
+8ddfdd6a1f98"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"pathFigs", "=", "\"\<./figs/\>\""}]], "Input",
+ CellChangeTimes->{{3.8625668432411337`*^9, 3.862566854951816*^9}, {
+  3.862908126283654*^9, 3.862908126909892*^9}},
+ CellLabel->"In[37]:=",ExpressionUUID->"e08ed24d-54d4-4a69-9c5e-826ddb781407"],
+
+Cell[BoxData["\<\"./figs/\"\>"], "Output",
+ CellChangeTimes->{3.862566856446784*^9, 3.862566902763709*^9, 
+  3.862567526673312*^9, 3.862906750448457*^9, 3.8629068235909224`*^9, 
+  3.8629070399631987`*^9, 3.862907122080449*^9, 3.862907220713294*^9, 
+  3.862908127726427*^9},
+ CellLabel->"Out[37]=",ExpressionUUID->"ff43b44e-2883-44b8-811a-eb20dbe0f800"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{"!", 
+    RowBox[{"DirectoryQ", "[", "pathFigs", "]"}]}], ",", 
+   RowBox[{"CreateDirectory", "[", "pathFigs", "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.8625666320270243`*^9, 3.862566635243701*^9}, {
+  3.862566776368732*^9, 3.862566791167506*^9}, {3.862566863535158*^9, 
+  3.862566879145714*^9}},
+ CellLabel->"In[38]:=",ExpressionUUID->"eeec36b2-1a8e-44c3-8dae-6778e8a9c704"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Przyk\[LSlash]adowe rozk\[LSlash]ady", "Section",
+ CellChangeTimes->{{3.862147539155047*^9, 3.862147545409082*^9}, {
+  3.862315796227416*^9, 3.8623158393607683`*^9}, {3.862567403288329*^9, 
+  3.862567406490429*^9}, {3.862907402508113*^9, 
+  3.862907405712595*^9}},ExpressionUUID->"6f7d5920-6926-4500-a946-\
+91067d76ad92"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"g1", "=", 
+   RowBox[{"RandomGraph", "@", 
+    RowBox[{"BarabasiAlbertGraphDistribution", "[", 
+     RowBox[{
+      RowBox[{"10", "^", "3"}], ",", "1"}], "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"g2", "=", 
+   RowBox[{"RandomGraph", "@", 
+    RowBox[{"BarabasiAlbertGraphDistribution", "[", 
+     RowBox[{
+      RowBox[{"10", "^", "3"}], ",", "2"}], "]"}]}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.862907407893413*^9, 3.862907434728505*^9}, {
+   3.8629075822366037`*^9, 3.862907652340036*^9}, {3.862907867038053*^9, 
+   3.862907867745097*^9}, 3.862907906280364*^9},
+ CellLabel->"In[30]:=",ExpressionUUID->"1c16ed50-c6bf-4f36-9f79-9b427cbb2ca8"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"fig", "=", 
+  RowBox[{"Histogram", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"VertexDegree", "[", "g1", "]"}], ",", 
+      RowBox[{"VertexDegree", "[", "g2", "]"}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{"1", ",", "25", ",", "1"}], "}"}], ",", "\"\<PDF\>\"", ",", 
+    RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+    RowBox[{"ChartLegends", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{
+      "\"\<\!\(\*Cell[TextData[Cell[BoxData[FormBox[RowBox[{\"z\", \"=\", \"2\
+\"}], TraditionalForm]],FormatType->TraditionalForm,ExpressionUUID->\"\
+10f87d5a-6702-49b1-9a08-e4665721506f\"]],ExpressionUUID->\"50fcb050-5a6e-4a9b-\
+ac9d-7746ebb171c5\"]\)\>\"", ",", 
+       "\"\<\!\(\*Cell[TextData[Cell[BoxData[FormBox[RowBox[{\"z\", \"=\", \
+\"4\"}], TraditionalForm]],FormatType->TraditionalForm,ExpressionUUID->\"\
+6a48aae7-371b-4125-9f23-fd06980f1a49\"]],ExpressionUUID->\"07c98b61-5445-44ad-\
+9ac3-f04c81dc62ce\"]\)\>\""}], "}"}]}], ",", 
+    RowBox[{"GridLines", "\[Rule]", "Automatic"}], ",", 
+    RowBox[{"FrameLabel", "\[Rule]", 
+     RowBox[{"{", 
+      RowBox[{"\"\<degree\>\"", ",", "\"\<probability density\>\""}], 
+      "}"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.862907444538165*^9, 3.862907448887108*^9}, {
+   3.86290755043812*^9, 3.8629075932025957`*^9}, {3.862907655061096*^9, 
+   3.862907779291123*^9}, {3.8629078266177797`*^9, 3.86290784543988*^9}, {
+   3.8629078833155746`*^9, 3.8629078834209023`*^9}, {3.862907914470028*^9, 
+   3.86290803122971*^9}, 3.862908075030756*^9, {3.862908151969654*^9, 
+   3.8629081606494827`*^9}, {3.862908199124618*^9, 3.8629082228889923`*^9}},
+ CellLabel->"In[41]:=",ExpressionUUID->"376ceefc-ac12-4100-b5a4-daeee6ac1b2f"],
+
+Cell[BoxData[
+ TemplateBox[{
+   GraphicsBox[{{
+      Directive[
+       EdgeForm[
+        Directive[
+         Thickness[Small], 
+         Opacity[0.518]]], 
+       RGBColor[
+       0.987148, 0.8073604000000001, 0.49470040000000004`]], {{{{}, {
+          Directive[
+           Opacity[0.5], 
+           Directive[
+            EdgeForm[
+             Directive[
+              Thickness[Small], 
+              Opacity[0.518]]], 
+            RGBColor[0.987148, 0.8073604000000001, 0.49470040000000004`]], 
+           Directive[
+            RGBColor[0.97858, 0.678934, 0.157834]]], {{{
+             RectangleBox[{1., 0.}, 
+              NCache[{2., 
+                Rational[665, 996]}, {2., 0.6676706827309237}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{2., 0.}, 
+              NCache[{3., 
+                Rational[38, 249]}, {3., 0.15261044176706828`}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{3., 0.}, 
+              NCache[{4., 
+                Rational[27, 332]}, {4., 0.08132530120481928}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{4., 0.}, 
+              NCache[{5., 
+                Rational[29, 996]}, {5., 0.029116465863453816`}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{5., 0.}, 
+              NCache[{6., 
+                Rational[11, 498]}, {6., 0.02208835341365462}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{6., 0.}, 
+              NCache[{7., 
+                Rational[5, 249]}, {7., 0.020080321285140562`}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{7., 0.}, 
+              NCache[{8., 
+                Rational[1, 166]}, {8., 0.006024096385542169}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{8., 0.}, 
+              NCache[{9., 
+                Rational[1, 249]}, {9., 0.004016064257028112}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{9., 0.}, 
+              NCache[{10., 
+                Rational[1, 166]}, {10., 0.006024096385542169}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{10., 0.}, 
+              NCache[{11., 
+                Rational[1, 498]}, {11., 0.002008032128514056}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{11., 0.}, 
+              NCache[{12., 
+                Rational[1, 332]}, {12., 0.0030120481927710845`}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{13., 0.}, 
+              NCache[{14., 
+                Rational[1, 996]}, {14., 0.001004016064257028}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{15., 0.}, 
+              NCache[{16., 
+                Rational[1, 498]}, {16., 0.002008032128514056}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{16., 0.}, 
+              NCache[{17., 
+                Rational[1, 498]}, {17., 0.002008032128514056}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{18., 0.}, 
+              NCache[{19., 
+                Rational[1, 996]}, {19., 0.001004016064257028}], 
+              "RoundingRadius" -> 0]}}}}, {}, {}}}, {{{}, {
+          Directive[
+           Opacity[0.5], 
+           Directive[
+            EdgeForm[
+             Directive[
+              Thickness[Small], 
+              Opacity[0.518]]], 
+            RGBColor[0.987148, 0.8073604000000001, 0.49470040000000004`]], 
+           Directive[
+            RGBColor[0.368417, 0.506779, 0.709798]]], {{{
+             RectangleBox[{2., 0.}, 
+              NCache[{3., 
+                Rational[494, 995]}, {3., 0.4964824120603015}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{3., 0.}, 
+              NCache[{4., 
+                Rational[208, 995]}, {4., 0.20904522613065327`}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{4., 0.}, 
+              NCache[{5., 
+                Rational[18, 199]}, {5., 0.09045226130653267}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{5., 0.}, 
+              NCache[{6., 
+                Rational[13, 199]}, {6., 0.06532663316582915}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{6., 0.}, 
+              NCache[{7., 
+                Rational[37, 995]}, {7., 0.0371859296482412}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{7., 0.}, 
+              NCache[{8., 
+                Rational[22, 995]}, {8., 0.022110552763819097`}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{8., 0.}, 
+              NCache[{9., 
+                Rational[13, 995]}, {9., 0.01306532663316583}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{9., 0.}, 
+              NCache[{10., 
+                Rational[14, 995]}, {10., 0.01407035175879397}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{10., 0.}, 
+              NCache[{11., 
+                Rational[11, 995]}, {11., 0.011055276381909548`}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{11., 0.}, 
+              NCache[{12., 
+                Rational[7, 995]}, {12., 0.007035175879396985}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{12., 0.}, 
+              NCache[{13., 
+                Rational[6, 995]}, {13., 0.006030150753768844}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{13., 0.}, 
+              NCache[{14., 
+                Rational[4, 995]}, {14., 0.004020100502512563}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{14., 0.}, 
+              NCache[{15., 
+                Rational[2, 995]}, {15., 0.0020100502512562816`}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{15., 0.}, 
+              NCache[{16., 
+                Rational[2, 995]}, {16., 0.0020100502512562816`}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{16., 0.}, 
+              NCache[{17., 
+                Rational[1, 995]}, {17., 0.0010050251256281408`}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{17., 0.}, 
+              NCache[{18., 
+                Rational[2, 995]}, {18., 0.0020100502512562816`}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{18., 0.}, 
+              NCache[{19., 
+                Rational[6, 995]}, {19., 0.006030150753768844}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{19., 0.}, 
+              NCache[{20., 
+                Rational[2, 995]}, {20., 0.0020100502512562816`}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{20., 0.}, 
+              NCache[{21., 
+                Rational[4, 995]}, {21., 0.004020100502512563}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{21., 0.}, 
+              NCache[{22., 
+                Rational[1, 995]}, {22., 0.0010050251256281408`}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{23., 0.}, 
+              NCache[{24., 
+                Rational[3, 995]}, {24., 0.003015075376884422}], 
+              "RoundingRadius" -> 0]}}, {{
+             RectangleBox[{24., 0.}, 
+              NCache[{25., 
+                Rational[1, 995]}, {25., 0.0010050251256281408`}], 
+              "RoundingRadius" -> 
+              0]}}}}, {}, {}}}}}, {{{{{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}, {}, {}, {}}, {}}}, {{{{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, \
+{}, {}, {}, {}, {}, {}, {}, {}, {}, {}}, {}}}}}, {
+    AspectRatio -> NCache[GoldenRatio^(-1), 0.6180339887498948], 
+     Axes -> {True, True}, AxesLabel -> {None, None}, 
+     AxesOrigin -> {0.52, 0.}, Frame -> True, FrameLabel -> {{
+        FormBox["\"probability density\"", TraditionalForm], None}, {
+        FormBox["\"degree\"", TraditionalForm], None}}, 
+     FrameTicks -> {{Automatic, Automatic}, {Automatic, Automatic}}, 
+     GridLines -> {Automatic, Automatic}, GridLinesStyle -> Directive[
+       GrayLevel[0.5, 0.4]], PlotRange -> {{1., 25.}, {All, All}}, 
+     PlotRangePadding -> {{
+        Scaled[0.02], 
+        Scaled[0.02]}, {None, 
+        Scaled[0.05]}}, Ticks -> {Automatic, Automatic}}], 
+   FormBox[
+    FormBox[
+     TemplateBox[{
+      "\"\\!\\(\\*Cell[TextData[Cell[BoxData[FormBox[RowBox[{\\\"z\\\", \\\"=\
+\\\", \\\"2\\\"}], TraditionalForm]],FormatType->TraditionalForm]]]\\)\"", 
+       "\"\\!\\(\\*Cell[TextData[Cell[BoxData[FormBox[RowBox[{\\\"z\\\", \
+\\\"=\\\", \\\"4\\\"}], \
+TraditionalForm]],FormatType->TraditionalForm]]]\\)\""}, "SwatchLegend", 
+      DisplayFunction -> (FormBox[
+        StyleBox[
+         StyleBox[
+          PaneBox[
+           TagBox[
+            GridBox[{{
+               TagBox[
+                GridBox[{{
+                   GraphicsBox[{
+                    Directive[
+                    PointSize[0.5], 
+                    AbsoluteThickness[1.6], 
+                    Opacity[0.5], 
+                    EdgeForm[
+                    Directive[
+                    GrayLevel[0], 
+                    Thickness[Small], 
+                    Opacity[0.518]]], 
+                    RGBColor[0.97858, 0.678934, 0.157834]], 
+                    RectangleBox[{0, 0}, {10, 10}, "RoundingRadius" -> 0]}, 
+                    AspectRatio -> Full, ImageSize -> {10, 10}, 
+                    PlotRangePadding -> None, ImagePadding -> Automatic, 
+                    BaselinePosition -> (Scaled[0.1] -> Baseline)], #}, {
+                   GraphicsBox[{
+                    Directive[
+                    PointSize[0.5], 
+                    AbsoluteThickness[1.6], 
+                    Opacity[0.5], 
+                    EdgeForm[
+                    Directive[
+                    GrayLevel[0], 
+                    Thickness[Small], 
+                    Opacity[0.518]]], 
+                    RGBColor[0.368417, 0.506779, 0.709798]], 
+                    RectangleBox[{0, 0}, {10, 10}, "RoundingRadius" -> 0]}, 
+                    AspectRatio -> Full, ImageSize -> {10, 10}, 
+                    PlotRangePadding -> None, ImagePadding -> Automatic, 
+                    BaselinePosition -> (Scaled[0.1] -> Baseline)], #2}}, 
+                 GridBoxAlignment -> {
+                  "Columns" -> {Center, Left}, "Rows" -> {{Baseline}}}, 
+                 AutoDelete -> False, 
+                 GridBoxDividers -> {
+                  "Columns" -> {{False}}, "Rows" -> {{False}}}, 
+                 GridBoxItemSize -> {"Columns" -> {{All}}, "Rows" -> {{All}}},
+                  GridBoxSpacings -> {
+                  "Columns" -> {{0.3}}, "Rows" -> {{0.5}}}], "Grid"]}}, 
+             GridBoxAlignment -> {"Columns" -> {{Left}}, "Rows" -> {{Top}}}, 
+             AutoDelete -> False, 
+             GridBoxItemSize -> {
+              "Columns" -> {{Automatic}}, "Rows" -> {{Automatic}}}, 
+             GridBoxSpacings -> {"Columns" -> {{1}}, "Rows" -> {{0}}}], 
+            "Grid"], Alignment -> Left, AppearanceElements -> None, 
+           ImageMargins -> {{5, 5}, {5, 5}}, ImageSizeAction -> 
+           "ResizeToFit"], LineIndent -> 0, StripOnInput -> False], {
+         FontFamily -> "Arial"}, Background -> Automatic, StripOnInput -> 
+         False], TraditionalForm]& ), 
+      InterpretationFunction :> (RowBox[{"SwatchLegend", "[", 
+         RowBox[{
+           RowBox[{"{", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|
+                    "color" -> RGBColor[0.97858, 0.678934, 0.157834]|>, 
+                    "RGBColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|
+                    "color" -> RGBColor[0.368417, 0.506779, 0.709798]|>, 
+                    "RGBColorSwatchTemplate"]}], "]"}]}], "}"}], ",", 
+               RowBox[{"{", 
+                 RowBox[{
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}], ",", 
+                   RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Opacity", "[", "0.5`", "]"}], ",", 
+                    RowBox[{"EdgeForm", "[", 
+                    RowBox[{"Directive", "[", 
+                    RowBox[{
+                    RowBox[{"Thickness", "[", "Small", "]"}], ",", 
+                    RowBox[{"Opacity", "[", "0.518`", "]"}]}], "]"}], "]"}], 
+                    ",", 
+                    
+                    TemplateBox[<|"color" -> GrayLevel[1]|>, 
+                    "GrayLevelColorSwatchTemplate"]}], "]"}]}], "}"}]}], 
+             "}"}], ",", 
+           RowBox[{"{", 
+             RowBox[{
+               RowBox[{"{", 
+                 RowBox[{#, ",", #2}], "}"}], ",", 
+               RowBox[{"{", "}"}]}], "}"}], ",", 
+           RowBox[{"LegendMarkers", "\[Rule]", 
+             RowBox[{"{", 
+               RowBox[{
+                 RowBox[{"{", 
+                   RowBox[{"Automatic", ",", "Automatic"}], "}"}], ",", 
+                 RowBox[{"{", "None", "}"}]}], "}"}]}], ",", 
+           RowBox[{"LabelStyle", "\[Rule]", 
+             RowBox[{"{", "}"}]}], ",", 
+           RowBox[{"LegendLayout", "\[Rule]", "\"Column\""}]}], "]"}]& ), 
+      Editable -> True], TraditionalForm], TraditionalForm]},
+  "Legended",
+  DisplayFunction->(GridBox[{{
+      TagBox[
+       ItemBox[
+        PaneBox[
+         TagBox[#, "SkipImageSizeLevel"], Alignment -> {Center, Baseline}, 
+         BaselinePosition -> Baseline], DefaultBaseStyle -> "Labeled"], 
+       "SkipImageSizeLevel"], 
+      ItemBox[#2, DefaultBaseStyle -> "LabeledLabel"]}}, 
+    GridBoxAlignment -> {"Columns" -> {{Center}}, "Rows" -> {{Center}}}, 
+    AutoDelete -> False, GridBoxItemSize -> Automatic, 
+    BaselinePosition -> {1, 1}]& ),
+  Editable->True,
+  InterpretationFunction->(RowBox[{"Legended", "[", 
+     RowBox[{#, ",", 
+       RowBox[{"Placed", "[", 
+         RowBox[{#2, ",", "After"}], "]"}]}], "]"}]& )]], "Output",
+ CellChangeTimes->{{3.8629075871960363`*^9, 3.862907699499549*^9}, 
+   3.862907748867675*^9, {3.8629078280846148`*^9, 3.86290792336388*^9}, 
+   3.8629079815143557`*^9, 3.862908077763015*^9, 3.862908161314302*^9, 
+   3.862908224046938*^9},
+ CellLabel->"Out[41]=",ExpressionUUID->"f7b8c69a-5318-487a-92a0-e884126b7bd6"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Export", "[", 
+  RowBox[{
+   RowBox[{"pathFigs", "<>", "\"\<dist.pdf\>\""}], ",", "fig"}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.862908094681507*^9, 3.862908149402358*^9}},
+ CellLabel->"In[42]:=",ExpressionUUID->"accffc67-aae0-47d8-9420-3719ff973e5a"],
+
+Cell[BoxData["\<\"./figs/dist.pdf\"\>"], "Output",
+ CellChangeTimes->{3.8629081715816917`*^9, 3.862908226146295*^9},
+ CellLabel->"Out[42]=",ExpressionUUID->"1502ebdd-c7e1-4dcb-a30f-f1735b4cd9e7"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Init", "Section",
+ CellChangeTimes->{{3.86099226488208*^9, 3.860992267703258*^9}, {
+  3.862119002003559*^9, 
+  3.8621190024050217`*^9}},ExpressionUUID->"b2ec4aa6-08ec-41d9-95cb-\
+c6901cc43c70"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"SetDirectory", "[", 
+   RowBox[{"NotebookDirectory", "[", "]"}], "]"}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.862119009263772*^9, 3.862119029224187*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"f3d03552-77e3-4b15-a3f5-21bb56bd068b"]
+}, Closed]]
+}, Open  ]]
+},
+WindowSize->{1280, 2107},
+WindowMargins->{{1280, Automatic}, {Automatic, 0}},
+PrintingCopies->1,
+PrintingPageRange->{1, Automatic},
+Magnification:>1.5 Inherited,
+FrontEndVersion->"13.0 for Mac OS X ARM (64-bit) (February 4, 2022)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"71e08b04-6d5a-4a42-89db-c667360cbc83"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[580, 22, 253, 4, 146, "Title",ExpressionUUID->"a407feea-a424-4241-a1e7-f45d6f95c126"],
+Cell[CellGroupData[{
+Cell[858, 30, 253, 4, 101, "Section",ExpressionUUID->"4733fcb6-f87e-4596-9372-8ddfdd6a1f98"],
+Cell[CellGroupData[{
+Cell[1136, 38, 266, 4, 46, "Input",ExpressionUUID->"e08ed24d-54d4-4a69-9c5e-826ddb781407"],
+Cell[1405, 44, 352, 5, 69, "Output",ExpressionUUID->"ff43b44e-2883-44b8-811a-eb20dbe0f800"]
+}, Open  ]],
+Cell[1772, 52, 438, 9, 46, "Input",ExpressionUUID->"eeec36b2-1a8e-44c3-8dae-6778e8a9c704"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2247, 66, 327, 5, 101, "Section",ExpressionUUID->"6f7d5920-6926-4500-a946-91067d76ad92"],
+Cell[2577, 73, 707, 17, 78, "Input",ExpressionUUID->"1c16ed50-c6bf-4f36-9f79-9b427cbb2ca8"],
+Cell[CellGroupData[{
+Cell[3309, 94, 1773, 34, 149, "Input",ExpressionUUID->"376ceefc-ac12-4100-b5a4-daeee6ac1b2f"],
+Cell[5085, 130, 28515, 616, 402, "Output",ExpressionUUID->"f7b8c69a-5318-487a-92a0-e884126b7bd6"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[33637, 751, 279, 6, 46, "Input",ExpressionUUID->"accffc67-aae0-47d8-9420-3719ff973e5a"],
+Cell[33919, 759, 195, 2, 69, "Output",ExpressionUUID->"1502ebdd-c7e1-4dcb-a30f-f1735b4cd9e7"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34163, 767, 199, 4, 101, "Section",ExpressionUUID->"b2ec4aa6-08ec-41d9-95cb-c6901cc43c70"],
+Cell[34365, 773, 294, 6, 84, "Input",ExpressionUUID->"f3d03552-77e3-4b15-a3f5-21bb56bd068b",
+ InitializationCell->True]
+}, Closed]]
+}, Open  ]]
+}
+]
+*)
+
