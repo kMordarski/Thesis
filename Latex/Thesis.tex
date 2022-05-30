@@ -184,11 +184,9 @@ with a low count of followers. The fundamental assumption is that the networks o
  
 One of the goals of \cite{santos2005scale} was to compare the results of simulations on different kinds of graphs. According to their results, players that occupy vertices of SF NOCs are much more likely to cooperate than on any other type of graph. Those results came up in the Snowdrift game (later referred to as SD) and Prisoners Dilemma game (later referred to as PD).  
 
-\todo{Tutaj opisać jaka jest struktura całej pracy, w sensie w tym rozdziale to jest to, w tamtym rozdziale to jest tamto. Robimy to na końcu.}
-
 Our work consists of several sections describing concepts and methods necessary to conduct simulations and therefore obtain results presented in \cite{santos2005scale}. We started off by presenting mathematical and economic ideas used later on. 
 
-In section 2, we introduce elements of noncooperative game theory crucial for understanding the underlying mechanisms of our work, e. g. the Nash equilibrium or the Normal-form game. Those concepts are being established as non-complicated as possible to remain easy to follow and readable. We also provide easy-to-follow examples of games (\enquote{Battle of sexes}, \enquote{Stag hunt}), with included analysis of said games.
+In section 2, we introduce elements of noncooperative game theory crucial for understanding the underlying mechanisms of our work, e. g. the Nash equilibrium or the Normal-form game. Those concepts are being established as non-complicated as possible to remain easy to follow and readable. We also provide simple examples of games (\enquote{Battle of sexes}, \enquote{Stag hunt}), with included analysis of said games.
 
 Section 3 is on the topic of graph theory. Since the structures of connections between players are modeled on the scale-free networks, we begin with a gentle introduction of basic concepts --- a definition of a graph, vertices and edges. Then move to more sophisticated ideas and characteristics --- degree distribution, procedure of creating the scale-free networks. We visualize the described graphs on figures \ref{fig:graphsa} - \ref{fig:graphsc}.
 
@@ -631,7 +629,7 @@ In this chapter we describe the data manipulations and methods used to transform
 
 \subsection{Format of obtained data}
 
-The data we end up with is in form of a vector of length 20 --- let us call it $P$. Each value of this vector is another vector of length 100, containing vectors of length 100. Therefore it can be easily transformed into a vector of matrices of size $100 x 100$. We interpret row number as a simulation's number (for each parametrization we performed 100 simulations) and column number as generation's number from which the proportion is extracted. Therefore we can present results for a single parametrization of games' payoffs as follows:
+The data we obtain is in form of a vector of length 20 --- let us call it $R$. Each value of this vector is another vector of length 100, containing vectors of length 100. Therefore it can be easily transformed into a vector of matrices of size $100 x 100$. We interpret row number as a simulation's number (for each parametrization we performed 100 simulations) and column number as generation's number from which the proportion is extracted. Therefore we can present results for a single parametrization of games' payoffs as follows:
 
 \[
 R = \begin{bmatrix} 
@@ -640,7 +638,7 @@ R = \begin{bmatrix}
     r_{N1} &  \dots      & a_{NM} 
     \end{bmatrix}
 ,\]
-where $R$ is a matrix of the results, $r_{NM}$ is a coop/def proportion after $M$th generation in $N$th simulation. Now we may denote $R$ as:
+where $R$ is a matrix of the results, $r_{NM}$ is a coop/def proportion after $2000 + M$ generations in $N$th simulation. Now we may denote $R$ as:
 \[
   P = (R_1, \dots, R_{20}),
 \]
@@ -651,7 +649,21 @@ To present our data as a plot, we bring the $R_i$ matrices into a single value. 
   \frac{\sum_{k=1}^{N}\sum_{j=1}^{M} r_{kj}}{N \cdot M}
 \] 
 
+Applying the above procedure to our vector results in gaining 20 data points, and allows us to produce one plot for each Barabasi-Albert Model parametriation. 
+
+Since we have three such parametrizations for each game, we gain 6 plots of coop/def tracks. We've decided to group them in regard of games so that they could be easly compared. 
+
 \subsection{Discussion}
+
+The results seem to agree with the general intuition concerning the game theory. As we analyzed PD and SD games in SECTION 4, we highlighted the Nash equilibriums and optimal, in this sense, strategies. 
+
+For the PD game, we demonstrated that for the lowest value of $b$ parameter (equal to 1), players are indifferent to the choice of their strategy. We may observe that on the plots FIG, the value for $b=1$ is close to $0.5$. As the value of $b$ increases, we can see that the average share of cooperators is decreasing. This is also a reasonable result --- $b$ parameter influences the dominance of $Defect$ strategy amongst the population of players. Thus, the higher the $b$ parameter is, the more competitive the $defect$ strategy becomes. 
+
+We may also observe that as the main Barabasi-Albert model's parameter --- average connectivity increases, the players tend to prioritize the dominant strategy more frequently. 
+
+As far as the SD goes, we obtained the quite opposite results. Since the main parameter --- $r$ represents the cost-to-benefit ratio of mutual cooperation, we expect our curve to start off high and then decline as the $r$ increases. 
+
+We can see from the plot \ref{fig:resb} --- that it is the case. Moreover, we can conclude that with the increase in average connectivity, the proportion of coop/def strategies seems to react slower to the adjustments of $r$. This means that if players can engage in more games during each generation, they are more likely to change their strategies to $Cooperate$ even for a higher cost-to-benefit ratio. 
 
 \todo{Tutaj wpisujemy uzyskane wyniki oraz dyskutujemy je, np. porównujemy do wyników z oryginalnego artykułu.}
 
@@ -678,6 +690,8 @@ To present our data as a plot, we bring the $R_i$ matrices into a single value. 
 % --- chapter ---------------------------------------------------------
 \clearpage
 \section{Conclussions}
+
+Throughout the course of this paper we have managed to accomplish --- to some extent, both of the goals set in the first chapter. 
 
 \todo{Tutaj na samym końcu dopisujemy dlaczego i co zrobiliśmy oraz jakie mamy dalsze plany na badania.}
 
